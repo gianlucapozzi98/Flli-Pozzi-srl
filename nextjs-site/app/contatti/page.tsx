@@ -36,10 +36,27 @@ export default function Contatti() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // Qui andrà la logica per inviare il form
-    console.log(data);
-    alert(t('contatti.form.success'));
-    reset();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Errore durante l\'invio');
+      }
+
+      alert(t('contatti.form.success'));
+      reset();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert(t('contatti.form.error.submit'));
+    }
   };
 
   return (

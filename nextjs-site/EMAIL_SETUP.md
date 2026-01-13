@@ -1,0 +1,103 @@
+# Configurazione Email per il Form di Contatto
+
+Il form di contatto invia le richieste via email utilizzando Nodemailer. Per configurare l'invio delle email, devi creare un file `.env.local` nella cartella `nextjs-site/` con le seguenti variabili:
+
+## Variabili d'Ambiente Richieste
+
+Crea un file `.env.local` nella cartella `nextjs-site/` con questo contenuto:
+
+```env
+# Email Configuration
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+
+# Email addresses
+EMAIL_FROM="Flli Pozzi Website" <your-email@gmail.com>
+EMAIL_TO=fllipozzi@fllipozzi.it
+EMAIL_BCC=ilgianlu98.29@gmail.com  # Email tecnica per verifica (opzionale, nascosta)
+```
+
+## Configurazione per Gmail
+
+1. **Abilita la verifica in due passaggi** sul tuo account Google:
+   - Vai su [Google Account](https://myaccount.google.com/)
+   - Sicurezza > Verifica in due passaggi
+
+2. **Crea una Password delle app**:
+   - Vai su [Password delle app](https://myaccount.google.com/apppasswords)
+   - Seleziona "App" > "Altra (Nome personalizzato)" > "Flli Pozzi Website"
+   - Copia la password generata (16 caratteri senza spazi)
+
+3. **Usa la password delle app** nel file `.env.local`:
+   ```env
+   SMTP_PASSWORD=xxxx xxxx xxxx xxxx
+   ```
+   (Rimuovi gli spazi dalla password)
+
+## Configurazione per Altri Provider Email
+
+### Outlook/Office365
+```env
+SMTP_HOST=smtp.office365.com
+SMTP_PORT=587
+SMTP_USER=your-email@outlook.com
+SMTP_PASSWORD=your-password
+```
+
+### Altri Provider SMTP
+Consulta la documentazione del tuo provider email per:
+- Host SMTP
+- Porta (solitamente 587 per TLS o 465 per SSL)
+- Se richiede autenticazione
+
+## Come Funziona
+
+Quando qualcuno compila il form di contatto:
+
+1. **Email all'azienda**: Viene inviata un'email a `EMAIL_TO` (fllipozzi@fllipozzi.it) con:
+   - Nome del contatto
+   - Email del contatto
+   - Telefono
+   - Messaggio
+   - L'email del contatto è impostata come `replyTo` per rispondere facilmente
+   - Una copia nascosta (BCC) viene inviata a `EMAIL_BCC` per verifica tecnica (non visibile agli altri destinatari)
+
+2. **Email di conferma**: Viene inviata un'email di conferma al contatto che ha compilato il form
+
+## Rispondere alle Richieste
+
+**Sì, puoi rispondere direttamente all'email ricevuta!** 
+
+L'email del cliente è impostata come `replyTo`, quindi quando clicchi su "Rispondi" nell'email ricevuta, la risposta andrà automaticamente all'indirizzo email del cliente che ha compilato il form. **Non serve creare una nuova email manualmente.**
+
+## Test
+
+Dopo aver configurato le variabili d'ambiente:
+
+1. Riavvia il server di sviluppo: `npm run dev`
+2. Vai alla pagina Contatti
+3. Compila e invia il form
+4. Controlla la casella email configurata in `EMAIL_TO`
+
+## Note di Sicurezza
+
+- **NON committare** il file `.env.local` su Git (è già nel `.gitignore`)
+- Usa sempre una **Password delle app** per Gmail, non la password principale
+- Per produzione, configura le variabili d'ambiente direttamente sulla piattaforma di hosting (Vercel, Netlify, ecc.)
+
+## Troubleshooting
+
+### Errore: "Invalid login"
+- Verifica che la password delle app sia corretta (per Gmail)
+- Assicurati di aver rimosso gli spazi dalla password delle app
+
+### Errore: "Connection timeout"
+- Verifica che `SMTP_HOST` e `SMTP_PORT` siano corretti
+- Controlla il firewall/antivirus che non blocchi la connessione
+
+### Email non arriva
+- Controlla la cartella spam
+- Verifica che `EMAIL_TO` sia corretto
+- Controlla i log del server per errori

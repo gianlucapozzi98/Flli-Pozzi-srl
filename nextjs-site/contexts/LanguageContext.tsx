@@ -86,6 +86,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contatti.form.error.email': 'Email non valida',
     'contatti.form.error.phone': 'Il telefono è obbligatorio',
     'contatti.form.error.message': 'Il messaggio deve contenere almeno 10 caratteri',
+    'contatti.form.error.submit': 'Si è verificato un errore durante l\'invio. Riprova più tardi.',
     'contatti.cta.text': 'Contattateci oggi per qualsiasi informazione o preventivo. Siamo qui per aiutarvi a trovare la soluzione di imballaggio perfetta per le vostre esigenze.',
     'contatti.cta.button': 'Contattaci',
     
@@ -315,6 +316,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contatti.form.error.email': 'Invalid email',
     'contatti.form.error.phone': 'Phone is required',
     'contatti.form.error.message': 'Message must contain at least 10 characters',
+    'contatti.form.error.submit': 'An error occurred while sending. Please try again later.',
     'contatti.cta.text': 'Contact us today for any information or quote. We are here to help you find the perfect packaging solution for your needs.',
     'contatti.cta.button': 'Contact us',
     
