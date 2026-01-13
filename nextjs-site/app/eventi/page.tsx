@@ -112,6 +112,32 @@ function getEventImage(eventTitle: string, imageKey: string, eventDate: string):
 export default function Eventi() {
   const { t } = useLanguage();
   
+  // Funzione helper per tradurre le date
+  const translateDate = (dateString: string): string => {
+    const monthMap: { [key: string]: string } = {
+      'GENNAIO': t('eventi.months.gennaio'),
+      'FEBBRAIO': t('eventi.months.febbraio'),
+      'MARZO': t('eventi.months.marzo'),
+      'APRILE': t('eventi.months.aprile'),
+      'MAGGIO': t('eventi.months.maggio'),
+      'GIUGNO': t('eventi.months.giugno'),
+      'LUGLIO': t('eventi.months.luglio'),
+      'AGOSTO': t('eventi.months.agosto'),
+      'SETTEMBRE': t('eventi.months.settembre'),
+      'OTTOBRE': t('eventi.months.ottobre'),
+      'NOVEMBRE': t('eventi.months.novembre'),
+      'DICEMBRE': t('eventi.months.dicembre'),
+    };
+    
+    // Sostituisce il mese italiano con quello tradotto
+    let translatedDate = dateString;
+    Object.keys(monthMap).forEach(month => {
+      translatedDate = translatedDate.replace(month, monthMap[month]);
+    });
+    
+    return translatedDate;
+  };
+  
   return (
     <>
       <Header />
@@ -275,7 +301,7 @@ export default function Eventi() {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                    <p className="text-text-light font-medium">{event.date}</p>
+                    <p className="text-text-light font-medium">{translateDate(event.date)}</p>
                   </div>
                 </motion.div>
                 );
