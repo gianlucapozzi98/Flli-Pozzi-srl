@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type Language = 'it' | 'en';
+type Language = 'it' | 'en' | 'fr';
 
 interface LanguageContextType {
   language: Language;
@@ -495,6 +495,152 @@ const translations: Record<Language, Record<string, string>> = {
     'privacy.intro1': 'Fratelli Pozzi S.r.l. pursuant to Legislative Decree 30 June 2003, n. 196 - Privacy Code (hereinafter "Code") modified and updated by Legislative Decree 101/2018, articles 4, n. 7), 13, 14 and 24 of EU Regulation no. 679 of 27 April 2016 relating to the protection of natural persons with regard to the processing of personal data, as well as the free circulation of such data (hereinafter, "Regulation" or "GDPR"), informs you that in carrying out its activity it pays maximum attention to the security and confidentiality of the personal data of its users.',
     'privacy.intro2': 'The Company is therefore the data controller of the personal data collected on this website. The Regulation was born with the intent to harmonize the legislation of the European Union, guaranteeing greater control over how personal data is processed. Following its entry into force, which took place on May 25, 2018, the Company has undertaken a path of adaptation of processes and internal policies in the protection of all information that our Company will come into possession of. This statement describes what types of information we collect, how it is used, what we share with other organizations, how rights regarding information in our possession can be exercised and how to contact our company.',
   },
+  fr: {
+    // Navigation
+    'nav.home': 'Accueil',
+    'nav.products': 'Produits',
+    'nav.company': 'L\'Entreprise',
+    'nav.events': 'Événements',
+    'nav.contacts': 'Contacts',
+    
+    // Home
+    'home.hero.title': 'Flli Pozzi srl',
+    'home.hero.subtitle': 'Depuis 1947, leader dans l\'emballage',
+    'home.features.madeInItaly': 'Made in Italy',
+    'home.features.madeInItaly.desc': 'Qualité italienne reconnue dans le monde entier',
+    'home.features.excellence': 'Excellence',
+    'home.features.excellence.desc': 'Produits de haute qualité pour tous les besoins',
+    'home.features.assistance': 'Assistance',
+    'home.features.assistance.desc': 'Support technique qualifié et formation',
+    'home.reggiatrici.title': 'Cerceleuses depuis 1947',
+    'home.reggiatrici.text': 'Nous produisons des cerceleuses et tendeurs manuels Made in Italy, synonymes de qualité, résistance et fiabilité. Adaptés à diverses applications industrielles, chaque appareil a été conçu pour donner le meilleur sous tous les efforts. Avec nous, vous obtiendrez non seulement des tendeurs de qualité supérieure, mais aussi la certitude d\'investir dans des solutions d\'emballage conçues pour durer dans le temps et relever les défis industriels avec succès.',
+    'home.reggiatrici.button': 'Toutes les cerceleuses',
+    'home.assistance.title': 'Assistance technique et formation',
+    'home.assistance.rapid': 'Interventions rapides',
+    'home.assistance.rapid.desc': 'Nous garantissons des interventions rapides d\'assistance et de maintenance programmée sur toutes les machines et produits commercialisés.',
+    'home.assistance.spare': 'Pièces de rechange d\'origine',
+    'home.assistance.spare.desc': 'Nous fournissons des pièces de rechange d\'origine pour maintenir des performances optimales dans le temps, même dans des environnements de travail à haute intensité.',
+    'home.assistance.docs': 'Documentation et formation',
+    'home.assistance.docs.desc': 'Nos techniciens livrent la documentation technique complète (manuels, liste des pièces de rechange, certifications) et offrent une formation dédiée au personnel de maintenance, dans le plein respect des normes en vigueur.',
+    'home.solutions.title': 'Solutions personnalisées pour chaque besoin',
+    'home.solutions.text': 'Nous proposons des solutions d\'emballage sur mesure adaptées aux besoins spécifiques de chaque client. Notre équipe d\'experts travaille en étroite collaboration avec vous pour développer des solutions qui optimisent vos processus d\'emballage.',
+    'home.solutions.button': 'Découvrez nos solutions',
+    'home.reggia.title': 'Cerceaux',
+    'home.reggia.desc': 'Cerceaux en polypropylène, polyester et acier, pour tous les besoins d\'emballage industriel.',
+    'home.reggia.button': 'Voir les produits',
+    'home.sigilli.title': 'Sceaux',
+    'home.sigilli.desc': 'Sceaux pour cerceaux en polypropylène, polyester et acier, avec différentes finitions.',
+    'home.sigilli.button': 'Voir les produits',
+    'home.cta.title': 'Choisissez l\'excellence dans l\'emballage',
+    'home.cta.text': 'En nous choisissant, vous choisissez l\'excellence dans l\'emballage. Contactez-nous aujourd\'hui pour découvrir comment nous pouvons contribuer à optimiser votre processus d\'emballage et améliorer votre efficacité opérationnelle.',
+    'home.cta.button': 'Contactez-nous',
+    
+    // Azienda
+    'azienda.title': 'L\'Entreprise',
+    'azienda.text1': 'Fratelli Pozzi S.r.l. est une entreprise italienne leader dans le secteur de l\'emballage industriel depuis 1947. Avec plus de 75 ans d\'expérience, nous nous sommes spécialisés dans la production de cerceleuses, tendeurs, cerceaux et sceaux pour l\'emballage industriel.',
+    'azienda.values.title': 'Nos Valeurs',
+    'azienda.values.madeInItaly': 'Made in Italy',
+    'azienda.values.madeInItaly.desc': 'Qualité et excellence italiennes reconnues dans le monde entier',
+    'azienda.values.innovation': 'Innovation',
+    'azienda.values.innovation.desc': 'Recherche constante de nouvelles solutions et technologies',
+    'azienda.values.service': 'Service',
+    'azienda.values.service.desc': 'Assistance technique et support client de qualité',
+    'azienda.cta.text': 'Découvrez comment nous pouvons vous aider à optimiser vos processus d\'emballage. Contactez-nous pour plus d\'informations.',
+    'azienda.cta.button': 'Contactez-nous',
+    
+    // Contatti
+    'contatti.title': 'Contactez-nous',
+    'contatti.address': 'Adresse',
+    'contatti.address.value': 'Via Leonardo da Vinci 37, 24043 Caravaggio (BG), Italie',
+    'contatti.phone': 'Téléphone',
+    'contatti.email': 'Email',
+    'contatti.form.title': 'Envoyez-nous un message',
+    'contatti.form.name': 'Nom',
+    'contatti.form.email': 'Email',
+    'contatti.form.phone.required': 'Téléphone *',
+    'contatti.form.message': 'Message',
+    'contatti.form.submit': 'Envoyer',
+    'contatti.form.submitting': 'Envoi en cours...',
+    'contatti.form.success': 'Merci pour votre message ! Nous vous contacterons bientôt.',
+    'contatti.form.error.name': 'Le nom doit contenir au moins 2 caractères',
+    'contatti.form.error.email': 'Email invalide',
+    'contatti.form.error.phone': 'Le téléphone est obligatoire',
+    'contatti.form.error.message': 'Le message doit contenir au moins 10 caractères',
+    'contatti.form.error.submit': 'Une erreur s\'est produite lors de l\'envoi. Veuillez réessayer plus tard.',
+    'contatti.cta.text': 'Contactez-nous aujourd\'hui pour toute information ou devis. Nous sommes là pour vous aider à trouver la solution d\'emballage parfaite pour vos besoins.',
+    'contatti.cta.button': 'Contactez-nous',
+    
+    // Eventi
+    'eventi.title': 'Événements et Salons',
+    'eventi.description': 'Découvrez les événements et salons auxquels Flli Pozzi participe dans le secteur de l\'emballage industriel.',
+    'eventi.ipack2025.title': 'IPACK-IMA 2025',
+    'eventi.ipack2025.text1': 'F.lli Pozzi sera présent à Ipack-Ima 2025, le principal salon international dédié aux technologies de l\'emballage et de l\'industrie de transformation.',
+    'eventi.ipack2025.text2': 'Lors de l\'événement, nous présenterons en avant-première notre nouveau brevet. Une solution innovante conçue pour améliorer l\'efficacité, l\'ergonomie et les performances.',
+    'eventi.ipack2025.text3': 'Les objectifs sont de consolider les relations commerciales existantes et d\'entrer en contact avec de nouveaux opérateurs.',
+    'eventi.ipack2025.moreInfo': 'Plus d\'informations en cliquant sur la bannière.',
+    'eventi.ipack2022.title': 'IPACK-IMA 2022',
+    'eventi.ipack2022.text1': 'Fratelli Pozzi a participé à Ipack-Ima 2022, rendez-vous principal dans le traitement et l\'emballage pour les professionnels des secteurs alimentaire et non alimentaire, ainsi que plateforme internationale pour la relance des activités.',
+    'eventi.ipack2022.text2': 'Les objectifs atteints sont de promouvoir l\'image de l\'entreprise au niveau mondial, présenter les nouveaux produits, établir et consolider les relations commerciales au niveau international.',
+    'eventi.ipack2022.text3': 'Les principaux résultats en cours d\'atteinte sont l\'augmentation de la clientèle et du chiffre d\'affaires.',
+    'eventi.months.gennaio': 'JANVIER',
+    'eventi.months.febbraio': 'FÉVRIER',
+    'eventi.months.marzo': 'MARS',
+    'eventi.months.aprile': 'AVRIL',
+    'eventi.months.maggio': 'MAI',
+    'eventi.months.giugno': 'JUIN',
+    'eventi.months.luglio': 'JUILLET',
+    'eventi.months.agosto': 'AOÛT',
+    'eventi.months.settembre': 'SEPTEMBRE',
+    'eventi.months.ottobre': 'OCTOBRE',
+    'eventi.months.novembre': 'NOVEMBRE',
+    'eventi.months.dicembre': 'DÉCEMBRE',
+    
+    // Prodotti
+    'prodotti.categories.reggiatrici': 'Cerceleuses et tendeurs',
+    'prodotti.categories.reggiatrici.desc': 'Manuels, à batterie et pneumatiques',
+    'prodotti.categories.carrelli': 'Chariots',
+    'prodotti.categories.carrelli.desc': 'Porte-cerceaux',
+    'prodotti.categories.reggia': 'Cerceaux',
+    'prodotti.categories.reggia.desc': 'Polyester, polypropylène et acier',
+    'prodotti.categories.sigilli': 'Sceaux',
+    'prodotti.categories.sigilli.desc': 'Polis ou galvanisés',
+    'prodotti.categories.accessori': 'Accessoires pour l\'emballage',
+    'prodotti.categories.accessori.desc': 'Fournitures pour l\'emballage',
+    'prodotti.quickNav.title': 'Navigation rapide',
+    'prodotti.cta.text': 'En plus de notre production, nous offrons également une gamme de produits complémentaires pour l\'emballage, sélectionnés pour leur qualité et leur fiabilité. Contactez-nous pour découvrir toutes les solutions disponibles.',
+    'prodotti.cta.button': 'Demander des informations',
+    'prodotti.table.section': 'Section en mm',
+    'prodotti.table.measure': 'Mesure en mm',
+    'prodotti.table.resistance': 'Résistance en kg',
+    'prodotti.table.length': 'Longueur en mètres',
+    'prodotti.table.article': 'Article',
+    'prodotti.table.dimensions': 'Dim. mm',
+    'prodotti.table.quantity': 'Qté',
+    'prodotti.table.model': 'Modèle',
+    'prodotti.table.tensileStrength': 'Résistance à la traction',
+    'prodotti.table.quantityFull': 'Quantité',
+    'prodotti.steel.polished': 'Poli',
+    'prodotti.steel.galvanized': 'Galvanisé',
+    'prodotti.steel.blued': 'Bleui',
+    'prodotti.steel.painted': 'Peint',
+    'prodotti.steel.highResistance': 'Haute résistance',
+    'prodotti.steel.upTo': 'jusqu\'à',
+    
+    // Footer
+    'footer.tagline': 'Leader dans l\'emballage depuis 1947',
+    'footer.links.title': 'Liens',
+    'footer.info.title': 'Informations',
+    'footer.contacts.title': 'Contacts',
+    'footer.quality': 'Qualité',
+    'footer.certification': 'Certification',
+    'footer.copyright': '© 2024 Flli Pozzi srl. Tous droits réservés.',
+    
+    // Cookies e Privacy (traduzioni principali)
+    'cookies.title': 'Politique des Cookies',
+    'cookies.subtitle': 'Gestion des cookies',
+    'privacy.title': 'Politique de Confidentialité',
+    'privacy.subtitle': 'Gestion des données personnelles',
+  },
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -502,7 +648,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') as Language;
-    if (savedLanguage && (savedLanguage === 'it' || savedLanguage === 'en')) {
+    if (savedLanguage && (savedLanguage === 'it' || savedLanguage === 'en' || savedLanguage === 'fr')) {
       setLanguageState(savedLanguage);
     }
   }, []);
