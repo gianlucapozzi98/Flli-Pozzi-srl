@@ -926,7 +926,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   const t = (key: string): string => {
-    return translations[language][key] || key;
+    const translation = translations[language]?.[key];
+    if (!translation && process.env.NODE_ENV === 'development') {
+      console.warn(`Translation missing for key "${key}" in language "${language}"`);
+    }
+    return translation || key;
   };
 
   return (
