@@ -79,6 +79,7 @@ function getEventImage(eventTitle: string, imageKey: string, eventDate: string):
       'default': '/Immagini/BLECH CHINA.jpg',
     },
     'MACFRUT': {
+      '8-10 MAGGIO 2024': '/Immagini/macfrut-2024.gif',
       'default': '/Immagini/mac-frut 2012.jpg',
     },
     'PROPACK CHINA': {
@@ -98,10 +99,6 @@ function getEventImage(eventTitle: string, imageKey: string, eventDate: string):
     },
     'IPACK-IMA 2025': {
       'default': '/Immagini/IPACK-IMA 2025.jpeg',
-    },
-    'MACFRUT': {
-      '8-10 MAGGIO 2024': '/Immagini/macfrut-2024.gif',
-      'default': '/Immagini/mac-frut 2012.jpg',
     },
   };
   
