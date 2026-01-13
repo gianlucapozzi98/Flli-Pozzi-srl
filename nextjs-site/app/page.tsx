@@ -158,7 +158,7 @@ export default function Home() {
             />
           </motion.div>
           <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="relative z-20 text-center text-white px-4" style={{ paddingBottom: '120px', width: '100%' }}>
+          <div className="relative z-20 text-center text-white px-6 lg:px-4" style={{ paddingBottom: '120px', width: '100%' }}>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -180,7 +180,7 @@ export default function Home() {
 
         {/* Features Section */}
         <section className="bg-white" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="w-full flex justify-center px-4 lg:px-8">
+          <div className="w-full flex justify-center px-6 lg:px-4">
             <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-6xl w-full">
               {features.map((feature, index) => (
                 <motion.div
@@ -202,7 +202,7 @@ export default function Home() {
 
         {/* Reggiatrici Preview */}
         <section className="bg-bg-light" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-4 lg:px-8">
+          <div className="container mx-auto px-6 lg:px-4">
             <div className="flex justify-center">
               <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ maxWidth: '1200px', width: '100%', gap: '32px' }}>
                 <div className="flex justify-center md:justify-end">
@@ -211,14 +211,14 @@ export default function Home() {
                   </div>
               </div>
                 <div className="flex justify-center md:justify-start">
-                  <div style={{ maxWidth: '600px', width: '100%' }}>
-                    <h2 className="text-4xl md:text-5xl font-bold font-heading whitespace-nowrap" style={{ marginBottom: '20px' }}>
+                  <div className="text-center md:text-left" style={{ maxWidth: '600px', width: '100%' }}>
+                    <h2 className="text-4xl md:text-5xl font-bold font-heading lg:whitespace-nowrap" style={{ marginBottom: '20px' }}>
                       {t('home.reggiatrici.title')}
                 </h2>
                     <p className="text-lg text-text-light leading-relaxed" style={{ marginBottom: '20px' }}>
                       {t('home.reggiatrici.text')}
                 </p>
-                    <div style={{ marginTop: '3px' }}>
+                    <div className="flex justify-center md:justify-start" style={{ marginTop: '3px' }}>
                 <Link
                   href="/prodotti#reggiatrici"
                         className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
@@ -236,7 +236,7 @@ export default function Home() {
 
         {/* Assistenza Section */}
         <section className="bg-white" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-4 lg:px-8">
+          <div className="container mx-auto px-6 lg:px-4">
             <h2 className="text-4xl md:text-5xl font-bold text-center font-heading" style={{ marginBottom: '60px' }}>
               {t('home.assistance.title')}
             </h2>
@@ -302,7 +302,7 @@ export default function Home() {
 
         {/* Soluzioni Section */}
         <section className="bg-bg-light" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
+          <div className="container mx-auto px-6 lg:px-4 max-w-5xl">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -332,7 +332,7 @@ export default function Home() {
 
         {/* Reggia e Sigilli Preview Section */}
         <section className="bg-white" style={{ paddingTop: '30px', paddingBottom: '0px' }}>
-          <div className="container mx-auto px-4 lg:px-8">
+          <div className="container mx-auto px-6 lg:px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {/* Reggia Riquadro */}
               <motion.div
@@ -340,8 +340,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="flex flex-col justify-start items-center text-center border-r border-gray-200"
-                style={{ paddingTop: '30px', paddingBottom: '30px', paddingLeft: '2rem', paddingRight: '2rem' }}
+                className="flex flex-col justify-start items-center text-center border-r border-gray-200 lg:pl-8 lg:pr-8"
+                style={{ paddingTop: '30px', paddingBottom: '30px', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
               >
                 <h3 className="text-3xl md:text-4xl font-bold font-heading" style={{ marginBottom: '10px' }}>
                   {t('home.reggia.title')}
@@ -378,8 +378,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex flex-col justify-start items-center text-center"
-                style={{ paddingTop: '30px', paddingBottom: '30px', paddingLeft: '2rem', paddingRight: '2rem' }}
+                className="flex flex-col justify-start items-center text-center lg:pl-8 lg:pr-8"
+                style={{ paddingTop: '30px', paddingBottom: '30px', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
               >
                 <h3 className="text-3xl md:text-4xl font-bold font-heading" style={{ marginBottom: '10px' }}>
                   {t('home.sigilli.title')}
@@ -415,7 +415,7 @@ export default function Home() {
 
         {/* CTA Section */}
         <section className="bg-gradient-to-br from-primary/10 to-secondary/10" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-4 lg:px-8">
+          <div className="container mx-auto px-6 lg:px-4">
             <div className="flex justify-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -441,8 +441,8 @@ export default function Home() {
                 {t('home.cta.button')}
               </Link>
               </motion.div>
-        </div>
-        </div>
+            </div>
+          </div>
         </section>
       </main>
       <Footer />
