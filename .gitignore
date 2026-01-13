@@ -1,0 +1,54 @@
+# Ignore old HTML files and folders
+*.html
+css/
+js/
+Imm/
+cartella senza nome/
+fllipozzi.WordPress.2022-05-29.xml
+
+# Next.js .gitignore (from nextjs-site)
+nextjs-site/node_modules/
+nextjs-site/.next/
+nextjs-site/out/
+nextjs-site/build
+nextjs-site/.pnp
+nextjs-site.pnp.*
+nextjs-site/.yarn/*
+!nextjs-site/.yarn/patches
+!nextjs-site/.yarn/plugins
+!nextjs-site/.yarn/releases
+!nextjs-site/.yarn/versions
+
+# Testing
+nextjs-site/coverage
+
+# Production
+nextjs-site/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment files
+nextjs-site/.env*
+nextjs-site/.env.local
+nextjs-site/.env.development.local
+nextjs-site/.env.test.local
+nextjs-site/.env.production.local
+
+# Vercel
+nextjs-site/.vercel
+
+# TypeScript
+nextjs-site/*.tsbuildinfo
+nextjs-site/next-env.d.ts
+
+# Next.js build artifacts
+nextjs-site/next
+nextjs-site/nextjs-site@0.1.0
