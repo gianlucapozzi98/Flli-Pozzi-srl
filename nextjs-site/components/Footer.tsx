@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 lg:px-8" style={{ paddingTop: '10px', paddingBottom: '15px' }}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-center">
           {/* Colonna 1: Logo e scritta */}
-          <div className="flex flex-col justify-center items-center md:items-start">
+          <div className="flex flex-col justify-center items-center md:items-start lg:items-start">
             <div className="mb-4">
               <Link href="/">
                 <Image
@@ -25,13 +25,13 @@ export default function Footer() {
                 />
               </Link>
             </div>
-            <p className="text-gray-400" style={{ marginLeft: '-0.5mm' }}>{t('footer.tagline')}</p>
+            <p className="text-gray-400 text-center md:text-left lg:text-left" style={{ marginLeft: '-0.5mm' }}>{t('footer.tagline')}</p>
           </div>
           
           {/* Colonna 2: Prodotti, Azienda, Eventi */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center items-center md:items-start lg:items-start">
             <h4 className="text-lg font-semibold mb-4">{t('footer.links.title')}</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-center md:text-left lg:text-left">
               <li>
                 <Link href="/prodotti" className="text-gray-400 hover:text-primary transition-colors">
                   {t('nav.products')}
@@ -51,9 +51,9 @@ export default function Footer() {
           </div>
           
           {/* Colonna 3: Privacy Policy, Cookie Policy e link futuri */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center items-center md:items-start lg:items-start">
             <h4 className="text-lg font-semibold mb-4">{t('footer.info.title')}</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-center md:text-left lg:text-left">
               <li>
                 <Link href="/privacy" className="text-gray-400 hover:text-primary transition-colors">
                   {t('footer.privacy')}
@@ -88,9 +88,9 @@ export default function Footer() {
           </div>
           
           {/* Colonna 4: Contatti */}
-          <div className="flex flex-col justify-center">
-            <h4 className="text-lg font-semibold mb-4" style={{ marginTop: '20px' }}>{t('footer.contacts.title')}</h4>
-            <ul className="space-y-2 text-gray-400">
+          <div className="flex flex-col justify-center items-center md:items-start lg:items-start">
+            <h4 className="text-lg font-semibold mb-4 lg:mt-5" style={{ marginTop: '20px' }}>{t('footer.contacts.title')}</h4>
+            <ul className="space-y-2 text-gray-400 text-center md:text-left lg:text-left">
               <li>
                 <span className="block">{t('footer.contacts.address')}</span>
               </li>
@@ -100,12 +100,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:fllipozzi@fllipozzi.it" className="hover:text-primary transition-colors">
+                <a href="mailto:fllipozzi@fllipozzi.it" className="hover:text-primary transition-colors break-all lg:break-normal">
                   {t('footer.contacts.email')} fllipozzi@fllipozzi.it
                 </a>
               </li>
             </ul>
-            <div className="flex gap-4" style={{ marginTop: '0.75rem', marginBottom: '20px' }}>
+            <div className="flex gap-4 justify-center md:justify-start lg:justify-start" style={{ marginTop: '0.75rem', marginBottom: '20px' }}>
               <a
                 href="https://www.linkedin.com/company/flli-pozzi"
                 target="_blank"

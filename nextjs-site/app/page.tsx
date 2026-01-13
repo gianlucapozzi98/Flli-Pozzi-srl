@@ -158,7 +158,7 @@ export default function Home() {
             />
           </motion.div>
           <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="relative z-20 text-center text-white px-6 lg:px-4" style={{ paddingBottom: '120px', width: '100%' }}>
+          <div className="relative z-20 text-center text-white px-8 lg:px-4" style={{ paddingBottom: '120px', width: '100%' }}>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -180,7 +180,7 @@ export default function Home() {
 
         {/* Features Section */}
         <section className="bg-white" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="w-full flex justify-center px-6 lg:px-4">
+          <div className="w-full flex justify-center px-8 lg:px-4">
             <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-6xl w-full">
               {features.map((feature, index) => (
                 <motion.div
@@ -202,7 +202,7 @@ export default function Home() {
 
         {/* Reggiatrici Preview */}
         <section className="bg-bg-light" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-6 lg:px-4">
+          <div className="container mx-auto px-8 lg:px-4">
             <div className="flex justify-center">
               <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ maxWidth: '1200px', width: '100%', gap: '32px' }}>
                 <div className="flex justify-center md:justify-end">
@@ -236,7 +236,7 @@ export default function Home() {
 
         {/* Assistenza Section */}
         <section className="bg-white" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-6 lg:px-4">
+          <div className="container mx-auto px-8 lg:px-4">
             <h2 className="text-4xl md:text-5xl font-bold text-center font-heading" style={{ marginBottom: '60px' }}>
               {t('home.assistance.title')}
             </h2>
@@ -332,7 +332,7 @@ export default function Home() {
 
         {/* Reggia e Sigilli Preview Section */}
         <section className="bg-white" style={{ paddingTop: '30px', paddingBottom: '0px' }}>
-          <div className="container mx-auto px-6 lg:px-4">
+          <div className="container mx-auto px-8 lg:px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {/* Reggia Riquadro */}
               <motion.div
@@ -415,7 +415,7 @@ export default function Home() {
 
         {/* CTA Section */}
         <section className="bg-gradient-to-br from-primary/10 to-secondary/10" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-6 lg:px-4">
+          <div className="container mx-auto px-8 lg:px-4">
             <div className="flex justify-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}

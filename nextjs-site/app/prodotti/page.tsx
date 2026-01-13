@@ -289,9 +289,9 @@ export default function Prodotti() {
       <Header />
       <main className="pt-20">
         {/* Quick Navigation */}
-        <section className="bg-bg-light" style={{ 
-          paddingTop: '32px', 
-          paddingBottom: '32px',
+        <section className="bg-bg-light overflow-x-auto lg:overflow-visible lg:pt-8 lg:pb-8" style={{ 
+          paddingTop: '16px', 
+          paddingBottom: '16px',
           position: 'fixed',
           top: '80px',
           left: 0,
@@ -300,8 +300,8 @@ export default function Prodotti() {
           boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
           width: '100%'
         }}>
-          <div className="flex flex-col items-center" style={{ maxWidth: '1800px', margin: '0 auto', padding: '0 1rem' }}>
-            <div className="flex justify-center gap-6 w-full" style={{ flexWrap: 'nowrap' }}>
+          <div className="flex flex-col items-center lg:items-center" style={{ maxWidth: '1800px', margin: '0 auto', padding: '0 1rem' }}>
+            <div className="flex justify-start lg:justify-center gap-4 lg:gap-6 w-full overflow-x-auto lg:overflow-visible px-4 lg:px-0" style={{ flexWrap: 'nowrap', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'thin' }}>
               {productCategories.map((category) => (
                 <a
                   key={category.id}
@@ -319,13 +319,13 @@ export default function Prodotti() {
                       });
                     }
                   }}
-                  className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center border-2 border-transparent hover:border-primary cursor-pointer"
-                  style={{ width: '100%', maxWidth: '280px', minWidth: '200px', flex: '1 1 0' }}
+                  className="bg-white p-4 lg:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center border-2 border-transparent hover:border-primary cursor-pointer flex-shrink-0 lg:flex-1 lg:max-w-[280px]"
+                  style={{ minWidth: '180px', maxWidth: '280px', flex: '0 0 auto' }}
                 >
-                  <h3 className="text-xl font-semibold mb-2 text-primary whitespace-nowrap">
+                  <h3 className="text-base lg:text-xl font-semibold mb-1 lg:mb-2 text-primary whitespace-nowrap">
                     {category.title}
                   </h3>
-                  <p className="text-text-light text-sm">{category.description}</p>
+                  <p className="text-text-light text-xs lg:text-sm">{category.description}</p>
                 </a>
               ))}
             </div>
