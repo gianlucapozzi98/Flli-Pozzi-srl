@@ -798,9 +798,14 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.links.title': 'Liens',
     'footer.info.title': 'Informations',
     'footer.contacts.title': 'Contacts',
+    'footer.contacts.address': 'Adresse : Via L. Da Vinci 37, Caravaggio (BG), Italie',
+    'footer.contacts.phone': 'Téléphone :',
+    'footer.contacts.email': 'E-mail :',
+    'footer.privacy': 'Politique de Confidentialité',
+    'footer.cookies': 'Politique des Cookies',
     'footer.quality': 'Qualité',
     'footer.certification': 'Certification',
-    'footer.copyright': '© 2024 Flli Pozzi srl. Tous droits réservés.',
+    'footer.copyright': 'Copyright © 2026 Flli Pozzi srl | Tous droits réservés. TVA 00215550161',
     
     // Cookies
     'cookies.title': 'Politique des Cookies',
