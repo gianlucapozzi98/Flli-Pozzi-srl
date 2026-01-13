@@ -48,14 +48,20 @@ export default function Contatti() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Errore durante l\'invio');
+        // Mostra il messaggio di errore specifico dal server
+        const errorMessage = result.error || t('contatti.form.error.submit');
+        alert(errorMessage + (result.details ? `\n\nDettagli: ${result.details}` : ''));
+        throw new Error(errorMessage);
       }
 
       alert(t('contatti.form.success'));
       reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting form:', error);
-      alert(t('contatti.form.error.submit'));
+      // Non mostrare di nuovo l'alert se è già stato mostrato sopra
+      if (!error.message || !error.message.includes('Configurazione email')) {
+        alert(t('contatti.form.error.submit'));
+      }
     }
   };
 

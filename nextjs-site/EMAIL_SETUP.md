@@ -39,12 +39,21 @@ EMAIL_BCC=ilgianlu98.29@gmail.com  # Email tecnica per verifica (opzionale, nasc
 ## Configurazione per Altri Provider Email
 
 ### Outlook/Office365
+Per Outlook/Office365, usa la password normale dell'account (non serve una password delle app come Gmail):
+
 ```env
 SMTP_HOST=smtp.office365.com
 SMTP_PORT=587
-SMTP_USER=your-email@outlook.com
-SMTP_PASSWORD=your-password
+SMTP_USER=fllipozzi@fllipozzi.it
+SMTP_PASSWORD=la-tua-password-normale
+EMAIL_FROM="Flli Pozzi srl" <fllipozzi@fllipozzi.it>
+EMAIL_TO=fllipozzi@fllipozzi.it
 ```
+
+**Nota importante per Outlook/Office365:**
+- Se l'account ha l'autenticazione a due fattori (2FA) abilitata, potrebbe essere necessario creare una password delle app
+- Alcuni account aziendali potrebbero richiedere l'autenticazione moderna (OAuth2) invece della password SMTP
+- Se hai problemi, contatta l'amministratore IT per le credenziali SMTP corrette
 
 ### Altri Provider SMTP
 Consulta la documentazione del tuo provider email per:

@@ -148,19 +148,19 @@ export default function Eventi() {
                 style={{ maxHeight: '714px', overflow: 'hidden' }}
               >
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-bold font-heading">
+                <h2 className="text-3xl font-bold font-heading">
                     {t('eventi.ipack2025.title')}
-                  </h2>
-                  <p className="text-text-light leading-relaxed">
+                </h2>
+                <p className="text-text-light leading-relaxed">
                     {t('eventi.ipack2025.text1')}
                   </p>
                   <p className="text-text-light leading-relaxed">
                     {t('eventi.ipack2025.text2')}
-                  </p>
-                  <p className="text-text-light leading-relaxed">
+                </p>
+                <p className="text-text-light leading-relaxed">
                     {t('eventi.ipack2025.text3')}
-                  </p>
-                  <p className="text-text-light leading-relaxed">
+                </p>
+                <p className="text-text-light leading-relaxed">
                     {t('eventi.ipack2025.moreInfo')}
                   </p>
                 </div>
@@ -253,14 +253,14 @@ export default function Eventi() {
               {events.map((event, index) => {
                 const eventImage = getEventImage(event.title, event.image, event.date);
                 return (
-                  <motion.div
+                <motion.div
                     key={`${event.title}-${event.date}`}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.05 }}
-                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                  >
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.05 }}
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                >
                     <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
                       {eventImage ? (
                         <Image
@@ -275,12 +275,12 @@ export default function Eventi() {
                           {event.title}
                         </span>
                       )}
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                      <p className="text-text-light font-medium">{event.date}</p>
-                    </div>
-                  </motion.div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
+                    <p className="text-text-light font-medium">{event.date}</p>
+                  </div>
+                </motion.div>
                 );
               })}
             </div>

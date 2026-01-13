@@ -14,24 +14,67 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Verifica che le credenziali siano configurate
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPassword = process.env.SMTP_PASSWORD;
+    
+    if (!smtpUser || !smtpPassword || smtpPassword.includes('INSERISCI_QUI')) {
+      return NextResponse.json(
+        { error: 'Configurazione email non completa. Verifica il file .env.local e inserisci SMTP_PASSWORD (Password delle app di Gmail)' },
+        { status: 500 }
+      );
+    }
+
     // Configurazione del transporter email
+    // Per Outlook/Office365: usa la password normale dell'account
     // Per Gmail: usa App Password invece della password normale
-    // Per altri provider: modifica host, port, secure di conseguenza
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      host: process.env.SMTP_HOST || 'smtp.office365.com',
       port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: false, // true per 465, false per altri port
+      secure: false, // true per 465, false per altri port (587 usa STARTTLS)
       auth: {
-        user: process.env.SMTP_USER || process.env.EMAIL_FROM,
-        pass: process.env.SMTP_PASSWORD || process.env.EMAIL_PASSWORD,
+        user: smtpUser,
+        pass: smtpPassword,
       },
+      // Aggiungi debug in sviluppo
+      debug: process.env.NODE_ENV === 'development',
+      logger: process.env.NODE_ENV === 'development',
     });
+    
+    // Verifica la connessione prima di inviare
+    try {
+      await transporter.verify();
+      console.log('SMTP server connection verified');
+    } catch (verifyError: any) {
+      console.error('SMTP verification failed:', verifyError);
+      let errorMessage = 'Errore di connessione al server email. Verifica le credenziali SMTP.';
+      
+      if (verifyError.code === 'EAUTH') {
+        errorMessage = 'Errore di autenticazione. Verifica che SMTP_USER e SMTP_PASSWORD siano corretti.';
+      } else if (verifyError.code === 'ECONNECTION' || verifyError.code === 'ETIMEDOUT') {
+        errorMessage = `Errore di connessione a ${process.env.SMTP_HOST}. Verifica SMTP_HOST e SMTP_PORT.`;
+      } else if (verifyError.message?.includes('535') || verifyError.message?.includes('authentication')) {
+        errorMessage = 'Credenziali non valide. Verifica username e password. Se l\'account ha 2FA, potrebbe essere necessaria una password delle app.';
+      }
+      
+      return NextResponse.json(
+        { 
+          error: errorMessage,
+          details: process.env.NODE_ENV === 'development' ? verifyError.message : undefined,
+          code: process.env.NODE_ENV === 'development' ? verifyError.code : undefined
+        },
+        { status: 500 }
+      );
+    }
 
     // Email per l'azienda (riceve la richiesta)
+    // Usa solo il nome senza mostrare l'email nel campo from
     const mailOptions = {
-      from: process.env.EMAIL_FROM || `"Flli Pozzi Website" <${process.env.SMTP_USER}>`,
+      from: {
+        name: 'Flli Pozzi srl',
+        address: smtpUser
+      },
       to: process.env.EMAIL_TO || 'fllipozzi@fllipozzi.it',
-      bcc: process.env.EMAIL_BCC || 'ilgianlu98.29@gmail.com', // Email tecnica per verifica (nascosta)
       replyTo: email,
       subject: `Nuova richiesta di contatto da ${name}`,
       html: `
@@ -60,7 +103,10 @@ ${message}
 
     // Email di conferma per il cliente
     const confirmationMailOptions = {
-      from: process.env.EMAIL_FROM || `"Flli Pozzi" <${process.env.SMTP_USER}>`,
+      from: {
+        name: 'Flli Pozzi srl',
+        address: smtpUser
+      },
       to: email,
       subject: 'Richiesta ricevuta - Flli Pozzi',
       html: `
@@ -104,10 +150,22 @@ Email: fllipozzi@fllipozzi.it
       { message: 'Email inviata con successo' },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error sending email:', error);
+    
+    // Messaggi di errore più specifici
+    let errorMessage = 'Errore durante l\'invio dell\'email';
+    
+    if (error.code === 'EAUTH') {
+      errorMessage = 'Errore di autenticazione email. Verifica le credenziali SMTP nel file .env.local';
+    } else if (error.code === 'ECONNECTION' || error.code === 'ETIMEDOUT') {
+      errorMessage = 'Errore di connessione al server email. Verifica SMTP_HOST e SMTP_PORT';
+    } else if (error.message?.includes('password') || error.message?.includes('authentication')) {
+      errorMessage = 'Credenziali email non valide. Verifica SMTP_USER e SMTP_PASSWORD nel file .env.local';
+    }
+    
     return NextResponse.json(
-      { error: 'Errore durante l\'invio dell\'email' },
+      { error: errorMessage, details: process.env.NODE_ENV === 'development' ? error.message : undefined },
       { status: 500 }
     );
   }

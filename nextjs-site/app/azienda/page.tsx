@@ -91,27 +91,27 @@ export default function Azienda() {
               ].map((value, index) => {
                 const colors = ['#009246', '#FFFFFF', '#E30613']; // Verde (primo), Bianco (secondo), Rosso (terzo)
                 return (
-                  <motion.div
-                    key={value.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                <motion.div
+                  key={value.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                     className="text-center p-8 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow relative overflow-hidden"
-                  >
+                >
                     <div 
                       className="absolute top-0 left-0 right-0 h-2" 
                       style={{ backgroundColor: colors[index] }}
                     />
                     <div style={{ marginTop: '0.5rem' }}>
                       <h3 className="text-2xl font-semibold mb-4 text-primary" style={{ letterSpacing: '-0.01em' }}>
-                        {value.title}
-                      </h3>
+                    {value.title}
+                  </h3>
                       <p className="text-text-light leading-relaxed" style={{ fontSize: '1rem' }}>
-                        {value.description}
-                      </p>
+                    {value.description}
+                  </p>
                     </div>
-                  </motion.div>
+                </motion.div>
                 );
               })}
             </div>

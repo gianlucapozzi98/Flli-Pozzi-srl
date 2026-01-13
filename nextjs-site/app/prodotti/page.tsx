@@ -34,8 +34,8 @@ function getProductCategories(t: (key: string) => string) {
       id: 'accessori',
       title: t('prodotti.categories.accessori'),
       description: t('prodotti.categories.accessori.desc'),
-    },
-  ];
+  },
+];
 }
 
 const reggiatrici = {

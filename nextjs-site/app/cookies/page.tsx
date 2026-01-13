@@ -113,7 +113,7 @@ export default function Cookies() {
                 </p>
                 <p className="mt-4">
                   {t('cookies.sharing.text2')}
-                </p>
+              </p>
                 <p className="mt-4">
                   {t('cookies.sharing.text3')}
                 </p>
@@ -134,14 +134,14 @@ export default function Cookies() {
               <p className="text-center" style={{ marginBottom: '1.5rem' }}>
                 {t('cookies.changes.text')}
               </p>
-              
+
               <div className="bg-gray-50 p-6 rounded-lg mx-auto text-center" style={{ maxWidth: '800px', marginTop: '2rem', marginBottom: '2rem' }}>
                 <p>
                   <strong>{t('cookies.dataController')}</strong> {t('cookies.dataController.value')}
                 </p>
                 <p className="mt-4">
                   {t('cookies.moreInfo')} <a href="http://www.allaboutcookies.org" target="_blank" rel="noreferrer noopener" className="text-primary hover:underline">http://www.allaboutcookies.org</a>.
-                </p>
+              </p>
               </div>
             </div>
           </div>

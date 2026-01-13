@@ -91,7 +91,7 @@ export default function RootLayout({
         />
         <LanguageProvider>
           <div className="min-h-screen w-full overflow-x-hidden">
-            {children}
+        {children}
             <ScrollToTop />
           </div>
         </LanguageProvider>

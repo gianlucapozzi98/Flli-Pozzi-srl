@@ -27,8 +27,8 @@ export default function Privacy() {
               <div className="text-center">
                 <p style={{ marginBottom: '1.5rem' }}>
                   {t('privacy.intro1')}
-                </p>
-                
+              </p>
+              
                 <p style={{ marginBottom: '1.5rem' }}>
                   {t('privacy.intro2')}
                 </p>
@@ -166,7 +166,7 @@ export default function Privacy() {
               </p>
               <p>
                   <strong>E-mail:</strong> <a href="mailto:fllipozzi@fllipozzi.it" className="text-primary hover:underline">fllipozzi@fllipozzi.it</a>
-                </p>
+              </p>
               </div>
 
               <h2 className="text-3xl font-bold text-text text-center" style={{ marginTop: '3rem', marginBottom: '2rem' }}>Modifiche alla presente informativa</h2>
@@ -174,9 +174,9 @@ export default function Privacy() {
                 La presente Informativa è in vigore dal 25 maggio 2018. Fratelli Pozzi S.r.l. si riserva di modificarne il contenuto, in parte o completamente, anche a causa di variazioni della Normativa Privacy. Fratelli Pozzi S.r.l. effettuerà la Pubblicazione sul Sito della versione aggiornata del presente atto, e da quel momento essa sarà vincolante: pertanto si invita a visitare con regolarità questa sezione.
               </p>
               <div className="bg-gray-50 p-6 rounded-lg mx-auto text-center" style={{ maxWidth: '800px', marginTop: '2rem', marginBottom: '2rem' }}>
-                <p>
+              <p>
                   <strong>Titolare del trattamento dati:</strong> Fratelli Pozzi S.r.l. con sede in via Leonardo Da Vinci, 37 Caravaggio, 24043 BG – P.IVA 00215550161.
-                </p>
+              </p>
               </div>
             </div>
           </div>
