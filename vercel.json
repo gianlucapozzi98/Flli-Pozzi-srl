@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd nextjs-site && npm install && npm run build",
+  "outputDirectory": "nextjs-site/.next",
+  "installCommand": "cd nextjs-site && npm install",
+  "framework": null,
+  "rootDirectory": "nextjs-site"
+}
