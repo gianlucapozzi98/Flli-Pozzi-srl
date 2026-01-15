@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     
     if (!smtpUser || !smtpPassword || smtpPassword.includes('INSERISCI_QUI')) {
       return NextResponse.json(
-        { error: 'Configurazione email non completa. Verifica il file .env.local e inserisci SMTP_PASSWORD (Password delle app di Gmail)' },
+        { error: 'Configurazione email non completa. Verifica il file .env.local e inserisci SMTP_PASSWORD corretta per Outlook/Office365' },
         { status: 500 }
       );
     }
