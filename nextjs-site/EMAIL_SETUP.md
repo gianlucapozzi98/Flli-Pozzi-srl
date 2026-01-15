@@ -16,7 +16,7 @@ SMTP_PASSWORD=your-app-password
 # Email addresses
 EMAIL_FROM="Flli Pozzi Website" <your-email@gmail.com>
 EMAIL_TO=ilgianlu98.29@gmail.com  # Email dove arrivano le richieste di contatto
-EMAIL_REPLY_TO=fllipozzi@fllipozzi.it  # Email da cui rispondere quando si clicca "Rispondi" (opzionale, default: email del cliente)
+EMAIL_REPLY_TO=camilla@fllipozzi.it  # Email da cui rispondere quando si clicca "Rispondi" (opzionale, default: email del cliente)
 ```
 
 ## Configurazione per Gmail
@@ -48,7 +48,7 @@ SMTP_USER=fllipozzi@fllipozzi.it
 SMTP_PASSWORD=la-tua-password-normale
 EMAIL_FROM="Flli Pozzi srl" <fllipozzi@fllipozzi.it>
 EMAIL_TO=ilgianlu98.29@gmail.com  # Email dove arrivano le richieste di contatto
-EMAIL_REPLY_TO=fllipozzi@fllipozzi.it  # Email da cui rispondere quando si clicca "Rispondi" (opzionale)
+EMAIL_REPLY_TO=camilla@fllipozzi.it  # Email da cui rispondere quando si clicca "Rispondi" (opzionale)
 ```
 
 **Nota importante per Outlook/Office365:**
@@ -71,7 +71,7 @@ Quando qualcuno compila il form di contatto:
    - Email del contatto
    - Telefono
    - Messaggio
-   - Il campo `replyTo` è impostato a `EMAIL_REPLY_TO` (default: fllipozzi@fllipozzi.it) per rispondere facilmente
+   - Il campo `replyTo` è impostato a `EMAIL_REPLY_TO` (default: camilla@fllipozzi.it) per rispondere facilmente
 
 2. **Email di conferma**: Viene inviata un'email di conferma al contatto che ha compilato il form
 
@@ -79,7 +79,7 @@ Quando qualcuno compila il form di contatto:
 
 - **Email visibile sul sito**: `fllipozzi@fllipozzi.it` (rimane sempre questa, visibile ai clienti)
 - **Email dove arrivano le richieste**: `EMAIL_TO` (es. ilgianlu98.29@gmail.com - email tecnica per gestire le richieste)
-- **Email da cui rispondere**: `EMAIL_REPLY_TO` (default: fllipozzi@fllipozzi.it - quando clicchi "Rispondi", la risposta parte da qui)
+- **Email da cui rispondere**: `EMAIL_REPLY_TO` (default: camilla@fllipozzi.it - quando clicchi "Rispondi", la risposta parte da qui)
 
 ## Rispondere alle Richieste
 
@@ -87,7 +87,7 @@ Quando qualcuno compila il form di contatto:
 
 Quando clicchi su "Rispondi" nell'email ricevuta:
 - La risposta andrà automaticamente all'indirizzo email del cliente che ha compilato il form
-- Il mittente della risposta sarà `EMAIL_REPLY_TO` (default: fllipozzi@fllipozzi.it)
+- Il mittente della risposta sarà `EMAIL_REPLY_TO` (default: camilla@fllipozzi.it)
 - **Non serve creare una nuova email manualmente.**
 
 ## Test
