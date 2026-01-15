@@ -58,32 +58,43 @@ export async function POST(request: NextRequest) {
         user: smtpUser,
         pass: smtpPassword,
       },
-      // Aggiungi debug in sviluppo
-      debug: process.env.NODE_ENV === 'development',
-      logger: process.env.NODE_ENV === 'development',
+      tls: {
+        ciphers: 'SSLv3',
+        rejectUnauthorized: false
+      },
+      // Aggiungi debug sempre per vedere gli errori
+      debug: true,
+      logger: true,
     });
     
     // Verifica la connessione prima di inviare
     try {
       await transporter.verify();
-      console.log('SMTP server connection verified');
+      console.log('SMTP server connection verified successfully');
     } catch (verifyError: any) {
       console.error('SMTP verification failed:', verifyError);
+      console.error('Error code:', verifyError.code);
+      console.error('Error message:', verifyError.message);
+      console.error('Error response:', verifyError.response);
+      
       let errorMessage = 'Errore di connessione al server email. Verifica le credenziali SMTP.';
       
       if (verifyError.code === 'EAUTH') {
-        errorMessage = 'Errore di autenticazione. Verifica che SMTP_USER e SMTP_PASSWORD siano corretti.';
+        errorMessage = 'Errore di autenticazione. Verifica che SMTP_USER (camilla@fllipozzi.it) e SMTP_PASSWORD siano corretti. Per Outlook/Office365 potrebbe essere necessario: 1) Abilitare SMTP AUTH sull\'account, 2) Usare una password delle app se l\'account ha 2FA, 3) Verificare che l\'account non sia bloccato.';
       } else if (verifyError.code === 'ECONNECTION' || verifyError.code === 'ETIMEDOUT') {
         errorMessage = `Errore di connessione a ${process.env.SMTP_HOST}. Verifica SMTP_HOST e SMTP_PORT.`;
-      } else if (verifyError.message?.includes('535') || verifyError.message?.includes('authentication')) {
-        errorMessage = 'Credenziali non valide. Verifica username e password. Se l\'account ha 2FA, potrebbe essere necessaria una password delle app.';
+      } else if (verifyError.message?.includes('535') || verifyError.message?.includes('authentication') || verifyError.response?.includes('535')) {
+        errorMessage = 'Credenziali non valide (errore 535). Verifica username e password. Per Outlook potrebbe essere necessario abilitare SMTP AUTH o usare una password delle app.';
+      } else if (verifyError.response?.includes('5.7.57') || verifyError.message?.includes('5.7.57')) {
+        errorMessage = 'SMTP AUTH non abilitato. Contatta l\'amministratore IT per abilitare SMTP AUTH sull\'account Office365.';
       }
       
       return NextResponse.json(
         { 
           error: errorMessage,
-          details: process.env.NODE_ENV === 'development' ? verifyError.message : undefined,
-          code: process.env.NODE_ENV === 'development' ? verifyError.code : undefined
+          details: verifyError.message || verifyError.response,
+          code: verifyError.code,
+          smtpUser: smtpUser // Per debug
         },
         { status: 500 }
       );
