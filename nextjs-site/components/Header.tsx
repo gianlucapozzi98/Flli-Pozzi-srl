@@ -11,8 +11,8 @@ import LanguageSwitcher from './LanguageSwitcher';
 
 const navLinks = [
   { href: '/', labelKey: 'nav.home' },
-  { href: '/prodotti', labelKey: 'nav.products' },
   { href: '/azienda', labelKey: 'nav.company' },
+  { href: '/prodotti', labelKey: 'nav.products' },
   { href: '/eventi', labelKey: 'nav.events' },
   { href: '/contatti', labelKey: 'nav.contacts' },
 ];
