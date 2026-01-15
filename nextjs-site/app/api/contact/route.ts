@@ -69,13 +69,18 @@ export async function POST(request: NextRequest) {
 
     // Email per l'azienda (riceve la richiesta)
     // Usa solo il nome senza mostrare l'email nel campo from
+    // EMAIL_TO: email dove arrivano le richieste (es. ilgianlu98.29@gmail.com)
+    // EMAIL_REPLY_TO: email da cui rispondere quando si clicca "Rispondi" (default: email del cliente)
+    const emailTo = process.env.EMAIL_TO || 'fllipozzi@fllipozzi.it';
+    const emailReplyTo = process.env.EMAIL_REPLY_TO || email; // Se non specificata, usa l'email del cliente
+    
     const mailOptions = {
       from: {
         name: 'Flli Pozzi srl',
         address: smtpUser
       },
-      to: process.env.EMAIL_TO || 'fllipozzi@fllipozzi.it',
-      replyTo: email,
+      to: emailTo,
+      replyTo: emailReplyTo, // Email da cui rispondere quando si clicca "Rispondi"
       subject: `Nuova richiesta di contatto da ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

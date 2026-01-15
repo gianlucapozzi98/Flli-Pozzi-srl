@@ -15,8 +15,8 @@ SMTP_PASSWORD=your-app-password
 
 # Email addresses
 EMAIL_FROM="Flli Pozzi Website" <your-email@gmail.com>
-EMAIL_TO=fllipozzi@fllipozzi.it
-EMAIL_BCC=ilgianlu98.29@gmail.com  # Email tecnica per verifica (opzionale, nascosta)
+EMAIL_TO=ilgianlu98.29@gmail.com  # Email dove arrivano le richieste di contatto
+EMAIL_REPLY_TO=fllipozzi@fllipozzi.it  # Email da cui rispondere quando si clicca "Rispondi" (opzionale, default: email del cliente)
 ```
 
 ## Configurazione per Gmail
@@ -47,7 +47,8 @@ SMTP_PORT=587
 SMTP_USER=fllipozzi@fllipozzi.it
 SMTP_PASSWORD=la-tua-password-normale
 EMAIL_FROM="Flli Pozzi srl" <fllipozzi@fllipozzi.it>
-EMAIL_TO=fllipozzi@fllipozzi.it
+EMAIL_TO=ilgianlu98.29@gmail.com  # Email dove arrivano le richieste di contatto
+EMAIL_REPLY_TO=fllipozzi@fllipozzi.it  # Email da cui rispondere quando si clicca "Rispondi" (opzionale)
 ```
 
 **Nota importante per Outlook/Office365:**
@@ -65,21 +66,29 @@ Consulta la documentazione del tuo provider email per:
 
 Quando qualcuno compila il form di contatto:
 
-1. **Email all'azienda**: Viene inviata un'email a `EMAIL_TO` (fllipozzi@fllipozzi.it) con:
+1. **Email all'azienda**: Viene inviata un'email a `EMAIL_TO` (es. ilgianlu98.29@gmail.com) con:
    - Nome del contatto
    - Email del contatto
    - Telefono
    - Messaggio
-   - L'email del contatto è impostata come `replyTo` per rispondere facilmente
-   - Una copia nascosta (BCC) viene inviata a `EMAIL_BCC` per verifica tecnica (non visibile agli altri destinatari)
+   - Il campo `replyTo` è impostato a `EMAIL_REPLY_TO` (default: fllipozzi@fllipozzi.it) per rispondere facilmente
 
 2. **Email di conferma**: Viene inviata un'email di conferma al contatto che ha compilato il form
+
+## Configurazione Email
+
+- **Email visibile sul sito**: `fllipozzi@fllipozzi.it` (rimane sempre questa, visibile ai clienti)
+- **Email dove arrivano le richieste**: `EMAIL_TO` (es. ilgianlu98.29@gmail.com - email tecnica per gestire le richieste)
+- **Email da cui rispondere**: `EMAIL_REPLY_TO` (default: fllipozzi@fllipozzi.it - quando clicchi "Rispondi", la risposta parte da qui)
 
 ## Rispondere alle Richieste
 
 **Sì, puoi rispondere direttamente all'email ricevuta!** 
 
-L'email del cliente è impostata come `replyTo`, quindi quando clicchi su "Rispondi" nell'email ricevuta, la risposta andrà automaticamente all'indirizzo email del cliente che ha compilato il form. **Non serve creare una nuova email manualmente.**
+Quando clicchi su "Rispondi" nell'email ricevuta:
+- La risposta andrà automaticamente all'indirizzo email del cliente che ha compilato il form
+- Il mittente della risposta sarà `EMAIL_REPLY_TO` (default: fllipozzi@fllipozzi.it)
+- **Non serve creare una nuova email manualmente.**
 
 ## Test
 
