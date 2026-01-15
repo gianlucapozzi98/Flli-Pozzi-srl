@@ -20,8 +20,9 @@ export async function POST(request: NextRequest) {
     
     // Debug in sviluppo
     if (process.env.NODE_ENV === 'development') {
-      console.log('SMTP_USER:', smtpUser ? 'Configurato' : 'Mancante');
-      console.log('SMTP_PASSWORD:', smtpPassword ? 'Configurato' : 'Mancante');
+      console.log('SMTP_USER:', smtpUser || 'Mancante');
+      console.log('SMTP_PASSWORD:', smtpPassword ? `Configurato (${smtpPassword.length} caratteri)` : 'Mancante');
+      console.log('SMTP_HOST:', process.env.SMTP_HOST || 'Mancante');
     }
     
     if (!smtpUser || !smtpPassword || smtpPassword.includes('INSERISCI_QUI')) {
