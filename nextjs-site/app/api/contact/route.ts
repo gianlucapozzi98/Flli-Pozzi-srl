@@ -80,11 +80,22 @@ export async function POST(request: NextRequest) {
       let errorMessage = 'Errore di connessione al server email. Verifica le credenziali SMTP.';
       
       if (verifyError.code === 'EAUTH') {
-        errorMessage = 'Errore di autenticazione. Verifica che SMTP_USER (camilla@fllipozzi.it) e SMTP_PASSWORD siano corretti. Per Outlook/Office365 potrebbe essere necessario: 1) Abilitare SMTP AUTH sull\'account, 2) Usare una password delle app se l\'account ha 2FA, 3) Verificare che l\'account non sia bloccato.';
+        // Controlla se è l'errore specifico di SMTP AUTH disabilitato
+        const errorMsg = verifyError.message || verifyError.response || '';
+        if (errorMsg.includes('SmtpClientAuthentication is disabled') || errorMsg.includes('5.7.139')) {
+          errorMessage = 'SMTP AUTH è disabilitato per il tenant Office365. L\'amministratore IT deve abilitare SMTP AUTH. Vedi: https://aka.ms/smtp_auth_disabled';
+        } else {
+          errorMessage = 'Errore di autenticazione. Verifica che SMTP_USER (camilla@fllipozzi.it) e SMTP_PASSWORD siano corretti. Per Outlook/Office365 potrebbe essere necessario: 1) Abilitare SMTP AUTH sull\'account, 2) Usare una password delle app se l\'account ha 2FA, 3) Verificare che l\'account non sia bloccato.';
+        }
       } else if (verifyError.code === 'ECONNECTION' || verifyError.code === 'ETIMEDOUT') {
         errorMessage = `Errore di connessione a ${process.env.SMTP_HOST}. Verifica SMTP_HOST e SMTP_PORT.`;
       } else if (verifyError.message?.includes('535') || verifyError.message?.includes('authentication') || verifyError.response?.includes('535')) {
-        errorMessage = 'Credenziali non valide (errore 535). Verifica username e password. Per Outlook potrebbe essere necessario abilitare SMTP AUTH o usare una password delle app.';
+        const errorMsg = verifyError.message || verifyError.response || '';
+        if (errorMsg.includes('SmtpClientAuthentication is disabled') || errorMsg.includes('5.7.139')) {
+          errorMessage = 'SMTP AUTH è disabilitato per il tenant Office365. L\'amministratore IT deve abilitare SMTP AUTH. Vedi: https://aka.ms/smtp_auth_disabled';
+        } else {
+          errorMessage = 'Credenziali non valide (errore 535). Verifica username e password. Per Outlook potrebbe essere necessario abilitare SMTP AUTH o usare una password delle app.';
+        }
       } else if (verifyError.response?.includes('5.7.57') || verifyError.message?.includes('5.7.57')) {
         errorMessage = 'SMTP AUTH non abilitato. Contatta l\'amministratore IT per abilitare SMTP AUTH sull\'account Office365.';
       }
