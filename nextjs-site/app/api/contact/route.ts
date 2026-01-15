@@ -18,6 +18,12 @@ export async function POST(request: NextRequest) {
     const smtpUser = process.env.SMTP_USER;
     const smtpPassword = process.env.SMTP_PASSWORD;
     
+    // Debug in sviluppo
+    if (process.env.NODE_ENV === 'development') {
+      console.log('SMTP_USER:', smtpUser ? 'Configurato' : 'Mancante');
+      console.log('SMTP_PASSWORD:', smtpPassword ? 'Configurato' : 'Mancante');
+    }
+    
     if (!smtpUser || !smtpPassword || smtpPassword.includes('INSERISCI_QUI')) {
       return NextResponse.json(
         { error: 'Configurazione email non completa. Verifica il file .env.local e inserisci SMTP_PASSWORD corretta per Outlook/Office365' },
