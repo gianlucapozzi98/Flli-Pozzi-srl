@@ -144,7 +144,7 @@ export default function Home() {
           {/* Background Image */}
           <motion.div
             initial={{ scale: 1.26 }}
-            animate={{ scale: 1.155 }}
+            animate={{ scale: 1.045 }}
             transition={{ duration: 3, ease: "easeOut" }}
             className="absolute inset-0 z-0"
           >
@@ -154,7 +154,7 @@ export default function Home() {
               fill
               className="object-cover"
               priority
-              style={{ opacity: 0.8, objectPosition: 'center center' }}
+              style={{ opacity: 0.8, objectPosition: 'left center' }}
             />
           </motion.div>
           <div className="absolute inset-0 bg-black/40 z-10" />
