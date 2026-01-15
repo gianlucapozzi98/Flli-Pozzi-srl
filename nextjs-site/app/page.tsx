@@ -149,12 +149,12 @@ export default function Home() {
             className="absolute inset-0 z-0"
           >
             <Image
-              src="/Immagini/flli pozzi esterno.jpeg"
+              src="/Immagini/flli pozzi esterno.png"
               alt="Flli Pozzi esterno"
               fill
               className="object-cover"
               priority
-              style={{ opacity: 0.8, objectPosition: 'left center' }}
+              style={{ opacity: 0.8, objectPosition: 'center center' }}
             />
           </motion.div>
           <div className="absolute inset-0 bg-black/40 z-10" />
