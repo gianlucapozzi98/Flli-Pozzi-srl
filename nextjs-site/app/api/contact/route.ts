@@ -50,15 +50,20 @@ export async function POST(request: NextRequest) {
     // Configurazione del transporter email
     // Per Outlook/Office365: usa la password normale dell'account
     // Per Gmail: usa App Password invece della password normale
+    const isGmail = process.env.SMTP_HOST?.includes('gmail.com') || process.env.SMTP_HOST === 'smtp.gmail.com';
+    
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.office365.com',
+      host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.SMTP_PORT || '587'),
       secure: false, // true per 465, false per altri port (587 usa STARTTLS)
       auth: {
         user: smtpUser,
         pass: smtpPassword,
       },
-      tls: {
+      // Configurazione TLS ottimizzata per Gmail e Outlook
+      tls: isGmail ? {
+        rejectUnauthorized: true
+      } : {
         ciphers: 'SSLv3',
         rejectUnauthorized: false
       },
