@@ -18,16 +18,31 @@ export async function POST(request: NextRequest) {
     const smtpUser = process.env.SMTP_USER;
     const smtpPassword = process.env.SMTP_PASSWORD;
     
-    // Debug in sviluppo
-    if (process.env.NODE_ENV === 'development') {
-      console.log('SMTP_USER:', smtpUser || 'Mancante');
-      console.log('SMTP_PASSWORD:', smtpPassword ? `Configurato (${smtpPassword.length} caratteri)` : 'Mancante');
-      console.log('SMTP_HOST:', process.env.SMTP_HOST || 'Mancante');
-    }
+    // Debug sempre attivo per vedere cosa viene letto
+    console.log('=== DEBUG SMTP CONFIGURATION ===');
+    console.log('NODE_ENV:', process.env.NODE_ENV);
+    console.log('SMTP_USER:', smtpUser || 'Mancante');
+    console.log('SMTP_PASSWORD:', smtpPassword ? `Configurato (${smtpPassword.length} caratteri)` : 'Mancante');
+    console.log('SMTP_HOST:', process.env.SMTP_HOST || 'Mancante');
+    console.log('SMTP_PORT:', process.env.SMTP_PORT || 'Mancante');
+    console.log('EMAIL_TO:', process.env.EMAIL_TO || 'Mancante');
+    console.log('EMAIL_REPLY_TO:', process.env.EMAIL_REPLY_TO || 'Mancante');
+    console.log('================================');
     
     if (!smtpUser || !smtpPassword || smtpPassword.includes('INSERISCI_QUI')) {
+      const missingFields = [];
+      if (!smtpUser) missingFields.push('SMTP_USER');
+      if (!smtpPassword || smtpPassword.includes('INSERISCI_QUI')) missingFields.push('SMTP_PASSWORD');
+      
       return NextResponse.json(
-        { error: 'Configurazione email non completa. Verifica il file .env.local e inserisci SMTP_PASSWORD corretta per Outlook/Office365' },
+        { 
+          error: `Configurazione email non completa. Variabili mancanti: ${missingFields.join(', ')}. Verifica le variabili d'ambiente su Vercel (Settings → Environment Variables) o nel file .env.local per sviluppo locale.`,
+          debug: process.env.NODE_ENV === 'development' ? {
+            smtpUser: smtpUser || null,
+            smtpPassword: smtpPassword ? 'Presente' : null,
+            allEnvKeys: Object.keys(process.env).filter(k => k.includes('SMTP') || k.includes('EMAIL'))
+          } : undefined
+        },
         { status: 500 }
       );
     }
