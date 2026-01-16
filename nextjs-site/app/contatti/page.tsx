@@ -82,96 +82,14 @@ export default function Contatti() {
                 priority
               />
             </div>
-            <div className="flex flex-col lg:grid lg:grid-cols-2" style={{ gap: '78px' }}>
-              {/* Contact Form - Prima su mobile */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="py-8 px-[3px] lg:px-8 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none lg:w-full order-1 lg:order-2"
-              >
-                <h2 className="text-3xl font-bold font-heading" style={{ marginBottom: '15px' }}>
-                  {t('contatti.form.title')}
-                </h2>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block font-medium mb-2">
-                      {t('contatti.form.name')} *
-                    </label>
-                    <input
-                      {...register('name')}
-                      type="text"
-                      id="name"
-                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
-                    />
-                    {errors.name && (
-                      <p className="text-primary text-sm mt-1">{errors.name.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block font-medium mb-2">
-                      {t('contatti.form.email')} *
-                    </label>
-                    <input
-                      {...register('email')}
-                      type="email"
-                      id="email"
-                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
-                    />
-                    {errors.email && (
-                      <p className="text-primary text-sm mt-1">{errors.email.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block font-medium mb-2">
-                      {t('contatti.form.phone.required')}
-                    </label>
-                    <input
-                      {...register('phone')}
-                      type="tel"
-                      id="phone"
-                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
-                    />
-                    {errors.phone && (
-                      <p className="text-primary text-sm mt-1">{errors.phone.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block font-medium mb-2">
-                      {t('contatti.form.message')} *
-                    </label>
-                    <textarea
-                      {...register('message')}
-                      id="message"
-                      rows={6}
-                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors resize-y"
-                    />
-                    {errors.message && (
-                      <p className="text-primary text-sm mt-1">{errors.message.message}</p>
-                    )}
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full px-8 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? t('contatti.form.submitting') : t('contatti.form.submit')}
-                  </button>
-                </form>
-              </motion.div>
-
-              {/* Contact Info - Seconda su mobile */}
+            <div className="flex flex-col lg:grid lg:grid-cols-2 items-center lg:items-start" style={{ gap: '78px' }}>
+              {/* Contact Info - Prima su mobile */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none order-2 lg:order-1"
+                className="mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full order-1 lg:order-1"
               >
                 <h2 className="text-3xl font-bold font-heading" style={{ marginBottom: '40px' }}>
                   {t('contatti.title')}
@@ -247,13 +165,96 @@ export default function Contatti() {
                 </div>
               </motion.div>
 
+              {/* Contact Form - Seconda su mobile */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="py-8 px-[3px] lg:px-8 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none lg:w-full w-full order-2 lg:order-2"
+              >
+                <h2 className="text-3xl font-bold font-heading" style={{ marginBottom: '15px' }}>
+                  {t('contatti.form.title')}
+                </h2>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block font-medium mb-2">
+                      {t('contatti.form.name')} *
+                    </label>
+                    <input
+                      {...register('name')}
+                      type="text"
+                      id="name"
+                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                    />
+                    {errors.name && (
+                      <p className="text-primary text-sm mt-1">{errors.name.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block font-medium mb-2">
+                      {t('contatti.form.email')} *
+                    </label>
+                    <input
+                      {...register('email')}
+                      type="email"
+                      id="email"
+                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                    />
+                    {errors.email && (
+                      <p className="text-primary text-sm mt-1">{errors.email.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="phone" className="block font-medium mb-2">
+                      {t('contatti.form.phone.required')}
+                    </label>
+                    <input
+                      {...register('phone')}
+                      type="tel"
+                      id="phone"
+                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                    />
+                    {errors.phone && (
+                      <p className="text-primary text-sm mt-1">{errors.phone.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block font-medium mb-2">
+                      {t('contatti.form.message')} *
+                    </label>
+                    <textarea
+                      {...register('message')}
+                      id="message"
+                      rows={6}
+                      className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:border-primary transition-colors resize-y"
+                    />
+                    {errors.message && (
+                      <p className="text-primary text-sm mt-1">{errors.message.message}</p>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full px-8 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? t('contatti.form.submitting') : t('contatti.form.submit')}
+                  </button>
+                </form>
+              </motion.div>
+
+
               {/* Map - Terza su mobile, sotto il form */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mx-auto lg:hidden max-w-[calc(100%-32px)] order-3"
+                className="mx-auto lg:hidden max-w-[calc(100%-32px)] w-full order-3"
                 style={{ marginTop: '40px' }}
               >
                 <iframe
