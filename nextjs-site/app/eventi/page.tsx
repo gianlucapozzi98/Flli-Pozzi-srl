@@ -144,8 +144,8 @@ export default function Eventi() {
       <main className="pt-20">
         {/* IPACK-IMA 2025 Featured Event */}
         <section className="py-20" style={{ paddingTop: '120px' }}>
-          <div className="px-8 lg:px-8 mx-auto" style={{ maxWidth: '1200px' }}>
-            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -210,12 +210,13 @@ export default function Eventi() {
         </section>
 
         {/* Spacer */}
-        <div style={{ height: '60px' }}></div>
+        <div className="hidden lg:block" style={{ height: '60px' }}></div>
+        <div className="lg:hidden" style={{ height: '30px' }}></div>
 
         {/* IPACK-IMA 2022 Featured Event */}
         <section className="py-20">
-          <div className="px-8 lg:px-8 mx-auto" style={{ maxWidth: '1200px' }}>
-            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
                 <motion.div
@@ -233,7 +234,7 @@ export default function Eventi() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </motion.div>
-                <div style={{ height: '60px' }}></div>
+                <div className="hidden lg:block" style={{ height: '60px' }}></div>
               </div>
               
               <motion.div
@@ -276,7 +277,7 @@ export default function Eventi() {
         {/* Events Grid */}
         <section className="py-20" style={{ paddingBottom: '80px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-[calc(100%-32px)] lg:max-w-none">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
               {events.map((event, index) => {
                 const eventImage = getEventImage(event.title, event.image, event.date);
                 return (
