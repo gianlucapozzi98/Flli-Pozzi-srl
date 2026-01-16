@@ -271,8 +271,8 @@ export default function Eventi() {
 
         {/* Events Grid */}
         <section className="py-20" style={{ paddingBottom: '80px' }}>
-          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
               {events.map((event, index) => {
                 const eventImage = getEventImage(event.title, event.image, event.date);
                 return (
@@ -282,7 +282,7 @@ export default function Eventi() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.05 }}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow mx-auto lg:mx-0 max-w-full"
                 >
                     <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
                       {eventImage ? (
