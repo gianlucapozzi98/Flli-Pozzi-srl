@@ -19,7 +19,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Flli Pozzi srl - Leader nell'imballaggio",
+  title: "Flli Pozzi srl - Articoli per imballaggio",
   description: "Flli Pozzi - Dal 1947, leader nell'imballaggio. Reggiatrici, carrelli, sigilli e reggia per imballaggio industriale. Made in Italy.",
   keywords: "reggiatrici, sigilli, reggia, imballaggio industriale, tendireggia, Flli Pozzi, Made in Italy",
   icons: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     apple: '/favicon.png',
   },
   openGraph: {
-    title: "Flli Pozzi srl - Leader nell'imballaggio",
+    title: "Flli Pozzi srl - Articoli per imballaggio",
     description: "Dal 1947, leader nell'imballaggio industriale. Reggiatrici, sigilli e reggia Made in Italy.",
     images: ['/Immagini/Logo Flli Pozzi 75.png'],
     type: 'website',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Flli Pozzi srl - Leader nell'imballaggio",
+    title: "Flli Pozzi srl - Articoli per imballaggio",
     description: "Dal 1947, leader nell'imballaggio industriale. Made in Italy.",
     images: ['/Immagini/Logo Flli Pozzi 75.png'],
   },
