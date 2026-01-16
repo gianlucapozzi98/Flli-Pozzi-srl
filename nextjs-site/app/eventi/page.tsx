@@ -144,7 +144,8 @@ export default function Eventi() {
       <main className="pt-20">
         {/* IPACK-IMA 2025 Featured Event */}
         <section className="py-20" style={{ paddingTop: '120px' }}>
-          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8 mx-auto" style={{ maxWidth: '1200px' }}>
+            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -170,20 +171,20 @@ export default function Eventi() {
                 className="flex flex-col"
                 style={{ maxHeight: '714px', overflow: 'hidden' }}
               >
-                <div className="space-y-4">
-                <h2 className="text-3xl font-bold font-heading">
+                <div>
+                <h2 className="text-3xl font-bold font-heading mb-4">
                     {t('eventi.ipack2025.title')}
                 </h2>
-                <p className="text-text-light leading-relaxed">
+                <p className="text-text-light leading-relaxed mb-4">
                     {t('eventi.ipack2025.text1')}
                   </p>
-                  <p className="text-text-light leading-relaxed">
+                  <p className="text-text-light leading-relaxed mb-4">
                     {t('eventi.ipack2025.text2')}
                 </p>
-                <p className="text-text-light leading-relaxed">
+                <p className="text-text-light leading-relaxed mb-4">
                     {t('eventi.ipack2025.text3')}
                 </p>
-                <p className="text-text-light leading-relaxed">
+                <p className="text-text-light leading-relaxed mb-4">
                     {t('eventi.ipack2025.moreInfo')}
                   </p>
                 </div>
@@ -204,6 +205,7 @@ export default function Eventi() {
                 </a>
               </motion.div>
             </div>
+            </div>
           </div>
         </section>
 
@@ -212,7 +214,8 @@ export default function Eventi() {
 
         {/* IPACK-IMA 2022 Featured Event */}
         <section className="py-20">
-          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8 mx-auto" style={{ maxWidth: '1200px' }}>
+            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
                 <motion.div
@@ -241,17 +244,17 @@ export default function Eventi() {
                 className="flex flex-col"
                 style={{ maxHeight: '714px', overflow: 'hidden' }}
               >
-                <div className="space-y-4">
-                  <h2 className="text-3xl font-bold font-heading">
+                <div>
+                  <h2 className="text-3xl font-bold font-heading mb-4">
                     {t('eventi.ipack2022.title')}
                   </h2>
-                  <p className="text-text-light leading-relaxed">
+                  <p className="text-text-light leading-relaxed mb-4">
                     {t('eventi.ipack2022.text1')}
                   </p>
-                  <p className="text-text-light leading-relaxed">
+                  <p className="text-text-light leading-relaxed mb-4">
                     {t('eventi.ipack2022.text2')}
                   </p>
-                  <p className="text-text-light leading-relaxed">
+                  <p className="text-text-light leading-relaxed mb-4">
                     {t('eventi.ipack2022.text3')}
                   </p>
                 </div>
@@ -266,13 +269,14 @@ export default function Eventi() {
                 </div>
               </motion.div>
             </div>
+            </div>
           </div>
         </section>
 
         {/* Events Grid */}
         <section className="py-20" style={{ paddingBottom: '80px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-[calc(100%-32px)] lg:max-w-none">
               {events.map((event, index) => {
                 const eventImage = getEventImage(event.title, event.image, event.date);
                 return (
@@ -282,7 +286,7 @@ export default function Eventi() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.05 }}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow mx-auto lg:mx-0 max-w-full"
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow mx-auto lg:mx-0 w-full"
                 >
                     <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
                       {eventImage ? (
@@ -299,8 +303,8 @@ export default function Eventi() {
                         </span>
                       )}
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
+                  <div className="p-6" style={{ paddingTop: '1.5rem', paddingBottom: '1.5rem' }}>
+                    <h3 className="text-xl font-semibold mb-3">{event.title}</h3>
                     <p className="text-text-light font-medium">{translateDate(event.date)}</p>
                   </div>
                 </motion.div>
