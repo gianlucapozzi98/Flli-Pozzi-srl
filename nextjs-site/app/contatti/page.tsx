@@ -78,7 +78,7 @@ export default function Contatti() {
                 alt="Flli Pozzi 75° Anniversario"
                 width={400}
                 height={200}
-                className="w-auto h-auto"
+                className="w-[300px] lg:w-auto h-auto"
                 priority
               />
             </div>
@@ -170,7 +170,7 @@ export default function Contatti() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="py-8 px-[3px] lg:px-8"
+                className="py-8 px-[3px] lg:px-8 mx-auto lg:mx-0 max-w-[calc(100%-16px)] lg:max-w-none lg:w-full"
               >
                 <h2 className="text-3xl font-bold font-heading" style={{ marginBottom: '15px' }}>
                   {t('contatti.form.title')}
