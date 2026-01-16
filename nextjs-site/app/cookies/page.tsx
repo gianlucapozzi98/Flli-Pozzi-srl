@@ -22,7 +22,7 @@ export default function Cookies() {
         </section>
 
         <section style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-4 lg:px-8" style={{ maxWidth: '1200px' }}>
+          <div className="container mx-auto px-8 lg:px-8" style={{ maxWidth: '1200px' }}>
             <div className="prose prose-lg max-w-none text-text-light leading-relaxed mx-auto">
               <div className="text-center">
                 <p style={{ marginBottom: '1.5rem' }}>

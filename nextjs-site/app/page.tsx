@@ -158,12 +158,13 @@ export default function Home() {
             />
           </motion.div>
           <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="relative z-20 text-center text-white px-8 lg:px-4" style={{ paddingBottom: '120px', width: '100%' }}>
+          <div className="relative z-20 text-center text-white px-10 lg:px-4" style={{ paddingBottom: '120px', width: '100%' }}>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black mb-4 font-heading uppercase tracking-tight"
+              className="md:text-7xl lg:text-8xl font-black mb-4 font-heading uppercase tracking-tight"
+              style={{ fontSize: '40px' }}
             >
               {t('home.hero.title')}
             </motion.h1>
@@ -171,7 +172,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl lg:text-3xl font-light uppercase tracking-wide"
+              className="text-lg md:text-2xl lg:text-3xl font-light uppercase tracking-wide"
             >
               {t('home.hero.subtitle')}
             </motion.p>
@@ -211,11 +212,11 @@ export default function Home() {
                   </div>
               </div>
                 <div className="flex justify-center md:justify-start">
-                  <div className="text-center md:text-left" style={{ maxWidth: '600px', width: '100%' }}>
+                  <div className="text-center md:text-left px-4 lg:px-0" style={{ maxWidth: '600px', width: '100%' }}>
                     <h2 className="text-4xl md:text-5xl font-bold font-heading lg:whitespace-nowrap" style={{ marginBottom: '20px' }}>
                       {t('home.reggiatrici.title')}
                 </h2>
-                    <p className="text-lg text-text-light leading-relaxed" style={{ marginBottom: '20px' }}>
+                    <p className="text-lg text-text-light leading-relaxed text-justify lg:text-left" style={{ marginBottom: '20px' }}>
                       {t('home.reggiatrici.text')}
                 </p>
                     <div className="flex justify-center md:justify-start" style={{ marginTop: '3px' }}>
@@ -247,7 +248,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center"
+                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center px-6 lg:px-8"
               >
                 <div className="mb-6 p-4 bg-primary/10 rounded-full">
                   <ClockIcon className="text-primary" style={{ width: '48px', height: '48px' }} />
@@ -255,7 +256,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   {t('home.assistance.rapid')}
                 </h3>
-                <p className="text-text-light leading-relaxed">
+                <p className="text-text-light leading-relaxed text-justify lg:text-left">
                   {t('home.assistance.rapid.desc')}
                 </p>
               </motion.div>
@@ -265,7 +266,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center"
+                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center px-6 lg:px-8"
               >
                 <div className="mb-6 p-4 bg-primary/10 rounded-full">
                   <CogIcon className="text-primary" style={{ width: '48px', height: '48px' }} />
@@ -273,7 +274,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   {t('home.assistance.spare')}
                 </h3>
-                <p className="text-text-light leading-relaxed">
+                <p className="text-text-light leading-relaxed text-justify lg:text-left">
                   {t('home.assistance.spare.desc')}
                 </p>
               </motion.div>
@@ -283,7 +284,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center"
+                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center px-6 lg:px-8"
               >
                 <div className="mb-6 p-4 bg-primary/10 rounded-full">
                   <DocumentTextIcon className="text-primary" style={{ width: '48px', height: '48px' }} />
@@ -291,7 +292,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 font-heading">
                   {t('home.assistance.docs')}
                 </h3>
-                <p className="text-text-light leading-relaxed">
+                <p className="text-text-light leading-relaxed text-justify lg:text-left">
                   {t('home.assistance.docs.desc')}
                 </p>
               </motion.div>
@@ -302,19 +303,19 @@ export default function Home() {
 
         {/* Soluzioni Section */}
         <section className="bg-bg-light" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-6 lg:px-4 max-w-5xl">
+          <div className="container mx-auto px-8 lg:px-4 max-w-5xl">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-xl shadow-lg"
-              style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', paddingLeft: 'calc(2.5rem + 5px)', paddingRight: 'calc(2.5rem + 5px)' }}
+              className="bg-white rounded-xl shadow-lg px-6 lg:px-0 lg:pl-[calc(2.5rem+5px)] lg:pr-[calc(2.5rem+5px)]"
+              style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem' }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-center font-heading" style={{ marginBottom: '2rem' }}>
                 {t('home.solutions.title')}
               </h2>
-              <p className="text-lg text-text-light leading-relaxed text-center" style={{ marginBottom: '2rem' }}>
+              <p className="text-lg text-text-light leading-relaxed text-justify lg:text-center px-4 lg:px-0" style={{ marginBottom: '2rem' }}>
                 {t('home.solutions.text')}
               </p>
               <div className="text-center">

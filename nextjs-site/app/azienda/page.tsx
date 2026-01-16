@@ -15,7 +15,7 @@ export default function Azienda() {
       <main className="pt-20">
         {/* Company Content */}
         <section className="py-20" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -41,7 +41,16 @@ export default function Azienda() {
                 className="text-lg text-text-light leading-relaxed"
                 style={{ fontSize: '1.125rem', lineHeight: '1.875rem' }}
               >
-                <div className="flex flex-col items-center" style={{ marginBottom: '40px' }}>
+                <p style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
+                  {t('azienda.paragraph1')}
+                </p>
+                <p style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
+                  {t('azienda.paragraph2')}
+                </p>
+                <p style={{ marginBottom: '40px', fontWeight: '400' }}>
+                  {t('azienda.paragraph3')}
+                </p>
+                <div className="flex flex-col items-center">
                   <div className="relative" style={{ filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))' }}>
                     <Image
                       src="/Immagini/Logo Flli Pozzi Italia.png"
@@ -52,15 +61,6 @@ export default function Azienda() {
                     />
                   </div>
                 </div>
-                <p style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
-                  {t('azienda.paragraph1')}
-                </p>
-                <p style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
-                  {t('azienda.paragraph2')}
-                </p>
-                <p style={{ fontWeight: '400' }}>
-                  {t('azienda.paragraph3')}
-                </p>
               </motion.div>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function Azienda() {
 
         {/* Values Section */}
         <section className="bg-bg-light" style={{ paddingTop: '65px', paddingBottom: '65px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <h2 className="text-4xl font-bold mb-6 text-center font-heading" style={{ letterSpacing: '-0.02em' }}>
               {t('azienda.values.title')}
             </h2>
@@ -120,7 +120,7 @@ export default function Azienda() {
 
         {/* Quadri Section */}
         <section className="py-20" style={{ paddingTop: '30px', paddingBottom: '80px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +143,7 @@ export default function Azienda() {
 
         {/* CTA Section */}
         <section className="bg-bg-light" style={{ paddingTop: '40.75px', paddingBottom: '40.75px', display: 'flex', alignItems: 'center', minHeight: '200px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

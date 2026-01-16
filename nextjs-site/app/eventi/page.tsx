@@ -144,7 +144,7 @@ export default function Eventi() {
       <main className="pt-20">
         {/* IPACK-IMA 2025 Featured Event */}
         <section className="py-20" style={{ paddingTop: '120px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -212,7 +212,7 @@ export default function Eventi() {
 
         {/* IPACK-IMA 2022 Featured Event */}
         <section className="py-20">
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
                 <motion.div
@@ -271,7 +271,7 @@ export default function Eventi() {
 
         {/* Events Grid */}
         <section className="py-20" style={{ paddingBottom: '80px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {events.map((event, index) => {
                 const eventImage = getEventImage(event.title, event.image, event.date);

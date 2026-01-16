@@ -8,7 +8,7 @@ export default function Footer() {
   const { t } = useLanguage();
   return (
     <footer className="bg-black/80 backdrop-blur-md text-white" style={{ marginTop: 0 }}>
-      <div className="container mx-auto px-4 lg:px-8" style={{ paddingTop: '10px', paddingBottom: '15px' }}>
+      <div className="container mx-auto px-4 lg:px-8" style={{ paddingTop: '11px', paddingBottom: '15px' }}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-center">
           {/* Colonna 1: Logo e scritta */}
           <div className="flex flex-col justify-center items-center md:items-start lg:items-start">
