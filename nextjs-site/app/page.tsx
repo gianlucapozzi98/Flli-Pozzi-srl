@@ -163,8 +163,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="md:text-7xl lg:text-8xl font-black mb-4 font-heading uppercase tracking-tight"
-              style={{ fontSize: '40px' }}
+              className="text-[40px] md:text-7xl lg:text-[50px] font-black mb-4 font-heading uppercase tracking-tight"
             >
               {t('home.hero.title')}
             </motion.h1>

@@ -89,6 +89,7 @@ export default function Contatti() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
+                className="px-[3px] lg:px-0"
               >
                 <h2 className="text-3xl font-bold font-heading" style={{ marginBottom: '40px' }}>
                   {t('contatti.title')}
@@ -169,7 +170,7 @@ export default function Contatti() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="p-8"
+                className="py-8 px-[3px] lg:px-8"
               >
                 <h2 className="text-3xl font-bold font-heading" style={{ marginBottom: '15px' }}>
                   {t('contatti.form.title')}
