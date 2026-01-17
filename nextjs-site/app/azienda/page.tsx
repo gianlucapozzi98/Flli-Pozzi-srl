@@ -15,14 +15,14 @@ export default function Azienda() {
       <main className="pt-20">
         {/* Company Content */}
         <section className="py-20" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl mx-auto lg:mx-0 w-full max-w-[calc(100%-32px)] lg:max-w-none"
+                className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full"
               >
                 <Image
                   src="/Immagini/Foto Storica Flli Pozzi.jpg"
@@ -38,7 +38,7 @@ export default function Azienda() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="text-lg text-text-light leading-relaxed text-justify lg:text-left w-full mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
+                className="text-lg text-text-light leading-relaxed mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full text-justify lg:text-left"
                 style={{ fontSize: '1.125rem', lineHeight: '1.875rem' }}
               >
                 <p className="text-justify lg:text-left" style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
@@ -68,13 +68,13 @@ export default function Azienda() {
 
         {/* Values Section */}
         <section className="bg-bg-light" style={{ paddingTop: '65px', paddingBottom: '65px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <h2 className="text-4xl font-bold mb-6 text-center font-heading" style={{ letterSpacing: '-0.02em' }}>
               {t('azienda.values.title')}
             </h2>
             <div style={{ marginBottom: '30px' }} />
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full">
               {[
                 {
                   title: t('azienda.values.madeInItaly'),
@@ -120,13 +120,13 @@ export default function Azienda() {
 
         {/* Quadri Section */}
         <section className="py-20" style={{ paddingTop: '30px', paddingBottom: '80px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="w-full rounded-xl overflow-hidden shadow-2xl max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0"
+              className="w-full rounded-xl overflow-hidden shadow-2xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
             >
               <Image
                 src="/Immagini/quadri flli pozzi.webp"
@@ -143,13 +143,13 @@ export default function Azienda() {
 
         {/* CTA Section */}
         <section className="bg-bg-light" style={{ paddingTop: '40.75px', paddingBottom: '40.75px', display: 'flex', alignItems: 'center', minHeight: '200px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+          <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center w-full max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0"
+              className="text-center mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full"
             >
               <p className="text-xl text-text-light" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginBottom: '47px' }}>
                 {t('azienda.cta.text')}
