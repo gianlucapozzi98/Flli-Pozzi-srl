@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { ScrollToTop } from "@/components/Header";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import ScrollToTopOnRouteChange from "@/components/ScrollToTopOnRouteChange";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -91,7 +92,8 @@ export default function RootLayout({
         />
         <LanguageProvider>
           <div className="min-h-screen w-full overflow-x-hidden">
-        {children}
+            <ScrollToTopOnRouteChange />
+            {children}
             <ScrollToTop />
           </div>
         </LanguageProvider>
