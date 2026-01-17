@@ -22,7 +22,7 @@ export default function Azienda() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl"
+                className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
               >
                 <Image
                   src="/Immagini/Foto Storica Flli Pozzi.jpg"
@@ -38,7 +38,7 @@ export default function Azienda() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="text-lg text-text-light leading-relaxed"
+                className="text-lg text-text-light leading-relaxed text-center lg:text-left mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
                 style={{ fontSize: '1.125rem', lineHeight: '1.875rem' }}
               >
                 <p style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
@@ -51,7 +51,7 @@ export default function Azienda() {
                   {t('azienda.paragraph3')}
                 </p>
                 <div className="flex flex-col items-center">
-                  <div className="relative" style={{ filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))' }}>
+                  <div className="relative scale-[0.85] lg:scale-100" style={{ filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))' }}>
                     <Image
                       src="/Immagini/Logo Flli Pozzi Italia.png"
                       alt="Flli Pozzi Logo"
@@ -74,7 +74,7 @@ export default function Azienda() {
             </h2>
             <div style={{ marginBottom: '30px' }} />
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
               {[
                 {
                   title: t('azienda.values.madeInItaly'),
@@ -126,7 +126,7 @@ export default function Azienda() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="w-full rounded-xl overflow-hidden shadow-2xl"
+              className="w-full rounded-xl overflow-hidden shadow-2xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
             >
               <Image
                 src="/Immagini/quadri flli pozzi.webp"
@@ -149,7 +149,7 @@ export default function Azienda() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center"
+              className="text-center max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0"
             >
               <p className="text-xl text-text-light" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginBottom: '47px' }}>
                 {t('azienda.cta.text')}

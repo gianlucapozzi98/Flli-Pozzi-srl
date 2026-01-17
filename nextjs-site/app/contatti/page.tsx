@@ -117,7 +117,7 @@ export default function Contatti() {
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-4 justify-center lg:justify-start" style={{ marginTop: '40px', marginBottom: '20px' }}>
+                <div className="flex gap-4 justify-center lg:justify-start" style={{ marginTop: '40px', marginBottom: '10px' }}>
                   <a
                     href="https://www.linkedin.com/company/flli-pozzi"
                     target="_blank"
