@@ -16,7 +16,7 @@ export default function Azienda() {
         {/* Company Content */}
         <section className="py-20" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-16 items-center lg:items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
