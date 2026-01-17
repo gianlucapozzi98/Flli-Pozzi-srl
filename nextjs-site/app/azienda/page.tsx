@@ -22,7 +22,7 @@ export default function Azienda() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full"
+                className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full lg:w-full"
               >
                 <Image
                   src="/Immagini/Foto Storica Flli Pozzi.jpg"
@@ -38,8 +38,8 @@ export default function Azienda() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="text-lg text-text-light leading-relaxed mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full text-justify lg:text-left"
-                style={{ fontSize: '1.125rem', lineHeight: '1.875rem' }}
+                className="text-lg text-text-light leading-relaxed mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none text-justify lg:text-left"
+                style={{ fontSize: '1.125rem', lineHeight: '1.875rem', width: '100%' }}
               >
                 <p className="text-justify lg:text-left" style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
                   {t('azienda.paragraph1')}
@@ -74,7 +74,7 @@ export default function Azienda() {
             </h2>
             <div style={{ marginBottom: '30px' }} />
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none" style={{ width: '100%' }}>
               {[
                 {
                   title: t('azienda.values.madeInItaly'),
@@ -149,7 +149,8 @@ export default function Azienda() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full"
+              className="text-center mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
+              style={{ width: '100%' }}
             >
               <p className="text-xl text-text-light" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginBottom: '47px' }}>
                 {t('azienda.cta.text')}
