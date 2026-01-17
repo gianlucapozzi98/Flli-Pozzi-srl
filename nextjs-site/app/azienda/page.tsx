@@ -22,7 +22,7 @@ export default function Azienda() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl mx-auto lg:mx-0 w-full"
+                className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl mx-auto lg:mx-0 w-full max-w-[calc(100%-32px)] lg:max-w-none"
               >
                 <Image
                   src="/Immagini/Foto Storica Flli Pozzi.jpg"
@@ -38,16 +38,16 @@ export default function Azienda() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="text-lg text-text-light leading-relaxed text-center lg:text-left w-full"
+                className="text-lg text-text-light leading-relaxed text-justify lg:text-left w-full mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
                 style={{ fontSize: '1.125rem', lineHeight: '1.875rem' }}
               >
-                <p style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
+                <p className="text-justify lg:text-left" style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
                   {t('azienda.paragraph1')}
                 </p>
-                <p style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
+                <p className="text-justify lg:text-left" style={{ marginBottom: '2.5rem', fontWeight: '400' }}>
                   {t('azienda.paragraph2')}
                 </p>
-                <p style={{ marginBottom: '40px', fontWeight: '400' }}>
+                <p className="text-justify lg:text-left" style={{ marginBottom: '40px', fontWeight: '400' }}>
                   {t('azienda.paragraph3')}
                 </p>
                 <div className="flex flex-col items-center">
@@ -74,7 +74,7 @@ export default function Azienda() {
             </h2>
             <div style={{ marginBottom: '30px' }} />
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
               {[
                 {
                   title: t('azienda.values.madeInItaly'),
@@ -107,7 +107,7 @@ export default function Azienda() {
                       <h3 className="text-2xl font-semibold mb-4 text-primary" style={{ letterSpacing: '-0.01em' }}>
                     {value.title}
                   </h3>
-                      <p className="text-text-light leading-relaxed" style={{ fontSize: '1rem' }}>
+                      <p className="text-text-light leading-relaxed text-justify lg:text-center" style={{ fontSize: '1rem' }}>
                     {value.description}
                   </p>
                     </div>
@@ -126,7 +126,7 @@ export default function Azienda() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="w-full rounded-xl overflow-hidden shadow-2xl"
+              className="w-full rounded-xl overflow-hidden shadow-2xl max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0"
             >
               <Image
                 src="/Immagini/quadri flli pozzi.webp"
@@ -149,7 +149,7 @@ export default function Azienda() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center w-full"
+              className="text-center w-full max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0"
             >
               <p className="text-xl text-text-light" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginBottom: '47px' }}>
                 {t('azienda.cta.text')}
