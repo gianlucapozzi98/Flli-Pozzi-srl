@@ -74,7 +74,7 @@ export default function Azienda() {
             </h2>
             <div style={{ marginBottom: '30px' }} />
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full lg:w-full">
               {[
                 {
                   title: t('azienda.values.madeInItaly'),
@@ -126,7 +126,7 @@ export default function Azienda() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="w-full rounded-xl overflow-hidden shadow-2xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
+              className="rounded-xl overflow-hidden shadow-2xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full lg:w-full"
             >
               <Image
                 src="/Immagini/quadri flli pozzi.webp"
@@ -149,8 +149,7 @@ export default function Azienda() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none"
-              style={{ width: '100%' }}
+              className="text-center mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full lg:w-full"
             >
               <p className="text-xl text-text-light" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginBottom: '47px' }}>
                 {t('azienda.cta.text')}
