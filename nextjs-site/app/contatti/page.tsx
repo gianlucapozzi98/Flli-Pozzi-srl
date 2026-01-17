@@ -89,9 +89,9 @@ export default function Contatti() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full order-1 lg:order-1"
+                className="mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full order-1 lg:order-1 text-center lg:text-left"
               >
-                <h2 className="text-3xl font-bold font-heading" style={{ marginBottom: '40px' }}>
+                <h2 className="text-2xl lg:text-3xl font-bold font-heading" style={{ marginBottom: '40px' }}>
                   {t('contatti.title')}
                 </h2>
                 <div className="space-y-6">
@@ -117,7 +117,7 @@ export default function Contatti() {
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-4" style={{ marginTop: '40px', marginBottom: '40px' }}>
+                <div className="flex gap-4 justify-center lg:justify-start" style={{ marginTop: '40px', marginBottom: '20px' }}>
                   <a
                     href="https://www.linkedin.com/company/flli-pozzi"
                     target="_blank"
@@ -173,7 +173,7 @@ export default function Contatti() {
                 transition={{ duration: 0.6 }}
                 className="py-8 px-[3px] lg:px-8 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none lg:w-full w-full order-2 lg:order-2"
               >
-                <h2 className="text-3xl font-bold font-heading" style={{ marginBottom: '15px' }}>
+                <h2 className="text-3xl font-bold font-heading text-center lg:text-left" style={{ marginBottom: '15px' }}>
                   {t('contatti.form.title')}
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

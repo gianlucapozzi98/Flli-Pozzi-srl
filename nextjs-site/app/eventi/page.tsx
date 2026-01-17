@@ -145,14 +145,14 @@ export default function Eventi() {
         {/* IPACK-IMA 2025 Featured Event */}
         <section className="py-20" style={{ paddingTop: '120px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto">
+            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="aspect-[1189/714] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden relative"
+                className="aspect-[1189/714] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden relative mx-auto lg:mx-0"
               >
                 <Image
                   src="/Immagini/IPACK-IMA 2025.jpeg"
@@ -168,7 +168,7 @@ export default function Eventi() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="flex flex-col"
+                className="flex flex-col mx-auto lg:mx-0"
                 style={{ maxHeight: '714px', overflow: 'hidden' }}
               >
                 <div>
@@ -216,7 +216,7 @@ export default function Eventi() {
         {/* IPACK-IMA 2022 Featured Event */}
         <section className="py-20">
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto">
+            <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
                 <motion.div
@@ -224,7 +224,7 @@ export default function Eventi() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="aspect-[1189/714] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden relative"
+                  className="aspect-[1189/714] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden relative mx-auto lg:mx-0"
                 >
                   <Image
                     src="/Immagini/IPACK-IMA 2022 - Stand Flli Pozzi.jpg"
@@ -242,7 +242,7 @@ export default function Eventi() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="flex flex-col"
+                className="flex flex-col mx-auto lg:mx-0"
                 style={{ maxHeight: '714px', overflow: 'hidden' }}
               >
                 <div>
@@ -275,7 +275,7 @@ export default function Eventi() {
         </section>
 
         {/* Events Grid */}
-        <section className="py-20" style={{ paddingBottom: '80px' }}>
+        <section className="py-20" style={{ paddingBottom: '80px', paddingTop: '60px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
               {events.map((event, index) => {

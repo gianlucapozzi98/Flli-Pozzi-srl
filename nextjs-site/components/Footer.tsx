@@ -29,7 +29,7 @@ export default function Footer() {
           </div>
           
           {/* Colonna 2: Prodotti, Azienda, Eventi */}
-          <div className="flex flex-col justify-center items-center md:items-start lg:items-start">
+          <div className="flex flex-col justify-center items-center md:items-start lg:items-start pl-4 lg:pl-0">
             <h4 className="text-lg font-semibold mb-4">{t('footer.links.title')}</h4>
             <ul className="space-y-2 text-center md:text-left lg:text-left">
               <li>
@@ -51,7 +51,7 @@ export default function Footer() {
           </div>
           
           {/* Colonna 3: Privacy Policy, Cookie Policy e link futuri */}
-          <div className="flex flex-col justify-center items-center md:items-start lg:items-start">
+          <div className="flex flex-col justify-center items-center md:items-start lg:items-start pr-4 lg:pr-0">
             <h4 className="text-lg font-semibold mb-4">{t('footer.info.title')}</h4>
             <ul className="space-y-2 text-center md:text-left lg:text-left">
               <li>
