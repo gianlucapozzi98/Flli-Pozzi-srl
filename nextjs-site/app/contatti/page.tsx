@@ -119,6 +119,7 @@ export default function Contatti() {
                   </div>
                 </div>
                 <div className="h-8 lg:hidden" aria-hidden="true" />
+                <div style={{ marginTop: '3rem' }} aria-hidden="true" />
                 <div className="flex gap-4 justify-center lg:justify-start mt-10 lg:mt-10 mb-[5px] lg:mb-[10px]">
                   <a
                     href="https://www.linkedin.com/company/flli-pozzi"

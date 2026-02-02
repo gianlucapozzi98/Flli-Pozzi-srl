@@ -679,7 +679,7 @@ export default function Prodotti() {
             
             <div className="w-full" style={{ maxWidth: '1200px', marginBottom: '2.8rem' }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div className="flex justify-center">
+                <div className="flex justify-center w-full" style={{ width: '338px', maxWidth: '100%' }}>
                   {sigilli.acciaio.map((product, index) => (
                     <ProductCard key={product.name} product={product} index={index} />
                   ))}
