@@ -49,6 +49,7 @@ img {
    (non alla hero / schermata con foto, che resta a tutta larghezza) */
 
 @media (max-width: 768px) {
+  /* Wrapper: nessun padding, i blocchi vanno a tutta larghezza */
   .text-content-area {
     padding-left: 0;
     padding-right: 0;
@@ -60,7 +61,19 @@ img {
     margin-right: auto;
     box-sizing: border-box;
   }
-  /* I blocchi colorati (section) restano a tutta larghezza: lo sfondo va da bordo a bordo pagina */
+  /* Blocchi colorati (section): full width, sfondo da bordo a bordo, NO padding */
+  .text-content-area > section {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    max-width: none;
+  }
+  /* Contenitore interno del testo: padding laterale 22px (respiro dai bordi) */
+  .text-content-area section > div {
+    padding-left: 22px;
+    padding-right: 22px;
+    box-sizing: border-box;
+  }
   /* Almeno 2px ai lati dei testi dentro i contenitori (es. soluzioni personalizzate) */
   .text-content-area .rounded-xl p,
   .text-content-area .rounded-xl h1,
