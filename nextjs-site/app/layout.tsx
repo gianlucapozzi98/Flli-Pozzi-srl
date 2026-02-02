@@ -91,7 +91,7 @@ export default function RootLayout({
           }}
         />
         <LanguageProvider>
-          <div className="min-h-screen w-full overflow-x-hidden">
+          <div className="min-h-screen w-full overflow-x-hidden site-content-wrapper">
             <ScrollToTopOnRouteChange />
             {children}
             <ScrollToTop />
