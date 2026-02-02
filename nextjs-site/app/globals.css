@@ -60,6 +60,17 @@ img {
     margin-right: auto;
     box-sizing: border-box;
   }
+  /* I blocchi colorati (section) restano a tutta larghezza: lo sfondo va da bordo a bordo pagina */
+  /* Almeno 2px ai lati dei testi dentro i contenitori (es. soluzioni personalizzate) */
+  .text-content-area .rounded-xl p,
+  .text-content-area .rounded-xl h1,
+  .text-content-area .rounded-xl h2,
+  .text-content-area .rounded-lg p,
+  .text-content-area .rounded-lg h3 {
+    padding-left: 2px;
+    padding-right: 2px;
+    box-sizing: border-box;
+  }
   .text-content-area h1,
   .text-content-area h2,
   .text-content-area h3,

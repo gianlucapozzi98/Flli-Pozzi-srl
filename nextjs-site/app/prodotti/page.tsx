@@ -135,16 +135,16 @@ function ProductCard({ product, index }: { product: { name: string; description:
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, margin: '-50px' }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow w-full min-w-0 max-w-full md:min-w-[280px] md:max-w-[350px] lg:flex-[0_1_auto] cursor-pointer md:cursor-default"
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow w-full min-w-0 max-w-full lg:w-full lg:min-w-[280px] lg:max-w-[350px] lg:flex-[0_1_auto] cursor-pointer lg:cursor-default"
       style={{ opacity: 1 }}
-      onClick={() => setExpanded((e) => !e)}
+      onClick={(e) => { if (typeof window !== 'undefined' && window.innerWidth < 1024) setExpanded((prev) => !prev); }}
     >
-      <div className={`aspect-square relative overflow-hidden md:mb-6 ${isSigillo ? 'bg-transparent' : 'bg-gradient-to-br from-gray-100 to-gray-200'}`} style={{ marginBottom: '0.75rem' }}>
+      <div className={`aspect-square relative overflow-hidden mb-3 lg:mb-6 ${isSigillo ? 'bg-transparent' : 'bg-gradient-to-br from-gray-100 to-gray-200'}`}>
         {imagePath ? (
           <img
             src={imagePath}
             alt={product.name}
-            className="w-full h-full object-contain p-2 md:p-4"
+            className="w-full h-full object-contain p-2 lg:p-4"
             style={{
               position: 'absolute',
               top: 0,
@@ -166,16 +166,16 @@ function ProductCard({ product, index }: { product: { name: string; description:
           </span>
         )}
       </div>
-      <div className="p-3 md:p-6" style={{ paddingTop: 0 }}>
-        <h3 className="text-base md:text-xl font-semibold mb-2 md:mb-6">{getProductNameTranslation(product.name, t)}</h3>
+      <div className="p-3 lg:p-6" style={{ paddingTop: 0 }}>
+        <h3 className="text-base lg:text-xl font-semibold mb-2 lg:mb-6">{getProductNameTranslation(product.name, t)}</h3>
         {description ? (
           <>
             <p
-              className={`text-text-light leading-relaxed text-sm md:text-base md:mb-4 ${!expanded ? 'line-clamp-2 md:line-clamp-none' : ''}`}
+              className={`text-text-light leading-relaxed text-sm lg:text-base lg:mb-4 ${!expanded ? 'line-clamp-2 lg:line-clamp-none' : ''}`}
             >
               {description}
             </p>
-            <span className="md:hidden text-primary text-xs font-medium mt-1 block">
+            <span className="lg:hidden text-primary text-xs font-medium mt-1 block">
               {expanded ? 'Meno' : 'Leggi tutto'}
             </span>
           </>
@@ -353,7 +353,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:justify-center lg:gap-10 w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.manuali.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -364,7 +364,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:justify-center lg:gap-10 w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.batteria.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -375,7 +375,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:justify-center lg:gap-10 w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.pneumaticheVibrazione.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -386,7 +386,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:justify-center lg:gap-10 w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.pneumaticheAcciaioConSigillo.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -397,7 +397,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:justify-center lg:gap-10 w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.pneumaticheAcciaioSenzaSigillo.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -413,7 +413,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:justify-center lg:gap-10 w-full" style={{ marginBottom: '2.8rem' }}>
               {carrelli.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -580,7 +580,7 @@ export default function Prodotti() {
             </p>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '4rem' }}>
+            <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:justify-center lg:gap-10 w-full" style={{ marginBottom: '4rem' }}>
               {sigilli.plasticaPoliestere.map((product, index) => (
                 <div key={product.name} className="flex flex-col items-center" style={{ width: '100%', maxWidth: '350px' }}>
                   <ProductCard product={product} index={index} />
