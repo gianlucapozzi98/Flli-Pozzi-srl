@@ -44,44 +44,40 @@ img {
   height: auto;
 }
 
-/* ========== MOBILE & TABLET (solo responsive) ========== */
+/* ========== MOBILE & TABLET: solo sezioni con testo ========== */
+/* Padding e centraggio applicati solo ai blocchi con classe .text-content-area
+   (non alla hero / schermata con foto, che resta a tutta larghezza) */
 
-/* Mobile (max-width 768px): padding 1.5rem (24px), centra contenuti, titoli e paragrafi */
 @media (max-width: 768px) {
-  .site-content-wrapper {
+  .text-content-area {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     box-sizing: border-box;
   }
-
-  .site-content-wrapper > * {
+  .text-content-area > * {
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
   }
-
-  .site-content-wrapper h1,
-  .site-content-wrapper h2,
-  .site-content-wrapper h3,
-  .site-content-wrapper h4,
-  .site-content-wrapper h5,
-  .site-content-wrapper h6 {
+  .text-content-area h1,
+  .text-content-area h2,
+  .text-content-area h3,
+  .text-content-area h4,
+  .text-content-area h5,
+  .text-content-area h6 {
     text-align: center;
   }
-
-  .site-content-wrapper p {
+  .text-content-area p {
     margin-bottom: 1rem;
   }
-
-  .site-content-wrapper p:last-child {
+  .text-content-area p:last-child {
     margin-bottom: 0;
   }
 }
 
-/* Tablet (769px - 1024px): padding laterale 40px */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .site-content-wrapper {
+  .text-content-area {
     padding-left: 40px;
     padding-right: 40px;
     box-sizing: border-box;

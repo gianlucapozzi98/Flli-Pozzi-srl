@@ -178,6 +178,7 @@ export default function Home() {
           </div>
         </section>
 
+        <div className="text-content-area">
         {/* Features Section */}
         <section className="bg-white" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
           <div className="w-full flex justify-center px-8 lg:px-4">
@@ -444,6 +445,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        </div>
       </main>
       <Footer />
     </>
