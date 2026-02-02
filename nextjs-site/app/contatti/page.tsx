@@ -109,7 +109,7 @@ export default function Contatti() {
                       </a>
                     </p>
                   </div>
-                  <div>
+                  <div className="mb-2.5 lg:mb-0">
                     <p className="text-text-light">
                       <span className="font-semibold text-primary">{t('contatti.email')}</span>{' '}
                       <a href="mailto:fllipozzi@fllipozzi.it" className="text-text-light hover:underline">
