@@ -253,6 +253,23 @@ export default function Prodotti() {
     setIsMounted(true);
   }, []);
 
+  // Scroll alla sezione indicata dall'hash (es. da home "Forniture per imballaggio" -> #accessori)
+  useEffect(() => {
+    const hash = typeof window !== 'undefined' ? window.location.hash.slice(1) : '';
+    if (!hash) return;
+    const scrollToHash = () => {
+      const el = document.getElementById(hash);
+      if (el) {
+        const headerOffset = 200;
+        const top = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    };
+    scrollToHash();
+    const t = setTimeout(scrollToHash, 300);
+    return () => clearTimeout(t);
+  }, []);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!carouselRef.current || !innerCarouselRef.current) return;
     setIsDragging(true);
