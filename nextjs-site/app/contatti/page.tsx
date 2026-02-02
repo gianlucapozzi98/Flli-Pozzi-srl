@@ -83,7 +83,7 @@ export default function Contatti() {
                 priority
               />
             </div>
-            <div className="flex flex-col lg:grid lg:grid-cols-2 items-center lg:items-start" style={{ gap: '78px' }}>
+            <div className="flex flex-col lg:grid lg:grid-cols-2 items-center lg:items-start gap-6 lg:gap-[78px]">
               {/* Contact Info - Prima su mobile */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -118,7 +118,7 @@ export default function Contatti() {
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-4 justify-center lg:justify-start" style={{ marginTop: '40px', marginBottom: '10px' }}>
+                <div className="flex gap-4 justify-center lg:justify-start mt-10 lg:mt-10 mb-[5px] lg:mb-[10px]">
                   <a
                     href="https://www.linkedin.com/company/flli-pozzi"
                     target="_blank"
@@ -172,7 +172,7 @@ export default function Contatti() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="py-8 px-[3px] lg:px-8 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none lg:w-full w-full order-2 lg:order-2"
+                className="pt-4 pb-8 lg:py-8 px-[3px] lg:px-8 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none lg:w-full w-full order-2 lg:order-2"
               >
                 <h2 className="text-3xl font-bold font-heading text-center lg:text-left" style={{ marginBottom: '15px' }}>
                   {t('contatti.form.title')}
