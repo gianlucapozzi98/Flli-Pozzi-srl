@@ -142,6 +142,7 @@ export default function Eventi() {
     <>
       <Header />
       <main className="pt-20">
+        <div className="text-content-area">
         {/* IPACK-IMA 2025 Featured Event */}
         <section className="py-20" style={{ paddingTop: '120px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -314,6 +315,7 @@ export default function Eventi() {
             </div>
           </div>
         </section>
+        </div>
       </main>
       <Footer />
     </>

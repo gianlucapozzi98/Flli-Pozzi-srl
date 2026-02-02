@@ -69,6 +69,7 @@ export default function Contatti() {
     <>
       <Header />
       <main className="pt-20" style={{ backgroundColor: '#EDEEF1', minHeight: '100vh' }}>
+        <div className="text-content-area">
         {/* Contact Section */}
         <section className="py-20" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -271,6 +272,7 @@ export default function Contatti() {
             </div>
           </div>
         </section>
+        </div>
       </main>
       <Footer />
     </>

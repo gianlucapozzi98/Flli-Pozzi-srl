@@ -120,12 +120,14 @@ function getProductImage(productName: string): string | null {
   return imageMap[productName] || null;
 }
 
-// Componente per la card prodotto con immagine
+// Componente per la card prodotto con immagine (mobile: 2 per riga, descrizione troncata con tap per espandere)
 function ProductCard({ product, index }: { product: { name: string; description: string }; index: number }) {
   const { t } = useLanguage();
+  const [expanded, setExpanded] = useState(false);
   const imagePath = getProductImage(product.name);
-    const isSigillo = product.name.includes('Bulinati') || product.name.includes('Zincati') || product.name === 'Overlap';
-  
+  const isSigillo = product.name.includes('Bulinati') || product.name.includes('Zincati') || product.name === 'Overlap';
+  const description = getProductDescriptionTranslation(product.name, product.description, t);
+
   return (
     <motion.div
       initial={false}
@@ -133,31 +135,27 @@ function ProductCard({ product, index }: { product: { name: string; description:
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, margin: '-50px' }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-      style={{ width: '100%', maxWidth: '350px', minWidth: '280px', flex: '0 1 auto', opacity: 1 }}
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow w-full min-w-0 max-w-full md:min-w-[280px] md:max-w-[350px] lg:flex-[0_1_auto] cursor-pointer md:cursor-default"
+      style={{ opacity: 1 }}
+      onClick={() => setExpanded((e) => !e)}
     >
-      <div className={`aspect-square relative overflow-hidden ${isSigillo ? 'bg-transparent' : 'bg-gradient-to-br from-gray-100 to-gray-200'}`} style={{ marginBottom: '1.5rem' }}>
+      <div className={`aspect-square relative overflow-hidden md:mb-6 ${isSigillo ? 'bg-transparent' : 'bg-gradient-to-br from-gray-100 to-gray-200'}`} style={{ marginBottom: '0.75rem' }}>
         {imagePath ? (
           <img
             src={imagePath}
             alt={product.name}
-            className="w-full h-full object-contain p-4"
-            style={{ 
+            className="w-full h-full object-contain p-2 md:p-4"
+            style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
               height: '100%',
               objectFit: 'contain',
-              padding: '1rem',
-              mixBlendMode: isSigillo ? 'multiply' : 'normal'
+              mixBlendMode: isSigillo ? 'multiply' : 'normal',
             }}
             loading="lazy"
-            onLoad={() => {
-              console.log('Immagine caricata:', imagePath);
-            }}
             onError={(e) => {
-              console.error('Errore caricamento immagine:', imagePath);
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
             }}
@@ -168,9 +166,20 @@ function ProductCard({ product, index }: { product: { name: string; description:
           </span>
         )}
       </div>
-      <div className="p-6" style={{ paddingTop: '0' }}>
-        <h3 className="text-xl font-semibold mb-6">{getProductNameTranslation(product.name, t)}</h3>
-        <p className="text-text-light leading-relaxed mb-4">{getProductDescriptionTranslation(product.name, product.description, t)}</p>
+      <div className="p-3 md:p-6" style={{ paddingTop: 0 }}>
+        <h3 className="text-base md:text-xl font-semibold mb-2 md:mb-6">{getProductNameTranslation(product.name, t)}</h3>
+        {description ? (
+          <>
+            <p
+              className={`text-text-light leading-relaxed text-sm md:text-base md:mb-4 ${!expanded ? 'line-clamp-2 md:line-clamp-none' : ''}`}
+            >
+              {description}
+            </p>
+            <span className="md:hidden text-primary text-xs font-medium mt-1 block">
+              {expanded ? 'Meno' : 'Leggi tutto'}
+            </span>
+          </>
+        ) : null}
       </div>
     </motion.div>
   );
@@ -335,6 +344,7 @@ export default function Prodotti() {
         {/* Spacer per compensare lo spazio dei bottoni fixed */}
         <div style={{ height: '180px' }}></div>
 
+        <div className="text-content-area">
         {/* Reggiatrici Section */}
         <section id="reggiatrici" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
@@ -343,7 +353,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="flex flex-wrap justify-center w-full" style={{ gap: '2.5rem', marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.manuali.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -354,7 +364,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="flex flex-wrap justify-center w-full" style={{ gap: '2.5rem', marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.batteria.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -365,7 +375,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="flex flex-wrap justify-center w-full" style={{ gap: '2.5rem', marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.pneumaticheVibrazione.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -376,7 +386,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="flex flex-wrap justify-center w-full" style={{ gap: '2.5rem', marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.pneumaticheAcciaioConSigillo.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -387,7 +397,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="flex flex-wrap justify-center w-full" style={{ gap: '2.5rem', marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
               {reggiatrici.pneumaticheAcciaioSenzaSigillo.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -403,7 +413,7 @@ export default function Prodotti() {
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="flex flex-wrap justify-center w-full" style={{ gap: '2.5rem', marginBottom: '2.8rem' }}>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '2.8rem' }}>
               {carrelli.map((product, index) => (
                 <ProductCard key={product.name} product={product} index={index} />
               ))}
@@ -570,7 +580,7 @@ export default function Prodotti() {
             </p>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
-            <div className="flex flex-wrap justify-center w-full" style={{ gap: '2.5rem', marginBottom: '4rem' }}>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 lg:flex lg:flex-wrap lg:justify-center w-full" style={{ marginBottom: '4rem' }}>
               {sigilli.plasticaPoliestere.map((product, index) => (
                 <div key={product.name} className="flex flex-col items-center" style={{ width: '100%', maxWidth: '350px' }}>
                   <ProductCard product={product} index={index} />
@@ -878,6 +888,7 @@ export default function Prodotti() {
             </motion.div>
           </div>
         </section>
+        </div>
       </main>
       <Footer />
     </>
