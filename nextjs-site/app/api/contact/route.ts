@@ -5,10 +5,18 @@ import { z } from 'zod';
 const contactSchema = z.object({
   name: z.string().trim().min(2).max(100),
   email: z.string().trim().email().max(200),
-  phone: z.string().trim().min(1).max(40),
+  /** Obbligatorio nel form Contatti; facoltativo nelle richieste B2B */
+  phone: z.string().trim().max(40).optional().default(''),
   message: z.string().trim().min(10).max(5000),
   /** Honeypot: i bot lo compilano; gli utenti reali lo lasciano vuoto */
   website: z.string().max(200).optional().default(''),
+  company: z.string().trim().max(200).optional().default(''),
+  country: z.string().trim().max(100).optional().default(''),
+  companyWebsite: z.string().trim().max(300).optional().default(''),
+  activityType: z.string().trim().max(200).optional().default(''),
+  productsInterest: z.string().trim().max(500).optional().default(''),
+  quantities: z.string().trim().max(200).optional().default(''),
+  source: z.enum(['contact', 'b2b']).optional().default('contact'),
 });
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -24,7 +32,6 @@ function escapeHtml(value: string): string {
 
 function logDiagnostic(message: string, meta?: Record<string, unknown>) {
   if (isProd) {
-    // In produzione: solo messaggi essenziali, senza PII / secret
     console.error(message, meta ? JSON.stringify(meta) : '');
   } else {
     console.error(message, meta ?? '');
@@ -59,9 +66,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { name, email, phone, message, website } = parsed.data;
+    const {
+      name,
+      email,
+      phone,
+      message,
+      website,
+      company,
+      country,
+      companyWebsite,
+      activityType,
+      productsInterest,
+      quantities,
+      source,
+    } = parsed.data;
 
-    // Honeypot: risposta "ok" senza inviare (non rivelare il filtro agli spam bot)
+    // Honeypot: risposta "ok" senza inviare
     if (website && website.trim() !== '') {
       logDiagnostic('contact: honeypot triggered');
       return NextResponse.json({ message: 'Email inviata con successo' }, { status: 200 });
@@ -92,10 +112,7 @@ export async function POST(request: NextRequest) {
         user: smtpUser,
         pass: smtpPassword,
       },
-      tls: isGmail
-        ? { rejectUnauthorized: true }
-        : { rejectUnauthorized: true },
-      // Debug Nodemailer solo in sviluppo
+      tls: { rejectUnauthorized: true },
       debug: !isProd,
       logger: !isProd,
     });
@@ -103,7 +120,7 @@ export async function POST(request: NextRequest) {
     try {
       await transporter.verify();
     } catch (verifyError: unknown) {
-      const err = verifyError as { code?: string; message?: string };
+      const err = verifyError as { code?: string };
       logDiagnostic('contact: SMTP verify failed', {
         code: err.code || 'UNKNOWN',
       });
@@ -113,20 +130,49 @@ export async function POST(request: NextRequest) {
           'Servizio email temporaneamente non disponibile. Riprova tra poco.'
         );
       }
-      if (err.code === 'EAUTH') {
-        return publicError();
-      }
       return publicError();
     }
 
     const emailTo = process.env.EMAIL_TO || 'fllipozzi@fllipozzi.it';
-    // Reply-To: se impostato in env, altrimenti email del cliente (per rispondere alla richiesta)
     const emailReplyTo = process.env.EMAIL_REPLY_TO || email;
+    const isB2b = source === 'b2b';
 
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
-    const safePhone = escapeHtml(phone);
+    const safePhone = escapeHtml(phone || 'Non fornito');
     const safeMessage = escapeHtml(message);
+    const safeCompany = escapeHtml(company || '');
+    const safeCountry = escapeHtml(country || '');
+    const safeCompanyWebsite = escapeHtml(companyWebsite || '');
+    const safeActivity = escapeHtml(activityType || '');
+    const safeProducts = escapeHtml(productsInterest || '');
+    const safeQuantities = escapeHtml(quantities || '');
+
+    const b2bHtml = isB2b
+      ? `
+          <p><strong>Azienda:</strong> ${safeCompany || '—'}</p>
+          <p><strong>Paese:</strong> ${safeCountry || '—'}</p>
+          <p><strong>Sito web aziendale:</strong> ${safeCompanyWebsite || '—'}</p>
+          <p><strong>Tipologia di attività:</strong> ${safeActivity || '—'}</p>
+          <p><strong>Prodotti di interesse:</strong> ${safeProducts || '—'}</p>
+          <p><strong>Quantità indicative:</strong> ${safeQuantities || '—'}</p>
+        `
+      : '';
+
+    const b2bText = isB2b
+      ? `
+Azienda: ${company || '—'}
+Paese: ${country || '—'}
+Sito web aziendale: ${companyWebsite || '—'}
+Tipologia di attività: ${activityType || '—'}
+Prodotti di interesse: ${productsInterest || '—'}
+Quantità indicative: ${quantities || '—'}
+`
+      : '';
+
+    const subject = isB2b
+      ? `Richiesta collaborazione commerciale / Listino B2B da ${name}`
+      : `Nuova richiesta di contatto da ${name}`;
 
     const mailOptions = {
       from: {
@@ -135,26 +181,27 @@ export async function POST(request: NextRequest) {
       },
       to: emailTo,
       replyTo: emailReplyTo,
-      subject: `Nuova richiesta di contatto da ${name}`,
+      subject,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #E30613;">Nuova Richiesta di Contatto</h2>
+          <h2 style="color: #E30613;">${isB2b ? 'Richiesta collaborazione commerciale / Listino B2B' : 'Nuova Richiesta di Contatto'}</h2>
           <p><strong>Nome:</strong> ${safeName}</p>
           <p><strong>Email:</strong> ${safeEmail}</p>
           <p><strong>Telefono:</strong> ${safePhone}</p>
+          ${b2bHtml}
           <p><strong>Messaggio:</strong></p>
           <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;">${safeMessage}</p>
           <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
-          <p style="color: #666; font-size: 12px;">Questa email è stata inviata dal form di contatto del sito web Flli Pozzi.</p>
+          <p style="color: #666; font-size: 12px;">Questa email è stata inviata dal sito web Flli Pozzi.</p>
         </div>
       `,
       text: `
-Nuova Richiesta di Contatto
+${isB2b ? 'Richiesta collaborazione commerciale / Listino B2B' : 'Nuova Richiesta di Contatto'}
 
 Nome: ${name}
 Email: ${email}
-Telefono: ${phone}
-
+Telefono: ${phone || 'Non fornito'}
+${b2bText}
 Messaggio:
 ${message}
       `,
@@ -175,7 +222,6 @@ ${message}
       return publicError();
     }
 
-    // Conferma al cliente: non blocca il successo commerciale se fallisce
     try {
       await transporter.sendMail({
         from: {

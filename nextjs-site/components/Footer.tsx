@@ -47,6 +47,11 @@ export default function Footer() {
                   {t('nav.events')}
                 </Link>
               </li>
+              <li>
+                <Link href="/diventa-rivenditore" className="text-gray-400 hover:text-primary transition-colors">
+                  {t('nav.reseller')}
+                </Link>
+              </li>
             </ul>
           </div>
           

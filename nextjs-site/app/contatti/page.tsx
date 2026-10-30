@@ -41,12 +41,14 @@ export default function Contatti() {
     defaultValues: { website: '', message: '' },
   });
 
-  // Prefill da query (es. /contatti?topic=accessori)
+  // Prefill da query (es. /contatti?topic=accessori | b2b)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const topic = new URLSearchParams(window.location.search).get('topic');
     if (topic === 'accessori') {
       setValue('message', t('contatti.form.prefill.accessori'), { shouldValidate: false });
+    } else if (topic === 'b2b') {
+      setValue('message', t('rivenditore.form.prefill'), { shouldValidate: false });
     }
   }, [t, setValue]);
 
