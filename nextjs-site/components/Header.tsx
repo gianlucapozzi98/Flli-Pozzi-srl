@@ -43,8 +43,8 @@ export default function Header() {
         <div className="flex justify-between items-center h-20">
           <Link href="/" className="flex items-center" style={{ marginTop: '18.5px', marginLeft: '20px', marginBottom: '18.5px' }}>
             <Image
-              src="/Immagini/Logo Flli Pozzi 75.png"
-              alt="Flli Pozzi"
+              src="/Immagini/flli-pozzi-ann-80.png"
+              alt="Fratelli Pozzi — 80 anni"
               width={210}
               height={84}
               className="w-auto object-contain"
