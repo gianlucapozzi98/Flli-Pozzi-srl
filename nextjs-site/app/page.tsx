@@ -434,13 +434,22 @@ export default function Home() {
                     {t('home.cta.text')}
                   </p>
                 </div>
-              <Link
-                href="/contatti"
-                className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
-                style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 3px)', paddingBottom: 'calc(0.625rem + 3px)' }}
-              >
-                {t('home.cta.button')}
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  href="/contatti"
+                  className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-lg hover:shadow-xl transform hover:scale-105 transition-all w-full sm:w-auto text-center"
+                  style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 3px)', paddingBottom: 'calc(0.625rem + 3px)' }}
+                >
+                  {t('home.cta.button')}
+                </Link>
+                <Link
+                  href="/diventa-rivenditore"
+                  className="inline-block border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors w-full sm:w-auto text-center"
+                  style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 1px)', paddingBottom: 'calc(0.625rem + 1px)' }}
+                >
+                  {t('nav.reseller')}
+                </Link>
+              </div>
               </motion.div>
             </div>
           </div>
