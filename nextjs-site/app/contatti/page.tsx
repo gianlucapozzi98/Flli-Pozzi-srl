@@ -14,6 +14,8 @@ type ContactFormData = {
   email: string;
   phone: string;
   message: string;
+  /** Honeypot antispam — deve restare vuoto */
+  website?: string;
 };
 
 export default function Contatti() {
@@ -24,6 +26,7 @@ export default function Contatti() {
     email: z.string().email(t('contatti.form.error.email')),
     phone: z.string().min(1, t('contatti.form.error.phone')),
     message: z.string().min(10, t('contatti.form.error.message')),
+    website: z.string().optional(),
   });
 
   const {
@@ -33,6 +36,7 @@ export default function Contatti() {
     reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: { website: '' },
   });
 
   const onSubmit = async (data: ContactFormData) => {
@@ -45,23 +49,22 @@ export default function Contatti() {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      let result: { error?: string; message?: string } = {};
+      try {
+        result = await response.json();
+      } catch {
+        // risposta non JSON
+      }
 
       if (!response.ok) {
-        // Mostra il messaggio di errore specifico dal server
-        const errorMessage = result.error || t('contatti.form.error.submit');
-        alert(errorMessage + (result.details ? `\n\nDettagli: ${result.details}` : ''));
-        throw new Error(errorMessage);
+        alert(result.error || t('contatti.form.error.submit'));
+        return;
       }
 
       alert(t('contatti.form.success'));
-      reset();
-    } catch (error: any) {
-      console.error('Error submitting form:', error);
-      // Non mostrare di nuovo l'alert se è già stato mostrato sopra
-      if (!error.message || !error.message.includes('Configurazione email')) {
-        alert(t('contatti.form.error.submit'));
-      }
+      reset({ website: '' });
+    } catch {
+      alert(t('contatti.form.error.submit'));
     }
   };
 
@@ -180,6 +183,28 @@ export default function Contatti() {
                   {t('contatti.form.title')}
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                  {/* Honeypot: nascosto a utenti e screen reader, non tabbabile */}
+                  <div
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute',
+                      left: '-10000px',
+                      top: 'auto',
+                      width: '1px',
+                      height: '1px',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <label htmlFor="website">Website</label>
+                    <input
+                      {...register('website')}
+                      type="text"
+                      id="website"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
                   <div>
                     <label htmlFor="name" className="block font-medium mb-2">
                       {t('contatti.form.name')} *
