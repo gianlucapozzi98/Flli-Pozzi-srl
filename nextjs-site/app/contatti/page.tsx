@@ -91,8 +91,8 @@ export default function Contatti() {
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <div className="flex justify-center" style={{ marginBottom: '60px' }}>
               <Image
-                src="/Immagini/Logo Flli Pozzi 75.png"
-                alt="Flli Pozzi 75° Anniversario"
+                src="/Immagini/flli-pozzi-ann-80-n.png"
+                alt="Fratelli Pozzi — 80 anni"
                 width={400}
                 height={200}
                 className="w-[300px] lg:w-auto h-auto"
