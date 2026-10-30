@@ -260,10 +260,12 @@ export default function DiventaRivenditore() {
               <h2 className="text-3xl md:text-4xl font-bold font-heading text-center" style={{ marginBottom: '1rem' }}>
                 {t('rivenditore.products.title')}
               </h2>
-              <div className="w-20 h-1 bg-primary mx-auto" style={{ marginBottom: '1rem' }} />
-              <p className="text-text-light text-center max-w-2xl mx-auto leading-relaxed" style={{ marginBottom: '2.5rem' }}>
-                {t('rivenditore.products.intro')}
-              </p>
+              <div className="w-20 h-1 bg-primary" style={{ marginBottom: '1rem', marginLeft: 'auto', marginRight: 'auto' }} />
+              <div className="flex justify-center" style={{ marginBottom: '2.5rem' }}>
+                <p className="text-text-light text-center leading-relaxed" style={{ maxWidth: '42rem', width: '100%' }}>
+                  {t('rivenditore.products.intro')}
+                </p>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {categories.map((cat, index) => (
                   <Link
