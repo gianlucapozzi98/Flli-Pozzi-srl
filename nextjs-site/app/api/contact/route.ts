@@ -5,8 +5,7 @@ import { z } from 'zod';
 const contactSchema = z.object({
   name: z.string().trim().min(2).max(100),
   email: z.string().trim().email().max(200),
-  /** Obbligatorio nel form Contatti; facoltativo nelle richieste B2B */
-  phone: z.string().trim().max(40).optional().default(''),
+  phone: z.string().trim().min(1).max(40),
   message: z.string().trim().min(10).max(5000),
   /** Honeypot: i bot lo compilano; gli utenti reali lo lasciano vuoto */
   website: z.string().max(200).optional().default(''),
@@ -139,7 +138,7 @@ export async function POST(request: NextRequest) {
 
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
-    const safePhone = escapeHtml(phone || 'Non fornito');
+    const safePhone = escapeHtml(phone);
     const safeMessage = escapeHtml(message);
     const safeCompany = escapeHtml(company || '');
     const safeCountry = escapeHtml(country || '');
@@ -200,7 +199,7 @@ ${isB2b ? 'Richiesta collaborazione commerciale / Listino B2B' : 'Nuova Richiest
 
 Nome: ${name}
 Email: ${email}
-Telefono: ${phone || 'Non fornito'}
+Telefono: ${phone}
 ${b2bText}
 Messaggio:
 ${message}

@@ -15,7 +15,7 @@ type B2BFormData = {
   name: string;
   company: string;
   email: string;
-  phone?: string;
+  phone: string;
   country: string;
   companyWebsite?: string;
   activityType: string;
@@ -75,7 +75,7 @@ export default function DiventaRivenditore() {
     name: z.string().min(2, t('contatti.form.error.name')),
     company: z.string().min(2, t('rivenditore.form.error.company')),
     email: z.string().email(t('contatti.form.error.email')),
-    phone: z.string().optional(),
+    phone: z.string().min(1, t('contatti.form.error.phone')),
     country: z.string().min(2, t('rivenditore.form.error.country')),
     companyWebsite: z.string().optional(),
     activityType: z.string().min(2, t('rivenditore.form.error.activity')),
@@ -114,7 +114,7 @@ export default function DiventaRivenditore() {
         body: JSON.stringify({
           name: data.name,
           email: data.email,
-          phone: data.phone || '',
+          phone: data.phone,
           message: data.message,
           website: data.website || '',
           company: data.company,
@@ -173,14 +173,14 @@ export default function DiventaRivenditore() {
             <div className="absolute inset-0 bg-black/55" />
           </div>
           <div
-            className="relative z-10 px-6 lg:px-8"
+            className="relative z-10 px-6 lg:px-8 flex flex-col items-center text-center"
             style={{ maxWidth: '1100px', margin: '0 auto', paddingTop: '100px', paddingBottom: '90px' }}
           >
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold font-heading text-center"
+              className="w-full text-4xl md:text-5xl lg:text-[3.25rem] font-bold font-heading text-center"
               style={{ marginBottom: '1.25rem' }}
             >
               {t('rivenditore.hero.title')}
@@ -189,7 +189,7 @@ export default function DiventaRivenditore() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-lg md:text-xl text-center text-white/90 leading-relaxed max-w-3xl mx-auto"
+              className="w-full text-lg md:text-xl text-center text-white/90 leading-relaxed max-w-3xl mx-auto"
               style={{ marginBottom: '2rem' }}
             >
               {t('rivenditore.hero.subtitle')}
@@ -198,7 +198,7 @@ export default function DiventaRivenditore() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full"
             >
               <a
                 href="#richiesta-b2b"
@@ -412,9 +412,10 @@ export default function DiventaRivenditore() {
                   </div>
                   <div>
                     <label htmlFor="b2b-phone" className="block font-medium mb-2">
-                      {t('rivenditore.form.phone')}
+                      {t('rivenditore.form.phone')} *
                     </label>
                     <input {...register('phone')} id="b2b-phone" type="tel" className={inputClass} />
+                    {errors.phone && <p className="text-primary text-sm mt-1">{errors.phone.message}</p>}
                   </div>
                 </div>
 
