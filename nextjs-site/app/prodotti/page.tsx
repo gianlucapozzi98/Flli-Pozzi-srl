@@ -864,28 +864,97 @@ export default function Prodotti() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Accessori e forniture */}
         <section id="accessori" className="py-20 bg-bg-light" style={{ scrollMarginTop: '200px' }}>
-          <div className="px-4 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <p className="text-xl text-text-light" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginBottom: '2rem' }}>
-                {t('prodotti.cta.text')}
-              </p>
+          <div className="flex flex-col items-center px-4 lg:px-8" style={{ maxWidth: '1320px', margin: '0 auto' }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-center font-heading w-full" style={{ marginBottom: '1.5rem' }}>
+              {t('prodotti.accessori.title')}
+            </h2>
+            <div className="w-24 h-1 bg-primary" style={{ marginBottom: '1.5rem' }} />
+            <p className="text-lg text-text-light text-center leading-relaxed max-w-3xl" style={{ marginBottom: '2.5rem' }}>
+              {t('prodotti.accessori.intro')}
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8 w-full" style={{ marginBottom: '2.5rem' }}>
+              {[
+                {
+                  image: '/Immagini/reggia tessile con fibbia.png',
+                  nameKey: 'prodotti.accessori.items.reggiaTessile.name',
+                  descKey: 'prodotti.accessori.items.reggiaTessile.desc',
+                  useKey: 'prodotti.accessori.items.reggiaTessile.use',
+                },
+                {
+                  image: '/Immagini/angolari in plastica reggia.png',
+                  nameKey: 'prodotti.accessori.items.angolariPlastica.name',
+                  descKey: 'prodotti.accessori.items.angolariPlastica.desc',
+                  useKey: 'prodotti.accessori.items.angolariPlastica.use',
+                },
+                {
+                  image: '/Immagini/bancali reggiati con angolari di cartone.png',
+                  nameKey: 'prodotti.accessori.items.angolariCartone.name',
+                  descKey: 'prodotti.accessori.items.angolariCartone.desc',
+                  useKey: 'prodotti.accessori.items.angolariCartone.use',
+                },
+                {
+                  image: '/Immagini/Film estensibile manuale trasparente.png',
+                  nameKey: 'prodotti.accessori.items.filmEstensibile.name',
+                  descKey: 'prodotti.accessori.items.filmEstensibile.desc',
+                  useKey: 'prodotti.accessori.items.filmEstensibile.use',
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.nameKey}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow w-full min-w-0"
+                >
+                  <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                    <Image
+                      src={item.image}
+                      alt={t(item.nameKey)}
+                      fill
+                      className="object-contain p-3 lg:p-4"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                  </div>
+                  <div className="p-3 lg:p-5">
+                    <h3 className="text-base lg:text-lg font-semibold mb-2 font-heading">
+                      {t(item.nameKey)}
+                    </h3>
+                    <p className="text-text-light text-sm lg:text-base leading-relaxed mb-2">
+                      {t(item.descKey)}
+                    </p>
+                    <p className="text-sm text-text-light">
+                      <span className="font-semibold text-primary">{t('prodotti.accessori.useLabel')}:</span>{' '}
+                      {t(item.useKey)}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-base lg:text-lg text-text-light text-center leading-relaxed max-w-3xl" style={{ marginBottom: '2rem' }}>
+              {t('prodotti.accessori.b2b')}
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full" style={{ marginBottom: '1.5rem' }}>
+              <Link
+                href="/contatti?topic=accessori"
+                className="inline-block text-center py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg w-full sm:w-auto"
+                style={{ fontSize: '1.0625rem', paddingLeft: '1.75rem', paddingRight: '1.75rem' }}
+              >
+                {t('prodotti.accessori.cta.quote')}
+              </Link>
               <Link
                 href="/contatti"
-                className="inline-block py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
-                style={{ fontSize: '1.125rem', paddingLeft: '2rem', paddingRight: '2rem' }}
+                className="inline-block text-center py-4 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors w-full sm:w-auto"
+                style={{ fontSize: '1.0625rem', paddingLeft: '1.75rem', paddingRight: '1.75rem' }}
               >
-                {t('prodotti.cta.button')}
+                {t('prodotti.accessori.cta.commercial')}
               </Link>
-              <div style={{ height: '25px' }} />
-            </motion.div>
+            </div>
           </div>
         </section>
         </div>

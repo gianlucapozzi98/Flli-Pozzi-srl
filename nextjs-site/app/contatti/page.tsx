@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useForm } from 'react-hook-form';
@@ -34,10 +35,20 @@ export default function Contatti() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    setValue,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { website: '' },
+    defaultValues: { website: '', message: '' },
   });
+
+  // Prefill da query (es. /contatti?topic=accessori)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const topic = new URLSearchParams(window.location.search).get('topic');
+    if (topic === 'accessori') {
+      setValue('message', t('contatti.form.prefill.accessori'), { shouldValidate: false });
+    }
+  }, [t, setValue]);
 
   const onSubmit = async (data: ContactFormData) => {
     try {
