@@ -10,9 +10,9 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const navLinks = [
-  { href: '/', labelKey: 'nav.home' },
   { href: '/azienda', labelKey: 'nav.company' },
   { href: '/prodotti', labelKey: 'nav.products' },
+  { href: '/assistenza-ricambi', labelKey: 'nav.service' },
   { href: '/eventi', labelKey: 'nav.events' },
   { href: '/contatti', labelKey: 'nav.contacts' },
 ];
@@ -21,7 +21,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +32,7 @@ export default function Header() {
   }, []);
 
   // Su tutte le pagine tranne Home, l'header è sempre nero con opacità 80%
-  const isHome = pathname === '/';
+  const isHome = pathname === lp('/');
   const shouldShowBackground = !isHome || scrolled;
 
   return (
@@ -41,7 +41,7 @@ export default function Header() {
     }`}>
       <nav className="container mx-auto px-4 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center" style={{ marginTop: '18.5px', marginLeft: '20px', marginBottom: '18.5px' }}>
+          <Link href={lp('/')} className="flex items-center" style={{ marginTop: '18.5px', marginLeft: '20px', marginBottom: '18.5px' }}>
             <Image
               src="/Immagini/flli-pozzi-ann-80.png"
               alt="Fratelli Pozzi — 80 anni"
@@ -58,11 +58,11 @@ export default function Header() {
             {navLinks.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={lp(link.href)}
                 title=""
                 prefetch={true}
                 className={`relative font-medium transition-colors px-3 py-2 rounded ${
-                  pathname === link.href
+                  pathname === lp(link.href)
                     ? 'text-white bg-primary'
                     : shouldShowBackground
                       ? 'text-white hover:text-primary hover:bg-white/10'
@@ -70,7 +70,7 @@ export default function Header() {
                 }`}
               >
                 {t(link.labelKey)}
-                {pathname === link.href && (
+                {pathname === lp(link.href) && (
                   <motion.div
                     layoutId="underline"
                     className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
@@ -89,7 +89,7 @@ export default function Header() {
               0363 350380
             </a>
             <Link
-              href="/contatti?topic=preventivo"
+              href={lp('/contatti?topic=preventivo')}
               className="hidden lg:inline-flex items-center bg-primary text-white font-semibold rounded whitespace-nowrap hover:bg-primary-dark transition-colors"
               style={{ paddingLeft: '16px', paddingRight: '16px', paddingTop: '10px', paddingBottom: '10px' }}
             >
@@ -124,11 +124,11 @@ export default function Header() {
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
-                    href={link.href}
+                    href={lp(link.href)}
                     title=""
                     onClick={() => setMobileMenuOpen(false)}
                     className={`block font-medium transition-colors px-4 ${
-                      pathname === link.href
+                      pathname === lp(link.href)
                         ? 'text-white bg-primary'
                         : 'text-white hover:text-primary hover:bg-white/10'
                     }`}

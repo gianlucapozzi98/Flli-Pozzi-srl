@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   return (
     <footer className="bg-black/80 backdrop-blur-md text-white" style={{ marginTop: 0 }}>
       <div className="container mx-auto px-4 lg:px-8" style={{ paddingTop: '11px', paddingBottom: '15px' }}>
@@ -13,7 +13,7 @@ export default function Footer() {
           {/* Colonna 1: Logo e scritta */}
           <div className="flex flex-col justify-center items-center md:items-start lg:items-start">
             <div className="mb-4">
-              <Link href="/">
+              <Link href={lp('/')}>
                 <Image
                   src="/Immagini/logo-fratelli-pozzi.png"
                   alt="Flli Pozzi srl"
@@ -33,23 +33,33 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">{t('footer.links.title')}</h4>
             <ul className="space-y-2 text-center md:text-left lg:text-left">
               <li>
-                <Link href="/prodotti" className="text-gray-400 hover:text-primary transition-colors">
+                <Link href={lp('/prodotti')} className="text-gray-400 hover:text-primary transition-colors">
                   {t('nav.products')}
                 </Link>
               </li>
               <li>
-                <Link href="/azienda" className="text-gray-400 hover:text-primary transition-colors">
+                <Link href={lp('/azienda')} className="text-gray-400 hover:text-primary transition-colors">
                   {t('nav.company')}
                 </Link>
               </li>
               <li>
-                <Link href="/eventi" className="text-gray-400 hover:text-primary transition-colors">
+                <Link href={lp('/eventi')} className="text-gray-400 hover:text-primary transition-colors">
                   {t('nav.events')}
                 </Link>
               </li>
               <li>
-                <Link href="/diventa-rivenditore" className="text-gray-400 hover:text-primary transition-colors">
+                <Link href={lp('/diventa-rivenditore')} className="text-gray-400 hover:text-primary transition-colors">
                   {t('nav.reseller')}
+                </Link>
+              </li>
+              <li>
+                <Link href={lp('/assistenza-ricambi')} className="text-gray-400 hover:text-primary transition-colors">
+                  {t('nav.service')}
+                </Link>
+              </li>
+              <li>
+                <Link href={lp('/ordine-rapido')} className="text-gray-400 hover:text-primary transition-colors">
+                  {t('nav.quickOrder')}
                 </Link>
               </li>
             </ul>
@@ -60,12 +70,12 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">{t('footer.info.title')}</h4>
             <ul className="space-y-2 text-center md:text-left lg:text-left">
               <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-primary transition-colors">
+                <Link href={lp('/privacy')} className="text-gray-400 hover:text-primary transition-colors">
                   {t('footer.privacy')}
                 </Link>
               </li>
               <li>
-                <Link href="/cookies" className="text-gray-400 hover:text-primary transition-colors">
+                <Link href={lp('/cookies')} className="text-gray-400 hover:text-primary transition-colors">
                   {t('footer.cookies')}
                 </Link>
               </li>
