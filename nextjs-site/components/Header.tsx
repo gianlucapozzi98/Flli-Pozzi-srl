@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Bars3Icon, XMarkIcon, ArrowUpIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Bars3Icon, XMarkIcon, ArrowUpIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
+import styles from './header.module.css';
 
 const navLinks = [
   { href: '/azienda', labelKey: 'nav.company' },
@@ -17,134 +17,146 @@ const navLinks = [
   { href: '/contatti', labelKey: 'nav.contacts' },
 ];
 
+const ISO_PDF = '/FRATELLI POZZI 9001 2015_Certificato di registrazione.pdf';
+
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
+  const pathname = usePathname() || '/';
   const { t, lp } = useLanguage();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Su tutte le pagine tranne Home, l'header è sempre nero con opacità 80%
-  const isHome = pathname === lp('/');
-  const shouldShowBackground = !isHome || scrolled;
+  // Menu mobile aperto: blocca lo scorrimento della pagina sotto e chiudi con Esc
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  const isActive = (href: string) => {
+    const target = lp(href);
+    return pathname === target || pathname.startsWith(`${target}/`);
+  };
+  const quoteHref = lp('/contatti?topic=preventivo');
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      shouldShowBackground ? 'bg-black/80 backdrop-blur-md shadow-lg' : ''
-    }`}>
-      <nav className="container mx-auto px-4 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link href={lp('/')} className="flex items-center" style={{ marginTop: '18.5px', marginLeft: '20px', marginBottom: '18.5px' }}>
-            <Image
-              src="/Immagini/flli-pozzi-ann-80.png"
-              alt="Fratelli Pozzi — 80 anni"
-              width={210}
-              height={84}
-              className="w-auto object-contain"
-              style={{ height: '60.56px', maxHeight: '69.22px' }}
-              priority
-            />
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={lp(link.href)}
-                title=""
-                prefetch={true}
-                className={`relative font-medium transition-colors px-3 py-2 rounded ${
-                  pathname === lp(link.href)
-                    ? 'text-white bg-primary'
-                    : shouldShowBackground
-                      ? 'text-white hover:text-primary hover:bg-white/10'
-                      : 'text-white hover:text-primary hover:bg-white/20'
-                }`}
-              >
-                {t(link.labelKey)}
-                {pathname === lp(link.href) && (
-                  <motion.div
-                    layoutId="underline"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                    initial={false}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </Link>
-            ))}
-            <LanguageSwitcher />
-            <a
-              href="tel:+390363350380"
-              className="hidden xl:inline-flex items-center gap-2 text-white font-semibold whitespace-nowrap hover:text-primary transition-colors"
-            >
-              <PhoneIcon className="h-5 w-5" aria-hidden="true" />
-              0363 350380
+    <>
+      <div className={styles.spacer} aria-hidden="true" />
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+        <div className={styles.util}>
+          <div className={styles.wrap}>
+            <a href="tel:+390363350380" className={styles.utilPhone}>
+              <PhoneIcon className={styles.utilIcon} aria-hidden="true" />
+              <b>+39 0363 350380</b>
             </a>
-            <Link
-              href={lp('/contatti?topic=preventivo')}
-              className="hidden lg:inline-flex items-center bg-primary text-white font-semibold rounded whitespace-nowrap hover:bg-primary-dark transition-colors"
-              style={{ paddingLeft: '16px', paddingRight: '16px', paddingTop: '10px', paddingBottom: '10px' }}
-            >
-              {t('cta.quote')}
-            </Link>
+            <a href="mailto:fllipozzi@fllipozzi.it" className={styles.utilPhone}>
+              <EnvelopeIcon className={styles.utilIcon} aria-hidden="true" />
+              fllipozzi@fllipozzi.it
+            </a>
+            <div className={styles.utilPush}>
+              <a href={ISO_PDF} target="_blank" rel="noopener noreferrer" className={styles.iso}>
+                ISO 9001:2015
+              </a>
+              <LanguageSwitcher tone="dark" />
+            </div>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 transition-colors text-white"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <XMarkIcon className="h-6 w-6" />
-            ) : (
-              <Bars3Icon className="h-6 w-6" />
-            )}
-          </button>
         </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden bg-black/95 backdrop-blur-md"
+        <div className={styles.bar}>
+          <div className={styles.wrap}>
+            <Link href={lp('/')} className={styles.logo} onClick={() => setOpen(false)}>
+              <Image
+                src="/Immagini/flli-pozzi-80-anni-logo.png"
+                alt="Fratelli Pozzi — 80 anni, 1947–2027"
+                width={949}
+                height={384}
+                sizes="140px"
+                priority
+              />
+            </Link>
+
+            <nav className={styles.nav} aria-label="Menu principale">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={lp(link.href)}
+                  className={styles.navLink}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
+                >
+                  {t(link.labelKey)}
+                </Link>
+              ))}
+            </nav>
+
+            <div className={styles.ctas}>
+              <a href="tel:+390363350380" className={`${styles.btn} ${styles.btnLine} ${styles.hideMd}`}>
+                {t('cta.call')}
+              </a>
+              <Link href={quoteHref} className={`${styles.btn} ${styles.btnRed}`}>
+                {t('cta.quote')}
+              </Link>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className={styles.burger}
+              aria-expanded={open}
+              aria-controls="menu-mobile"
+              aria-label="Menu"
             >
-              <div className="py-4 space-y-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={lp(link.href)}
-                    title=""
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`block font-medium transition-colors px-4 ${
-                      pathname === lp(link.href)
-                        ? 'text-white bg-primary'
-                        : 'text-white hover:text-primary hover:bg-white/10'
-                    }`}
-                  >
-                    {t(link.labelKey)}
-                  </Link>
-                ))}
-                <div className="px-4">
-                  <LanguageSwitcher />
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-    </header>
+              {open ? <XMarkIcon aria-hidden="true" /> : <Bars3Icon aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
+
+        <div id="menu-mobile" className={`${styles.panel} ${open ? styles.panelOpen : ''}`}>
+          <ul>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={lp(link.href)}
+                  onClick={() => setOpen(false)}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
+                >
+                  {t(link.labelKey)}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link href={lp('/ordine-rapido')} onClick={() => setOpen(false)}>
+                {t('nav.quickOrder')}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </li>
+          </ul>
+          <div className={styles.panelBody}>
+            <Link href={quoteHref} className={`${styles.btn} ${styles.btnRed}`} onClick={() => setOpen(false)}>
+              {t('cta.quote')}
+            </Link>
+            <a href="tel:+390363350380" className={`${styles.btn} ${styles.btnLine}`}>
+              <PhoneIcon className={styles.utilIcon} aria-hidden="true" />
+              +39 0363 350380
+            </a>
+            <LanguageSwitcher tone="light" />
+            <p className={styles.panelMeta}>fllipozzi@fllipozzi.it · ISO 9001:2015</p>
+          </div>
+        </div>
+      </header>
+    </>
   );
 }
 
@@ -152,41 +164,21 @@ export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
+    const toggleVisibility = () => setIsVisible(window.scrollY > 600);
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  if (!isVisible) return null;
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          onClick={scrollToTop}
-          className="fixed bottom-20 right-5 md:bottom-8 md:right-8 bg-primary text-white p-3 shadow-lg hover:bg-secondary transition-colors z-50"
-          style={{ borderRadius: '4px' }}
-          aria-label="Torna in cima"
-        >
-          <ArrowUpIcon className="h-6 w-6" />
-        </motion.button>
-      )}
-    </AnimatePresence>
+    <button
+      type="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className={styles.toTop}
+      aria-label="Torna in cima"
+    >
+      <ArrowUpIcon aria-hidden="true" />
+    </button>
   );
 }
-

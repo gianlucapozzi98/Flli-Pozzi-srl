@@ -189,7 +189,7 @@ export default async function AssistenzaPage({ params }: Params) {
                 <div key={s.t.it} className={styles.card}>
                   <div className={styles.cardBody}>
                     <h3 className={`${styles.cardTitle} font-heading font-bold`}>{s.t[lang]}</h3>
-                    <p className={styles.cardSpec} style={{ fontSize: 15, lineHeight: 1.6 }}>
+                    <p className={styles.cardText}>
                       {s.d[lang]}
                     </p>
                   </div>

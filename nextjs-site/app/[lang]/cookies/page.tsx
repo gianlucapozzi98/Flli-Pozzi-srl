@@ -3,23 +3,20 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
+import PageHead from '@/components/PageHead';
 
 export default function Cookies() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   return (
     <>
       <Header />
-      <main className="pt-20">
-        <section className="bg-gradient-to-br from-primary to-primary-dark text-white" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-4 lg:px-8 text-center">
-            <h1 className="text-5xl md:text-6xl font-black mb-4 font-heading">
-              {t('cookies.title')}
-            </h1>
-            <p className="text-xl md:text-2xl opacity-90">
-              {t('cookies.subtitle')}
-            </p>
-          </div>
-        </section>
+      <main>
+        <PageHead
+          crumbs={[{ label: t('nav.home'), href: lp('/') }, { label: t('footer.cookies') }]}
+          eyebrow={t('pagehead.legal')}
+          title={t('cookies.title')}
+          lead={t('cookies.subtitle')}
+        />
 
         <section style={{ paddingTop: '80px', paddingBottom: '80px' }}>
           <div className="container mx-auto px-8 lg:px-8" style={{ maxWidth: '1200px' }}>

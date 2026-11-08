@@ -22,8 +22,8 @@ export default function Grazie() {
   return (
     <>
       <Header />
-      <main className="pt-20" style={{ backgroundColor: '#EDEEF1' }}>
-        <section style={{ paddingTop: '96px', paddingBottom: '96px' }}>
+      <main style={{ backgroundColor: '#EDEFF2' }}>
+        <section style={{ paddingTop: '80px', paddingBottom: '88px' }}>
           <div className="flex flex-col items-center text-center" style={{ maxWidth: '720px', margin: '0 auto', padding: '0 22px' }}>
             <CheckCircleIcon className="text-primary" style={{ width: '64px', height: '64px', marginBottom: '24px' }} aria-hidden="true" />
             <h1 className="text-3xl md:text-5xl font-bold font-heading text-balance" style={{ marginBottom: '20px', lineHeight: 1.15 }}>
@@ -39,7 +39,7 @@ export default function Grazie() {
             </p>
             <a
               href="tel:+390363350380"
-              className="inline-flex items-center gap-2 text-2xl font-bold font-heading text-secondary hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-3xl font-bold font-heading text-secondary hover:text-primary transition-colors"
               style={{ marginBottom: '40px' }}
             >
               <PhoneIcon className="h-6 w-6" aria-hidden="true" />
@@ -48,15 +48,13 @@ export default function Grazie() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center w-full sm:w-auto">
               <Link
                 href={lp('/prodotti')}
-                className="inline-flex items-center justify-center bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
-                style={{ padding: '13px 27px' }}
+                className="btn-ui btn-red"
               >
                 {t('grazie.products')}
               </Link>
               <Link
                 href={lp('/')}
-                className="inline-flex items-center justify-center border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
-                style={{ padding: '11px 25px' }}
+                className="btn-ui btn-line"
               >
                 {t('grazie.home')}
               </Link>

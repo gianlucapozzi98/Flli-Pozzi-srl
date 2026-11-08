@@ -1,0 +1,129 @@
+.footer {
+  background: #22262b;
+  color: #b9c1c9;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  padding-top: 56px;
+  padding-bottom: 40px;
+}
+.brand {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+.logoTile {
+  display: inline-flex;
+  justify-self: start;
+  background: #fff;
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.logoTile img {
+  height: 64px;
+  width: auto;
+}
+.tagline {
+  color: #d3d8de;
+  max-width: 34ch;
+}
+.iso {
+  justify-self: start;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  border: 1px solid #59606a;
+  border-radius: 2px;
+  padding: 3px 8px;
+  color: #d3d8de;
+}
+.iso:hover {
+  border-color: #fff;
+  color: #fff;
+}
+.title {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.list {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.list a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.phone {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff;
+}
+.phone:hover {
+  color: #ff6970;
+}
+.social {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.social a {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #434a53;
+  border-radius: 3px;
+  color: #d3d8de;
+}
+.social a:hover {
+  border-color: #fff;
+  color: #fff;
+}
+.social svg {
+  width: 18px;
+  height: 18px;
+}
+.legal {
+  border-top: 1px solid #3c434b;
+  padding-top: 18px;
+  padding-bottom: 22px;
+  font-size: 13px;
+  color: #8e98a2;
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .wrap {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-top: 44px;
+  }
+}

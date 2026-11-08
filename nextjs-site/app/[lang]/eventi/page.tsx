@@ -1,6 +1,7 @@
 'use client';
 
 import Header from '@/components/Header';
+import PageHead from '@/components/PageHead';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -110,7 +111,7 @@ function getEventImage(eventTitle: string, imageKey: string, eventDate: string):
 }
 
 export default function Eventi() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   
   // Funzione helper per tradurre le date
   const translateDate = (dateString: string): string => {
@@ -141,14 +142,16 @@ export default function Eventi() {
   return (
     <>
       <Header />
-      <main className="pt-20">
+      <main>
+        <PageHead
+          crumbs={[{ label: t('nav.home'), href: lp('/') }, { label: t('nav.events') }]}
+          eyebrow={t('pagehead.eventi')}
+          title={t('eventi.h1')}
+        />
         <div className="text-content-area">
         {/* IPACK-IMA 2025 Featured Event */}
-        <section className="py-20" style={{ paddingTop: '120px' }}>
+        <section style={{ paddingTop: '64px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h1 className="text-3xl md:text-5xl font-bold font-heading text-center" style={{ marginBottom: '48px', lineHeight: 1.15 }}>
-              {t('eventi.h1')}
-            </h1>
             <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <motion.div

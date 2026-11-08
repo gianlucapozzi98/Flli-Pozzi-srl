@@ -1,0 +1,312 @@
+/*
+ * Header in stile anteprima: barra servizi grafite (telefono, email, ISO, lingue)
+ * e barra principale bianca con logo, menu e pulsanti.
+ * L'altezza totale è --header-h (globals.css); lo spaziatore la riserva nella pagina.
+ */
+
+.spacer {
+  height: var(--header-h);
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: #fff;
+  transition: box-shadow 0.2s;
+}
+.scrolled {
+  box-shadow: 0 4px 18px rgba(20, 24, 28, 0.1);
+}
+
+.wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Barra servizi */
+.util {
+  height: 36px;
+  background: #22262b;
+  color: #d3d8de;
+  font-size: 13px;
+}
+.util .wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.util a:hover {
+  color: #fff;
+}
+.utilPhone {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.utilPhone b {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.utilIcon {
+  width: 15px;
+  height: 15px;
+}
+.utilPush {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.iso {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  border: 1px solid #59606a;
+  border-radius: 2px;
+  padding: 2px 7px;
+}
+.iso:hover {
+  border-color: #fff;
+}
+
+/* Barra principale */
+.bar {
+  height: 76px;
+  border-bottom: 1px solid #d2d7dc;
+}
+.bar .wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+.logo img {
+  height: 52px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  gap: 4px;
+}
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-weight: 600;
+  font-size: 15.5px;
+  color: #1b1e22;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -1px;
+  height: 3px;
+  background: #e30613;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s;
+}
+.navLink:hover {
+  color: #b8050f;
+}
+.navLink:hover::after,
+.navLink[aria-current='page']::after {
+  transform: scaleX(1);
+}
+
+.ctas {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 3px;
+  border: 1.5px solid transparent;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.1;
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.btnRed {
+  background: #e30613;
+  color: #fff;
+}
+.btnRed:hover {
+  background: #b8050f;
+}
+.btnLine {
+  border-color: #1b1e22;
+  color: #1b1e22;
+}
+.btnLine:hover {
+  background: #1b1e22;
+  color: #fff;
+}
+
+.burger {
+  display: none;
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #d2d7dc;
+  border-radius: 3px;
+  background: #fff;
+  color: #1b1e22;
+  cursor: pointer;
+}
+.burger svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Menu mobile */
+.panel {
+  display: none;
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  background: #fff;
+  border-top: 1px solid #d2d7dc;
+}
+.panelOpen {
+  display: block;
+}
+.panel ul {
+  list-style: none;
+  border-bottom: 1px solid #d2d7dc;
+}
+.panel li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-top: 1px solid #e1e5e9;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 23px;
+  text-transform: uppercase;
+  color: #1b1e22;
+}
+.panel li:first-child a {
+  border-top: 0;
+}
+.panel li a[aria-current='page'] {
+  color: #b8050f;
+  box-shadow: inset 4px 0 0 #e30613;
+}
+.panelBody {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+}
+.panelBody .btn {
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.panelMeta {
+  font-size: 14px;
+  color: #596169;
+}
+
+@media (max-width: 1199px) {
+  .navLink {
+    padding: 0 9px;
+    font-size: 15px;
+  }
+  .navLink::after {
+    left: 9px;
+    right: 9px;
+  }
+  .bar .wrap {
+    gap: 20px;
+  }
+  .hideMd {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .util,
+  .nav,
+  .ctas {
+    display: none;
+  }
+  .bar {
+    height: 68px;
+  }
+  .burger {
+    display: inline-flex;
+  }
+  .logo img {
+    height: 42px;
+  }
+  .wrap {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+/* Torna su */
+.toTop {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  z-index: 45;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  background: #22262b;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(20, 24, 28, 0.25);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.toTop:hover {
+  background: #e30613;
+}
+.toTop svg {
+  width: 22px;
+  height: 22px;
+}
+@media (min-width: 768px) {
+  .toTop {
+    right: 28px;
+    bottom: 28px;
+  }
+}

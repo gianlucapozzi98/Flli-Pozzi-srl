@@ -3,23 +3,20 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
+import PageHead from '@/components/PageHead';
 
 export default function Privacy() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   return (
     <>
       <Header />
-      <main className="pt-20">
-        <section className="bg-gradient-to-br from-primary to-primary-dark text-white" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-4 lg:px-8 text-center">
-            <h1 className="text-5xl md:text-6xl font-black mb-4 font-heading">
-              {t('privacy.title')}
-            </h1>
-            <p className="text-xl md:text-2xl opacity-90">
-              {t('privacy.subtitle')}
-            </p>
-          </div>
-        </section>
+      <main>
+        <PageHead
+          crumbs={[{ label: t('nav.home'), href: lp('/') }, { label: t('footer.privacy') }]}
+          eyebrow={t('pagehead.legal')}
+          title={t('privacy.title')}
+          lead={t('privacy.subtitle')}
+        />
 
         <section style={{ paddingTop: '80px', paddingBottom: '80px' }}>
           <div className="container mx-auto px-8 lg:px-8" style={{ maxWidth: '1200px' }}>
@@ -72,7 +69,7 @@ export default function Privacy() {
               </p>
 
               <div className="overflow-x-auto mx-auto" style={{ maxWidth: '1000px', marginTop: '2rem', marginBottom: '2rem' }}>
-                <table className="min-w-full border-collapse border border-gray-300">
+                <table className="table-ui min-w-full border-collapse">
                   <thead>
                     <tr className="bg-gray-100">
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold text-text">{t('privacy.table.purpose')}</th>

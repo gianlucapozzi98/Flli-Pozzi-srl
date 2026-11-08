@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Barlow, Barlow_Condensed, IBM_Plex_Mono } from "next/font/google";
 import "../globals.css";
 import { notFound } from "next/navigation";
 import { ScrollToTop } from "@/components/Header";
@@ -9,17 +9,26 @@ import ScrollToTopOnRouteChange from "@/components/ScrollToTopOnRouteChange";
 import { PAGE_META, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { DEFAULT_LANG, LANGS, isLang } from "@/lib/i18n";
 
-const inter = Inter({
+// Font serviti dal sito stesso (next/font): nessuna richiesta ai server di Google dal browser
+const barlow = Barlow({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-barlow",
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-const montserrat = Montserrat({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-barlow-condensed",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["500", "600", "700", "800"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-plex-mono",
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 export function generateStaticParams() {
@@ -110,7 +119,7 @@ export default async function RootLayout({
     <html
       lang={lang}
       suppressHydrationWarning
-      className={`${inter.variable} ${montserrat.variable} overflow-x-hidden`}
+      className={`${barlow.variable} ${barlowCondensed.variable} ${plexMono.variable} overflow-x-hidden`}
     >
       <body className="antialiased overflow-x-hidden max-w-full" suppressHydrationWarning>
         {/* JSON-LD renderizzato dal server: presente già nell'HTML iniziale (next/script lo inseriva solo dopo l'idratazione) */}

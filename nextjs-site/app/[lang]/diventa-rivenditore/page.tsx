@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
+import PageHead from '@/components/PageHead';
 import Footer from '@/components/Footer';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -155,65 +155,20 @@ export default function DiventaRivenditore() {
   return (
     <>
       <Header />
-      <main className="pt-20">
-        {/* Hero */}
-        <section className="relative overflow-hidden bg-bg-dark text-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
-              alt="Flli Pozzi"
-              fill
-              className="object-cover opacity-40"
-              priority
-              style={{ objectPosition: 'left center' }}
-            />
-            <div className="absolute inset-0 bg-black/55" />
-          </div>
-          <div
-            className="relative z-10 px-6 lg:px-8 flex flex-col items-center text-center"
-            style={{ maxWidth: '1100px', margin: '0 auto', paddingTop: '100px', paddingBottom: '90px' }}
-          >
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="w-full text-4xl md:text-5xl lg:text-[3.25rem] font-bold font-heading text-center"
-              style={{ marginBottom: '1.25rem' }}
-            >
-              {t('rivenditore.hero.title')}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="w-full text-lg md:text-xl text-center text-white/90 leading-relaxed max-w-3xl mx-auto"
-              style={{ marginBottom: '2rem' }}
-            >
-              {t('rivenditore.hero.subtitle')}
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full"
-            >
-              <a
-                href="#richiesta-b2b"
-                className="inline-block text-center bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-md w-full sm:w-auto"
-                style={{ padding: '0.9rem 1.75rem' }}
-              >
-                {t('rivenditore.hero.cta.primary')}
-              </a>
-              <a
-                href="#richiesta-b2b"
-                className="inline-block text-center border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors w-full sm:w-auto"
-                style={{ padding: '0.9rem 1.75rem' }}
-              >
-                {t('rivenditore.hero.cta.secondary')}
-              </a>
-            </motion.div>
-          </div>
-        </section>
+      <main>
+        <PageHead
+          crumbs={[{ label: t('nav.home'), href: lp('/') }, { label: t('nav.reseller') }]}
+          eyebrow={t('pagehead.rivenditore')}
+          title={t('rivenditore.hero.title')}
+          lead={t('rivenditore.hero.subtitle')}
+        >
+          <a href="#richiesta-b2b" className="btn-ui btn-red">
+            {t('rivenditore.hero.cta.primary')}
+          </a>
+          <a href="#richiesta-b2b" className="btn-ui btn-line">
+            {t('rivenditore.hero.cta.secondary')}
+          </a>
+        </PageHead>
 
         <div className="text-content-area">
           {/* Presentazione */}
@@ -358,7 +313,7 @@ export default function DiventaRivenditore() {
           <section
             id="richiesta-b2b"
             className="bg-white"
-            style={{ paddingTop: '70px', paddingBottom: '80px', scrollMarginTop: '100px' }}
+            style={{ paddingTop: '70px', paddingBottom: '80px', scrollMarginTop: 'var(--header-h)' }}
           >
             <div className="px-6 lg:px-8" style={{ maxWidth: '720px', margin: '0 auto' }}>
               <h2 className="text-3xl md:text-4xl font-bold font-heading text-center" style={{ marginBottom: '1rem' }}>
@@ -369,7 +324,7 @@ export default function DiventaRivenditore() {
                 {t('rivenditore.form.intro')}
               </p>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 relative">
+              <form onSubmit={handleSubmit(onSubmit)} className="form-ui form-panel relative">
                 <div
                   aria-hidden="true"
                   style={{

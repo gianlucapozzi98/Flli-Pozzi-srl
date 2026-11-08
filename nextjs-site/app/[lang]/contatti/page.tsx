@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
+import PageHead from '@/components/PageHead';
 import Footer from '@/components/Footer';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 type ContactFormData = {
@@ -105,24 +105,16 @@ export default function Contatti() {
   return (
     <>
       <Header />
-      <main className="pt-20" style={{ backgroundColor: '#EDEEF1', minHeight: '100vh' }}>
+      <main style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
+        <PageHead
+          crumbs={[{ label: t('nav.home'), href: lp('/') }, { label: t('nav.contacts') }]}
+          eyebrow={t('pagehead.contatti')}
+          title={t('contatti.h1')}
+        />
         <div className="text-content-area">
         {/* Contact Section */}
-        <section className="py-20" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+        <section style={{ paddingTop: '64px', paddingBottom: '80px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <div className="flex justify-center" style={{ marginBottom: '60px' }}>
-              <Image
-                src="/Immagini/flli-pozzi-ann-80-n.png"
-                alt="Fratelli Pozzi — 80 anni"
-                width={400}
-                height={200}
-                className="w-[300px] lg:w-auto h-auto"
-                priority
-              />
-            </div>
-            <h1 className="text-3xl md:text-5xl font-bold font-heading text-center text-balance" style={{ marginTop: '-20px', marginBottom: '56px', lineHeight: 1.15 }}>
-              {t('contatti.h1')}
-            </h1>
             <div className="flex flex-col lg:grid lg:grid-cols-2 items-center lg:items-start gap-6 lg:gap-[78px]">
               {/* Contact Info - Prima su mobile */}
               <motion.div
@@ -199,7 +191,7 @@ export default function Contatti() {
                     src="https://www.google.com/maps?q=Via+Leonardo+da+Vinci+37,+Caravaggio+24043+BG,+Italy&output=embed"
                     width="100%"
                     height="300"
-                    style={{ border: 0, borderRadius: '8px' }}
+                    style={{ border: 0, borderRadius: '3px' }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
@@ -216,12 +208,12 @@ export default function Contatti() {
                 transition={{ duration: 0.6 }}
                 id="modulo"
                 className="pt-4 pb-8 lg:py-8 px-[3px] lg:px-8 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none lg:w-full w-full order-2 lg:order-2"
-                style={{ scrollMarginTop: '100px' }}
+                style={{ scrollMarginTop: 'var(--header-h)' }}
               >
                 <h2 className="text-3xl font-bold font-heading text-center lg:text-left" style={{ marginBottom: '15px' }}>
                   {t('contatti.form.title')}
                 </h2>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="form-ui form-panel">
                   {/* Honeypot: nascosto a utenti e screen reader, non tabbabile */}
                   <div
                     aria-hidden="true"
@@ -333,7 +325,7 @@ export default function Contatti() {
                   src="https://www.google.com/maps?q=Via+Leonardo+da+Vinci+37,+Caravaggio+24043+BG,+Italy&output=embed"
                   width="100%"
                   height="300"
-                  style={{ border: 0, borderRadius: '8px' }}
+                  style={{ border: 0, borderRadius: '3px' }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

@@ -25,14 +25,14 @@ export default function MobileCtaBar() {
       <div
         className="md:hidden"
         aria-hidden="true"
-        style={{ height: `calc(${BAR_HEIGHT}px + env(safe-area-inset-bottom, 0px))`, background: 'rgba(0, 0, 0, 0.8)' }}
+        style={{ height: `calc(${BAR_HEIGHT}px + env(safe-area-inset-bottom, 0px))`, background: '#22262B' }}
       />
       {/* flex e non grid: in globals.css `.grid { display: grid }` è fuori dai layer e annullerebbe md:hidden */}
       <nav
         aria-label={t('cta.quote')}
         className="md:hidden fixed bottom-0 left-0 right-0 z-40 flex"
         style={{
-          background: '#1A1A1A',
+          background: '#22262B',
           boxShadow: '0 -2px 12px rgba(0, 0, 0, 0.25)',
           paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}

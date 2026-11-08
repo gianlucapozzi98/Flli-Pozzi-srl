@@ -9,16 +9,16 @@
 }
 
 .hudLabel {
-  font: 700 12px/1 var(--font-inter), system-ui, sans-serif;
-  letter-spacing: 0.16em;
+  font: 500 12px/1 var(--font-plex-mono), ui-monospace, monospace;
+  letter-spacing: 0.12em;
   fill: #9ca6b0;
 }
 .hudValue {
-  font: 700 15px/1 var(--font-inter), system-ui, sans-serif;
+  font: 700 17px/1 var(--font-barlow-condensed), sans-serif;
   fill: #ffffff;
 }
 .hudStep {
-  font: 500 13px/1 var(--font-inter), system-ui, sans-serif;
+  font: 600 14px/1 var(--font-barlow), system-ui, sans-serif;
   fill: #e8ebee;
 }
 .hudDone {

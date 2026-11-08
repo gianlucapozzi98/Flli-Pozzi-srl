@@ -6,20 +6,23 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import PageHead from '@/components/PageHead';
 
 export default function Azienda() {
   const { t, lp } = useLanguage();
   return (
     <>
       <Header />
-      <main className="pt-20">
+      <main>
+        <PageHead
+          crumbs={[{ label: t('nav.home'), href: lp('/') }, { label: t('nav.company') }]}
+          eyebrow={t('pagehead.azienda')}
+          title={t('azienda.h1')}
+        />
         <div className="text-content-area">
         {/* Company Content */}
-        <section className="py-20" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+        <section style={{ paddingTop: '64px', paddingBottom: '80px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h1 className="text-3xl md:text-5xl font-bold font-heading text-center text-balance" style={{ marginBottom: '56px', lineHeight: 1.15 }}>
-              {t('azienda.h1')}
-            </h1>
             <div className="flex flex-col lg:grid lg:grid-cols-2 gap-16 items-center lg:items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -101,17 +104,18 @@ export default function Azienda() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="text-center p-8 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow relative overflow-hidden"
+                    className="bg-white rounded-xl relative overflow-hidden"
+                    style={{ border: '1px solid #D2D7DC', padding: '30px 26px 26px' }}
                 >
-                    <div 
-                      className="absolute top-0 left-0 right-0 h-2" 
-                      style={{ backgroundColor: colors[index] }}
+                    <div
+                      className="absolute top-0 left-0 right-0 h-1.5"
+                      style={{ backgroundColor: colors[index], borderBottom: index === 1 ? '1px solid #D2D7DC' : undefined }}
                     />
                     <div style={{ marginTop: '0.5rem' }}>
-                      <h3 className="text-2xl font-semibold mb-4 text-primary" style={{ letterSpacing: '-0.01em' }}>
+                      <h3 className="text-2xl font-bold text-primary uppercase" style={{ marginBottom: '10px' }}>
                     {value.title}
                   </h3>
-                      <p className="text-text-light leading-relaxed text-justify lg:text-center" style={{ fontSize: '1rem' }}>
+                      <p className="text-text-light leading-relaxed" style={{ fontSize: '1rem' }}>
                     {value.description}
                   </p>
                     </div>
@@ -160,8 +164,7 @@ export default function Azienda() {
               </p>
               <Link
                 href={lp('/contatti')}
-                className="inline-block py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
-                style={{ fontSize: '1.125rem', paddingLeft: '2.25rem', paddingRight: '2.25rem' }}
+                className="btn-ui btn-red"
               >
                 {t('azienda.cta.button')}
               </Link>

@@ -49,7 +49,7 @@ export default function HomePage({ categories, finderItems, madeProducts }: Prop
   return (
     <>
       <Header />
-      <main className="pt-20">
+      <main>
         {/* Apertura: testo a sinistra, animazione della reggia a destra */}
         <section className={styles.hero}>
           <Image
@@ -64,7 +64,7 @@ export default function HomePage({ categories, finderItems, madeProducts }: Prop
           <div className={`${styles.wrap} ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <p className={styles.heroEyebrow}>{t('home.hero.eyebrow')}</p>
-              <h1 className="font-heading font-black uppercase text-balance">{t('home.hero.title')}</h1>
+              <h1 className="font-heading uppercase text-balance">{t('home.hero.title')}</h1>
               <p className={styles.heroSub}>{t('home.hero.subtitle')}</p>
               <div className={styles.heroCtas}>
                 <Link href={lp('/contatti?topic=preventivo')} className={`${styles.btn} ${styles.btnRed}`}>

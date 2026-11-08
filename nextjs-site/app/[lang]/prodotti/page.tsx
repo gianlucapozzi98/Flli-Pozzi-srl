@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Header from '@/components/Header';
+import PageHead from '@/components/PageHead';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -140,11 +141,11 @@ function ProductCard({ product, index }: { product: { name: string; description:
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, margin: '-50px' }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow w-full min-w-0 max-w-full cursor-pointer lg:cursor-default"
-      style={{ opacity: 1 }}
+      className="bg-white rounded-lg overflow-hidden transition-colors w-full min-w-0 max-w-full cursor-pointer lg:cursor-default flex flex-col hover:border-[#1B1E22]"
+      style={{ opacity: 1, border: '1px solid #D2D7DC' }}
       onClick={(e) => { if (typeof window !== 'undefined' && window.innerWidth < 1024) setExpanded((prev) => !prev); }}
     >
-      <div className={`aspect-square relative overflow-hidden mb-3 lg:mb-6 ${isSigillo ? 'bg-transparent' : 'bg-gradient-to-br from-gray-100 to-gray-200'}`}>
+      <div className="aspect-square relative overflow-hidden bg-white" style={{ borderBottom: '1px solid #D2D7DC' }}>
         {imagePath ? (
           // next/image: ridimensiona e converte in WebP (prima le foto erano servite a peso pieno, 400–650 KB l'una)
           <Image
@@ -153,7 +154,7 @@ function ProductCard({ product, index }: { product: { name: string; description:
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
             className="object-contain"
-            style={{ mixBlendMode: isSigillo ? 'multiply' : 'normal' }}
+            style={{ mixBlendMode: isSigillo ? 'multiply' : 'normal', padding: '14px' }}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
@@ -165,8 +166,8 @@ function ProductCard({ product, index }: { product: { name: string; description:
           </span>
         )}
       </div>
-      <div className="p-3 lg:p-6" style={{ paddingTop: 0 }}>
-        <h3 className="text-base lg:text-xl font-semibold mb-2 lg:mb-6">
+      <div className="flex flex-col flex-1" style={{ padding: '14px 16px 16px', gap: '6px' }}>
+        <h3 className="text-lg lg:text-2xl font-semibold">
           {detailPath ? (
             <Link href={lp(detailPath)} className="hover:text-primary transition-colors" onClick={(e) => e.stopPropagation()}>
               {getProductNameTranslation(product.name, t)}
@@ -258,17 +259,12 @@ function getProductDescriptionTranslation(name: string, description: string, t: 
 export default function Prodotti() {
   const { t, lp } = useLanguage();
   const productCategories = getProductCategories(t);
-  const [isMounted, setIsMounted] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [animationOffset, setAnimationOffset] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const innerCarouselRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!carouselRef.current || !innerCarouselRef.current) return;
@@ -313,69 +309,46 @@ export default function Prodotti() {
   return (
     <>
       <Header />
-      <main className="pt-20">
-        {/* Quick Navigation */}
-        <section className="bg-bg-light overflow-x-auto lg:overflow-visible lg:pt-8 lg:pb-8" style={{ 
-          paddingTop: '16px', 
-          paddingBottom: '16px',
-          position: 'fixed',
-          top: '80px',
-          left: 0,
-          right: 0,
-          zIndex: 40,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-          width: '100%'
-        }}>
-          <div className="flex flex-col items-center lg:items-center" style={{ maxWidth: '1800px', margin: '0 auto', padding: '0 1rem' }}>
-            <div className="flex justify-start lg:justify-center gap-4 lg:gap-6 w-full overflow-x-auto lg:overflow-visible px-4 lg:px-0" style={{ flexWrap: 'nowrap', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'thin' }}>
-              {productCategories.map((category) => (
-                <a
-                  key={category.id}
-                  href={`#${category.id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.getElementById(category.id);
-                    if (element) {
-                      const headerOffset = 200;
-                      const elementPosition = element.getBoundingClientRect().top;
-                      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                      });
-                    }
-                  }}
-                  className="bg-white p-4 lg:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center border-2 border-transparent hover:border-primary cursor-pointer flex-shrink-0 lg:flex-1 lg:max-w-[280px]"
-                  style={{ minWidth: '180px', maxWidth: '280px', flex: '0 0 auto' }}
-                >
-                  <h3 className="text-base lg:text-xl font-semibold mb-1 lg:mb-2 text-primary whitespace-nowrap">
-                    {category.title}
-                  </h3>
-                  <p className="text-text-light text-xs lg:text-sm">{category.description}</p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
+      <main>
+        <PageHead
+          crumbs={[{ label: t('nav.home'), href: lp('/') }, { label: t('nav.products') }]}
+          eyebrow={t('pagehead.prodotti')}
+          title={t('prodotti.h1')}
+          lead={t('prodotti.h1.intro')}
+        />
 
-        {/* Spacer per compensare lo spazio dei bottoni fixed */}
-        <div style={{ height: '180px' }}></div>
+        {/* Scorciatoie alle sezioni del catalogo */}
+        <nav aria-label={t('nav.products')} style={{ background: '#fff', borderBottom: '1px solid #D2D7DC' }}>
+          <div
+            className="flex overflow-x-auto"
+            style={{ maxWidth: '1200px', margin: '0 auto', padding: '14px 24px', gap: '10px', scrollbarWidth: 'thin' }}
+          >
+            {productCategories.map((category) => (
+              <a
+                key={category.id}
+                href={`#${category.id}`}
+                onClick={(e) => {
+                  const element = document.getElementById(category.id);
+                  if (element) {
+                    e.preventDefault();
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="flex-none transition-colors hover:border-[#1B1E22]"
+                style={{ display: 'grid', gap: '2px', padding: '10px 14px', border: '1px solid #D2D7DC', borderRadius: '3px', background: '#fff', minWidth: '170px' }}
+              >
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '19px', lineHeight: 1.1, textTransform: 'uppercase', color: '#1B1E22' }}>
+                  {category.title}
+                </span>
+                <span style={{ fontSize: '13px', lineHeight: 1.35, color: '#596169' }}>{category.description}</span>
+              </a>
+            ))}
+          </div>
+        </nav>
 
         <div className="text-content-area">
-        {/* Titolo pagina (H1) */}
-        <section style={{ paddingTop: '1.5rem' }}>
-          <div className="flex flex-col items-center text-center" style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 1rem' }}>
-            <h1 className="text-3xl md:text-5xl font-bold font-heading text-balance" style={{ marginBottom: '1rem', lineHeight: 1.15 }}>
-              {t('prodotti.h1')}
-            </h1>
-            <p className="text-lg text-text-light" style={{ maxWidth: '720px' }}>
-              {t('prodotti.h1.intro')}
-            </p>
-          </div>
-        </section>
-
         {/* Reggiatrici Section */}
-        <section id="reggiatrici" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
+        <section id="reggiatrici" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: 'calc(var(--header-h) + 12px)' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
               {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
@@ -440,7 +413,7 @@ export default function Prodotti() {
         </section>
 
         {/* Carrelli Section */}
-        <section id="carrelli" className="bg-bg-light" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
+        <section id="carrelli" className="bg-bg-light" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: 'calc(var(--header-h) + 12px)' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
               {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
@@ -457,7 +430,7 @@ export default function Prodotti() {
         </section>
 
         {/* Reggia Section */}
-        <section id="reggia" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
+        <section id="reggia" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: 'calc(var(--header-h) + 12px)' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
               {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
@@ -470,9 +443,9 @@ export default function Prodotti() {
               <h3 className="font-bold text-center mb-2 font-heading" style={{ marginBottom: '1rem', fontSize: '32px' }}>{t('prodotti.sections.reggia.polipropilene')}</h3>
               <p className="text-center text-text-light mb-6" style={{ marginBottom: '2rem', fontSize: '18px' }}>{t('prodotti.sections.reggia.onRequest')}</p>
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse bg-white rounded-lg shadow-md">
+                <table className="table-ui w-full border-collapse bg-white">
                   <thead>
-                    <tr className="bg-primary text-white">
+                    <tr>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.section')}</th>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.resistance')}</th>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.length')}</th>
@@ -514,9 +487,9 @@ export default function Prodotti() {
               <h3 className="font-bold text-center mb-2 font-heading" style={{ marginBottom: '1rem', fontSize: '32px' }}>{t('prodotti.sections.reggia.poliestere')}</h3>
               <p className="text-center text-text-light mb-6" style={{ marginBottom: '2rem', fontSize: '18px' }}>{t('prodotti.sections.reggia.onRequest')}</p>
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse bg-white rounded-lg shadow-md">
+                <table className="table-ui w-full border-collapse bg-white">
                   <thead>
-                    <tr className="bg-primary text-white">
+                    <tr>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.measure')}</th>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.resistance')}</th>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.length')}</th>
@@ -558,9 +531,9 @@ export default function Prodotti() {
               <h3 className="font-bold text-center mb-2 font-heading" style={{ marginBottom: '1rem', fontSize: '32px' }}>{t('prodotti.sections.reggia.acciaio')}</h3>
               <p className="text-center text-text-light mb-6" style={{ marginBottom: '2rem', fontSize: '18px' }}>{t('prodotti.sections.reggia.acciaio.desc')}</p>
               <div className="overflow-x-auto">
-                <table className="w-full border-collapse bg-white rounded-lg shadow-md">
+                <table className="table-ui w-full border-collapse bg-white">
                   <thead>
-                    <tr className="bg-primary text-white">
+                    <tr>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.model')}</th>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.tensileStrength')}</th>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.measure')}</th>
@@ -606,7 +579,7 @@ export default function Prodotti() {
         </section>
 
         {/* Sigilli Section */}
-        <section id="sigilli" className="bg-bg-light" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
+        <section id="sigilli" className="bg-bg-light" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: 'calc(var(--header-h) + 12px)' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
               {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
@@ -624,9 +597,9 @@ export default function Prodotti() {
                   {product.name === 'Bulinati lucidi' && (
                     <div className="w-full" style={{ maxWidth: '350px', marginTop: '1rem' }}>
                       <div className="overflow-x-auto">
-                        <table className="w-full border-collapse bg-white rounded-lg shadow-md">
+                        <table className="table-ui w-full border-collapse bg-white">
                           <thead>
-                            <tr className="bg-primary text-white">
+                            <tr>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.article')}</th>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.dimensions')}</th>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.quantity')}</th>
@@ -651,9 +624,9 @@ export default function Prodotti() {
                   {product.name === 'Bulinati zincati' && (
                     <div className="w-full" style={{ maxWidth: '350px', marginTop: '1rem' }}>
                       <div className="overflow-x-auto">
-                        <table className="w-full border-collapse bg-white rounded-lg shadow-md">
+                        <table className="table-ui w-full border-collapse bg-white">
                           <thead>
-                            <tr className="bg-primary text-white">
+                            <tr>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.article')}</th>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.dimensions')}</th>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.quantity')}</th>
@@ -678,9 +651,9 @@ export default function Prodotti() {
                   {product.name === 'Zincati' && (
                     <div className="w-full" style={{ maxWidth: '350px', marginTop: '1rem' }}>
                       <div className="overflow-x-auto">
-                        <table className="w-full border-collapse bg-white rounded-lg shadow-md">
+                        <table className="table-ui w-full border-collapse bg-white">
                           <thead>
-                            <tr className="bg-primary text-white">
+                            <tr>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.article')}</th>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.dimensions')}</th>
                               <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.quantity')}</th>
@@ -723,9 +696,9 @@ export default function Prodotti() {
                   ))}
                 </div>
                 <div className="overflow-x-auto" style={{ marginTop: '115px' }}>
-                  <table className="w-full border-collapse bg-white rounded-lg shadow-md">
+                  <table className="table-ui w-full border-collapse bg-white">
                   <thead>
-                    <tr className="bg-primary text-white">
+                    <tr>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.article')}</th>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.dimensions')}</th>
                       <th className="px-6 py-4 text-left font-semibold">{t('prodotti.table.quantityFull')}</th>
@@ -903,7 +876,7 @@ export default function Prodotti() {
         </section>
 
         {/* Accessori e forniture */}
-        <section id="accessori" className="py-20 bg-bg-light" style={{ scrollMarginTop: '200px' }}>
+        <section id="accessori" className="py-20 bg-bg-light" style={{ scrollMarginTop: 'calc(var(--header-h) + 12px)' }}>
           <div className="flex flex-col items-center px-4 lg:px-8" style={{ maxWidth: '1320px', margin: '0 auto' }}>
             <h2 className="text-3xl md:text-4xl font-bold text-center font-heading w-full" style={{ marginBottom: '1.5rem' }}>
               {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
@@ -981,15 +954,13 @@ export default function Prodotti() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full flex-wrap" style={{ marginBottom: '1.5rem' }}>
               <Link
                 href={lp('/contatti?topic=accessori')}
-                className="inline-block text-center py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg w-full sm:w-auto"
-                style={{ fontSize: '1.0625rem', paddingLeft: '1.75rem', paddingRight: '1.75rem' }}
+                className="btn-ui btn-red"
               >
                 {t('prodotti.accessori.cta.quote')}
               </Link>
               <Link
                 href={lp('/contatti')}
-                className="inline-block text-center py-4 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors w-full sm:w-auto"
-                style={{ fontSize: '1.0625rem', paddingLeft: '1.75rem', paddingRight: '1.75rem' }}
+                className="btn-ui btn-line"
               >
                 {t('prodotti.accessori.cta.commercial')}
               </Link>
