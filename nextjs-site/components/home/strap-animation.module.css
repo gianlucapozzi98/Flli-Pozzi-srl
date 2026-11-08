@@ -162,23 +162,25 @@
   }
 }
 
-/* Tablet e telefono: indicatore sopra la fascia, allineato a destra */
+/* Tablet e telefono: prima la reggia (visibile appena si apre il sito), sotto l'indicatore */
 @media (max-width: 900px) {
   .band {
+    display: flex;
+    flex-direction: column;
     height: auto;
+  }
+  .svg {
+    order: -1;
+    position: relative;
+    inset: auto;
+    height: 116px;
   }
   .hud {
     position: relative;
     left: auto;
     bottom: auto;
     width: 210px;
-    margin: 0 18px 0 auto;
-  }
-  .svg {
-    position: relative;
-    inset: auto;
-    height: 116px;
-    margin-top: -8px;
+    margin: 4px 18px 0 auto;
   }
 }
 
