@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Bars3Icon, XMarkIcon, ArrowUpIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon, ArrowUpIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -81,6 +81,20 @@ export default function Header() {
               </Link>
             ))}
             <LanguageSwitcher />
+            <a
+              href="tel:+390363350380"
+              className="hidden xl:inline-flex items-center gap-2 text-white font-semibold whitespace-nowrap hover:text-primary transition-colors"
+            >
+              <PhoneIcon className="h-5 w-5" aria-hidden="true" />
+              0363 350380
+            </a>
+            <Link
+              href="/contatti?topic=preventivo"
+              className="hidden lg:inline-flex items-center bg-primary text-white font-semibold rounded whitespace-nowrap hover:bg-primary-dark transition-colors"
+              style={{ paddingLeft: '16px', paddingRight: '16px', paddingTop: '10px', paddingBottom: '10px' }}
+            >
+              {t('cta.quote')}
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -165,7 +179,7 @@ export function ScrollToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-primary text-white p-3 shadow-lg hover:bg-secondary transition-colors z-50"
+          className="fixed bottom-20 right-5 md:bottom-8 md:right-8 bg-primary text-white p-3 shadow-lg hover:bg-secondary transition-colors z-50"
           style={{ borderRadius: '4px' }}
           aria-label="Torna in cima"
         >

@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useForm } from 'react-hook-form';
@@ -29,25 +30,25 @@ type B2BFormData = {
 const categories = [
   {
     href: '/prodotti#reggiatrici',
-    image: '/Immagini/cp2000.png',
+    image: '/Immagini/tendireggia-manuale-cp2000.png',
     titleKey: 'rivenditore.products.manuali.title',
     descKey: 'rivenditore.products.manuali.desc',
   },
   {
     href: '/prodotti#reggiatrici',
-    image: '/Immagini/GTone.png',
+    image: '/Immagini/reggiatrice-a-batteria-gt-one.png',
     titleKey: 'rivenditore.products.batteria.title',
     descKey: 'rivenditore.products.batteria.desc',
   },
   {
     href: '/prodotti#reggiatrici',
-    image: '/Immagini/FP 13-16-19.png',
+    image: '/Immagini/reggiatrice-pneumatica-acciaio-fp-13-16-19.png',
     titleKey: 'rivenditore.products.pneumatiche.title',
     descKey: 'rivenditore.products.pneumatiche.desc',
   },
   {
     href: '/prodotti#accessori',
-    image: '/Immagini/angolari in plastica reggia.png',
+    image: '/Immagini/angolari-in-plastica-per-reggia.png',
     titleKey: 'rivenditore.products.accessori.title',
     descKey: 'rivenditore.products.accessori.desc',
   },
@@ -70,6 +71,8 @@ const benefits = [
 
 export default function DiventaRivenditore() {
   const { t } = useLanguage();
+  const router = useRouter();
+  const [submitError, setSubmitError] = useState('');
 
   const schema = z.object({
     name: z.string().min(2, t('contatti.form.error.name')),
@@ -89,7 +92,6 @@ export default function DiventaRivenditore() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
     setValue,
   } = useForm<B2BFormData>({
     resolver: zodResolver(schema),
@@ -107,6 +109,7 @@ export default function DiventaRivenditore() {
   }, [t, setValue]);
 
   const onSubmit = async (data: B2BFormData) => {
+    setSubmitError('');
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -135,20 +138,14 @@ export default function DiventaRivenditore() {
       }
 
       if (!response.ok) {
-        alert(result.error || t('contatti.form.error.submit'));
+        setSubmitError(result.error || t('contatti.form.error.submit'));
         return;
       }
 
-      alert(t('contatti.form.success'));
-      reset({
-        website: '',
-        message: t('rivenditore.form.prefill'),
-        phone: '',
-        companyWebsite: '',
-        quantities: '',
-      });
+      // Pagina di ringraziamento al posto dell'alert
+      router.push('/grazie?tipo=b2b');
     } catch {
-      alert(t('contatti.form.error.submit'));
+      setSubmitError(t('contatti.form.error.submit'));
     }
   };
 
@@ -163,7 +160,7 @@ export default function DiventaRivenditore() {
         <section className="relative overflow-hidden bg-bg-dark text-white">
           <div className="absolute inset-0">
             <Image
-              src="/Immagini/flli pozzi esterno.png"
+              src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
               alt="Flli Pozzi"
               fill
               className="object-cover opacity-40"
@@ -225,7 +222,7 @@ export default function DiventaRivenditore() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
                 <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-md">
                   <Image
-                    src="/Immagini/Foto Storica Flli Pozzi.jpg"
+                    src="/Immagini/fratelli-pozzi-foto-storica-1949.jpg"
                     alt="Flli Pozzi"
                     fill
                     className="object-cover"
@@ -493,6 +490,11 @@ export default function DiventaRivenditore() {
                 >
                   {isSubmitting ? t('contatti.form.submitting') : t('rivenditore.form.submit')}
                 </button>
+                {submitError && (
+                  <p role="alert" className="text-primary text-sm text-center font-medium">
+                    {submitError}
+                  </p>
+                )}
 
                 <p className="text-sm text-text-light text-center">
                   {t('rivenditore.form.note')}{' '}

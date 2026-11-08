@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useForm } from 'react-hook-form';
@@ -21,6 +22,8 @@ type ContactFormData = {
 
 export default function Contatti() {
   const { t } = useLanguage();
+  const router = useRouter();
+  const [submitError, setSubmitError] = useState('');
   
   const contactSchema = z.object({
     name: z.string().min(2, t('contatti.form.error.name')),
@@ -34,14 +37,13 @@ export default function Contatti() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
     setValue,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: { website: '', message: '' },
   });
 
-  // Prefill da query (es. /contatti?topic=accessori | b2b)
+  // Prefill da query (es. /contatti?topic=accessori | b2b | preventivo)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const topic = new URLSearchParams(window.location.search).get('topic');
@@ -49,10 +51,22 @@ export default function Contatti() {
       setValue('message', t('contatti.form.prefill.accessori'), { shouldValidate: false });
     } else if (topic === 'b2b') {
       setValue('message', t('rivenditore.form.prefill'), { shouldValidate: false });
+    } else if (topic === 'preventivo') {
+      setValue('message', t('contatti.form.prefill.preventivo'), { shouldValidate: false });
     }
   }, [t, setValue]);
 
+  // Da "Richiedi preventivo" su mobile il modulo è sotto i contatti: ci portiamo direttamente lì
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const topic = new URLSearchParams(window.location.search).get('topic');
+    if (topic === 'preventivo' && window.innerWidth < 1024) {
+      document.getElementById('modulo')?.scrollIntoView({ block: 'start' });
+    }
+  }, []);
+
   const onSubmit = async (data: ContactFormData) => {
+    setSubmitError('');
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -70,14 +84,14 @@ export default function Contatti() {
       }
 
       if (!response.ok) {
-        alert(result.error || t('contatti.form.error.submit'));
+        setSubmitError(result.error || t('contatti.form.error.submit'));
         return;
       }
 
-      alert(t('contatti.form.success'));
-      reset({ website: '' });
+      // Pagina di ringraziamento al posto dell'alert: conferma chiara all'utente e URL misurabile
+      router.push('/grazie');
     } catch {
-      alert(t('contatti.form.error.submit'));
+      setSubmitError(t('contatti.form.error.submit'));
     }
   };
 
@@ -99,6 +113,9 @@ export default function Contatti() {
                 priority
               />
             </div>
+            <h1 className="text-3xl md:text-5xl font-bold font-heading text-center text-balance" style={{ marginTop: '-20px', marginBottom: '56px', lineHeight: 1.15 }}>
+              {t('contatti.h1')}
+            </h1>
             <div className="flex flex-col lg:grid lg:grid-cols-2 items-center lg:items-start gap-6 lg:gap-[78px]">
               {/* Contact Info - Prima su mobile */}
               <motion.div
@@ -190,7 +207,9 @@ export default function Contatti() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
+                id="modulo"
                 className="pt-4 pb-8 lg:py-8 px-[3px] lg:px-8 mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none lg:w-full w-full order-2 lg:order-2"
+                style={{ scrollMarginTop: '100px' }}
               >
                 <h2 className="text-3xl font-bold font-heading text-center lg:text-left" style={{ marginBottom: '15px' }}>
                   {t('contatti.form.title')}
@@ -285,6 +304,11 @@ export default function Contatti() {
                   >
                     {isSubmitting ? t('contatti.form.submitting') : t('contatti.form.submit')}
                   </button>
+                  {submitError && (
+                    <p role="alert" className="text-primary text-sm text-center font-medium">
+                      {submitError}
+                    </p>
+                  )}
                 </form>
               </motion.div>
 

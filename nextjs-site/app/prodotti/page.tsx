@@ -90,31 +90,31 @@ const sigilli = {
 // Funzione helper per mappare i nomi dei prodotti ai file immagine
 function getProductImage(productName: string): string | null {
   const imageMap: { [key: string]: string } = {
-    'CP2000': '/Immagini/cp2000.png',
-    'BEST': '/Immagini/best.png',
-    'PLR/G': '/Immagini/plrg.png',
-    'GT SMART+': '/Immagini/gtsmart+.png',
-    'GT-ONE': '/Immagini/GTone.png',
-    'GTXTREME': '/Immagini/gtxtreme.png',
-    'CP 007': '/Immagini/cp007.gif',
-    'GT MAX': '/Immagini/gtmax.gif',
-    'VIPER': '/Immagini/reggiatrice-automatica-VIPER.gif',
-    'FAST/PN L T': '/Immagini/FAST:PN L T flli pozzi.gif',
-    'FAST/PN HIGH TENSION': '/Immagini/FAST:PN L T flli pozzi.gif',
-    'FP 13-16-19': '/Immagini/FP 13-16-19.png',
-    'FP 19S - 25S - 32S': '/Immagini/FP 19S.png',
-    'FP 32 PLUS': '/Immagini/fp32 plus.gif',
-    'SL3 PN': '/Immagini/sl3pn.png',
-    'GM 15': '/Immagini/gm15.gif',
-    'FP15': '/Immagini/FP15.png',
-    'FP 93': '/Immagini/fp 93.png',
-    'FP15S': '/Immagini/fp15s.gif',
-    'FP 92': '/Immagini/fp 92.png',
-    'FP13': '/Immagini/fp13.gif',
-    'Bulinati lucidi': '/Immagini/sigilli Bulinati lucidi.png',
-    'Bulinati zincati': '/Immagini/sigilli Bulinati zincati .png',
-    'Zincati': '/Immagini/Sigillo Zincato.png',
-    'Overlap': '/Immagini/sigillo-Overlap.png',
+    'CP2000': '/Immagini/tendireggia-manuale-cp2000.png',
+    'BEST': '/Immagini/tendireggia-manuale-best.png',
+    'PLR/G': '/Immagini/tendireggia-manuale-plr-g.png',
+    'GT SMART+': '/Immagini/reggiatrice-a-batteria-gt-smart-plus.png',
+    'GT-ONE': '/Immagini/reggiatrice-a-batteria-gt-one.png',
+    'GTXTREME': '/Immagini/reggiatrice-a-batteria-gtxtreme.png',
+    'CP 007': '/Immagini/reggiatrice-a-batteria-cp-007.gif',
+    'GT MAX': '/Immagini/reggiatrice-a-batteria-gt-max.gif',
+    'VIPER': '/Immagini/reggiatrice-a-batteria-viper.gif',
+    'FAST/PN L T': '/Immagini/reggiatrice-pneumatica-fast-pn-lt.gif',
+    'FAST/PN HIGH TENSION': '/Immagini/reggiatrice-pneumatica-fast-pn-lt.gif',
+    'FP 13-16-19': '/Immagini/reggiatrice-pneumatica-acciaio-fp-13-16-19.png',
+    'FP 19S - 25S - 32S': '/Immagini/reggiatrice-pneumatica-acciaio-fp-19s-25s-32s.png',
+    'FP 32 PLUS': '/Immagini/reggiatrice-pneumatica-acciaio-fp-32-plus.gif',
+    'SL3 PN': '/Immagini/reggiatrice-pneumatica-acciaio-sl3-pn.png',
+    'GM 15': '/Immagini/carrello-porta-reggia-gm-15.gif',
+    'FP15': '/Immagini/carrello-porta-reggia-fp-15.png',
+    'FP 93': '/Immagini/carrello-porta-reggia-fp-93.png',
+    'FP15S': '/Immagini/carrello-porta-reggia-fp-15s.gif',
+    'FP 92': '/Immagini/carrello-porta-reggia-fp-92.png',
+    'FP13': '/Immagini/carrello-porta-reggia-fp-13.gif',
+    'Bulinati lucidi': '/Immagini/sigilli-bulinati-lucidi.png',
+    'Bulinati zincati': '/Immagini/sigilli-bulinati-zincati.png',
+    'Zincati': '/Immagini/sigillo-zincato.png',
+    'Overlap': '/Immagini/sigillo-overlap.png',
   };
   
   return imageMap[productName] || null;
@@ -127,6 +127,9 @@ function ProductCard({ product, index }: { product: { name: string; description:
   const imagePath = getProductImage(product.name);
   const isSigillo = product.name.includes('Bulinati') || product.name.includes('Zincati') || product.name === 'Overlap';
   const description = getProductDescriptionTranslation(product.name, product.description, t);
+  // Alt descrittivo: nome del modello + tipo di prodotto (prima frase della descrizione)
+  const displayName = getProductNameTranslation(product.name, t);
+  const imageAlt = description ? `${displayName} – ${description.split('.')[0].slice(0, 90).trim()}` : displayName;
 
   return (
     <motion.div
@@ -141,20 +144,14 @@ function ProductCard({ product, index }: { product: { name: string; description:
     >
       <div className={`aspect-square relative overflow-hidden mb-3 lg:mb-6 ${isSigillo ? 'bg-transparent' : 'bg-gradient-to-br from-gray-100 to-gray-200'}`}>
         {imagePath ? (
-          <img
+          // next/image: ridimensiona e converte in WebP (prima le foto erano servite a peso pieno, 400–650 KB l'una)
+          <Image
             src={imagePath}
-            alt={product.name}
-            className="w-full h-full object-contain p-2 lg:p-4"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-              mixBlendMode: isSigillo ? 'multiply' : 'normal',
-            }}
-            loading="lazy"
+            alt={imageAlt}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
+            className="object-contain"
+            style={{ mixBlendMode: isSigillo ? 'multiply' : 'normal' }}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
@@ -345,6 +342,18 @@ export default function Prodotti() {
         <div style={{ height: '180px' }}></div>
 
         <div className="text-content-area">
+        {/* Titolo pagina (H1) */}
+        <section style={{ paddingTop: '1.5rem' }}>
+          <div className="flex flex-col items-center text-center" style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 1rem' }}>
+            <h1 className="text-3xl md:text-5xl font-bold font-heading text-balance" style={{ marginBottom: '1rem', lineHeight: 1.15 }}>
+              {t('prodotti.h1')}
+            </h1>
+            <p className="text-lg text-text-light" style={{ maxWidth: '720px' }}>
+              {t('prodotti.h1.intro')}
+            </p>
+          </div>
+        </section>
+
         {/* Reggiatrici Section */}
         <section id="reggiatrici" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
@@ -765,7 +774,7 @@ export default function Prodotti() {
                   <div className="flex-shrink-0 mx-4" style={{ width: '320px', height: '220px' }}>
                     <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden">
                       <Image
-                        src="/Immagini/Carrello porta reggia polipropilene poliestere.png"
+                        src="/Immagini/carrello-porta-reggia-polipropilene-poliestere.png"
                         alt="Carrello porta reggia polipropilene poliestere"
                         width={320}
                         height={220}
@@ -776,7 +785,7 @@ export default function Prodotti() {
                   <div className="flex-shrink-0 mx-4" style={{ width: '320px', height: '220px' }}>
                     <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden">
                       <Image
-                        src="/Immagini/reggia tessile con fibbia.png"
+                        src="/Immagini/reggia-tessile-con-fibbia.png"
                         alt="Reggia tessile con fibbia"
                         width={320}
                         height={220}
@@ -787,7 +796,7 @@ export default function Prodotti() {
                   <div className="flex-shrink-0 mx-4" style={{ width: '320px', height: '220px' }}>
                     <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden">
                       <Image
-                        src="/Immagini/bancali reggiati con angolari di cartone.png"
+                        src="/Immagini/bancali-reggiati-angolari-cartone.png"
                         alt="Bancali reggiati con angolari di cartone"
                         width={320}
                         height={220}
@@ -798,7 +807,7 @@ export default function Prodotti() {
                   <div className="flex-shrink-0 mx-4" style={{ width: '320px', height: '220px' }}>
                     <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden">
                       <Image
-                        src="/Immagini/angolari in plastica reggia.png"
+                        src="/Immagini/angolari-in-plastica-per-reggia.png"
                         alt="Angolari in plastica reggia"
                         width={320}
                         height={220}
@@ -809,7 +818,7 @@ export default function Prodotti() {
                   <div className="flex-shrink-0 mx-4" style={{ width: '320px', height: '220px' }}>
                     <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden">
                       <Image
-                        src="/Immagini/reggia in acciaio.png"
+                        src="/Immagini/reggia-in-acciaio.png"
                         alt="Reggia in acciaio"
                         width={320}
                         height={220}
@@ -820,7 +829,7 @@ export default function Prodotti() {
                   <div className="flex-shrink-0 mx-4" style={{ width: '320px', height: '220px' }}>
                     <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden">
                       <Image
-                        src="/Immagini/Film estensibile manuale trasparente.png"
+                        src="/Immagini/film-estensibile-manuale-trasparente.png"
                         alt="Film estensibile manuale trasparente"
                         width={320}
                         height={220}
@@ -831,7 +840,7 @@ export default function Prodotti() {
                   <div className="flex-shrink-0 mx-4" style={{ width: '320px', height: '220px' }}>
                     <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden">
                       <Image
-                        src="/Immagini/Reggia in ferro e sigillo.png"
+                        src="/Immagini/reggia-in-ferro-e-sigillo.png"
                         alt="Reggia in ferro e sigillo"
                         width={320}
                         height={220}
@@ -842,7 +851,7 @@ export default function Prodotti() {
                   <div className="flex-shrink-0 mx-4" style={{ width: '320px', height: '220px' }}>
                     <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden">
                       <Image
-                        src="/Immagini/reggia poliestere pet su bancale.png"
+                        src="/Immagini/reggia-poliestere-pet-su-bancale.png"
                         alt="Reggia poliestere pet su bancale"
                         width={320}
                         height={220}
@@ -878,25 +887,25 @@ export default function Prodotti() {
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8 w-full" style={{ marginBottom: '2.5rem' }}>
               {[
                 {
-                  image: '/Immagini/reggia tessile con fibbia.png',
+                  image: '/Immagini/reggia-tessile-con-fibbia.png',
                   nameKey: 'prodotti.accessori.items.reggiaTessile.name',
                   descKey: 'prodotti.accessori.items.reggiaTessile.desc',
                   useKey: 'prodotti.accessori.items.reggiaTessile.use',
                 },
                 {
-                  image: '/Immagini/angolari in plastica reggia.png',
+                  image: '/Immagini/angolari-in-plastica-per-reggia.png',
                   nameKey: 'prodotti.accessori.items.angolariPlastica.name',
                   descKey: 'prodotti.accessori.items.angolariPlastica.desc',
                   useKey: 'prodotti.accessori.items.angolariPlastica.use',
                 },
                 {
-                  image: '/Immagini/bancali reggiati con angolari di cartone.png',
+                  image: '/Immagini/bancali-reggiati-angolari-cartone.png',
                   nameKey: 'prodotti.accessori.items.angolariCartone.name',
                   descKey: 'prodotti.accessori.items.angolariCartone.desc',
                   useKey: 'prodotti.accessori.items.angolariCartone.use',
                 },
                 {
-                  image: '/Immagini/Film estensibile manuale trasparente.png',
+                  image: '/Immagini/film-estensibile-manuale-trasparente.png',
                   nameKey: 'prodotti.accessori.items.filmEstensibile.name',
                   descKey: 'prodotti.accessori.items.filmEstensibile.desc',
                   useKey: 'prodotti.accessori.items.filmEstensibile.use',

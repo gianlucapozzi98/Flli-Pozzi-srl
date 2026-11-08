@@ -15,7 +15,7 @@ export default function Footer() {
             <div className="mb-4">
               <Link href="/">
                 <Image
-                  src="/Immagini/Logo Flli Pozzi Italia.png"
+                  src="/Immagini/logo-fratelli-pozzi.png"
                   alt="Flli Pozzi srl"
                   width={230}
                   height={92}
