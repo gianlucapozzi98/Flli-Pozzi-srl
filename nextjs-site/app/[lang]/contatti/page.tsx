@@ -21,7 +21,7 @@ type ContactFormData = {
 };
 
 export default function Contatti() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   const router = useRouter();
   const [submitError, setSubmitError] = useState('');
   
@@ -89,7 +89,7 @@ export default function Contatti() {
       }
 
       // Pagina di ringraziamento al posto dell'alert: conferma chiara all'utente e URL misurabile
-      router.push('/grazie');
+      router.push(lp('/grazie'));
     } catch {
       setSubmitError(t('contatti.form.error.submit'));
     }

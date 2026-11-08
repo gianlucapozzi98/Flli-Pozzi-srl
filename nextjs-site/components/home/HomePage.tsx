@@ -132,8 +132,8 @@ function TendireggiaCarousel() {
   );
 }
 
-export default function Home() {
-  const { t } = useLanguage();
+export default function HomePage() {
+  const { t, lp } = useLanguage();
   const features = getFeatures(t);
   
   return (
@@ -187,7 +187,7 @@ export default function Home() {
               style={{ marginTop: '32px' }}
             >
               <Link
-                href="/contatti?topic=preventivo"
+                href={lp('/contatti?topic=preventivo')}
                 className="inline-flex items-center justify-center bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-lg w-full sm:w-auto"
                 style={{ paddingLeft: '28px', paddingRight: '28px', paddingTop: '14px', paddingBottom: '14px' }}
               >
@@ -248,7 +248,7 @@ export default function Home() {
                 </p>
                     <div className="flex justify-center md:justify-start" style={{ marginTop: '3px' }}>
                 <Link
-                  href="/prodotti#reggiatrici"
+                  href={lp('/prodotti#reggiatrici')}
                         className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
                         style={{ paddingLeft: '27px', paddingRight: '27px', paddingTop: '13px', paddingBottom: '13px' }}
                 >
@@ -347,7 +347,7 @@ export default function Home() {
               </p>
               <div className="text-center">
                 <Link
-                  href="/prodotti#accessori"
+                  href={lp('/prodotti#accessori')}
                   className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
                   style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 3px)', paddingBottom: 'calc(0.625rem + 3px)' }}
                 >
@@ -379,7 +379,7 @@ export default function Home() {
                 </p>
                 <div style={{ marginBottom: '10px', marginTop: '3px' }}>
                   <Link
-                    href="/prodotti#reggia"
+                    href={lp('/prodotti#reggia')}
                     className="inline-block border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
                     style={{ paddingLeft: '27px', paddingRight: '27px', paddingTop: '13px', paddingBottom: '13px' }}
                   >
@@ -416,7 +416,7 @@ export default function Home() {
                 </p>
                 <div style={{ marginBottom: '10px', marginTop: '3px' }}>
                   <Link
-                    href="/prodotti#sigilli"
+                    href={lp('/prodotti#sigilli')}
                     className="inline-block border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
                     style={{ paddingLeft: '27px', paddingRight: '27px', paddingTop: '13px', paddingBottom: '13px' }}
                   >
@@ -461,14 +461,14 @@ export default function Home() {
                 </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link
-                  href="/contatti"
+                  href={lp('/contatti')}
                   className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-lg hover:shadow-xl transform hover:scale-105 transition-all w-full sm:w-auto text-center"
                   style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 3px)', paddingBottom: 'calc(0.625rem + 3px)' }}
                 >
                   {t('home.cta.button')}
                 </Link>
                 <Link
-                  href="/diventa-rivenditore"
+                  href={lp('/diventa-rivenditore')}
                   className="inline-block border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors w-full sm:w-auto text-center"
                   style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 1px)', paddingBottom: 'calc(0.625rem + 1px)' }}
                 >

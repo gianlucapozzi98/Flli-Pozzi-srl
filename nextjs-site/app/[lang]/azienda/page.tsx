@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Azienda() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   return (
     <>
       <Header />
@@ -159,7 +159,7 @@ export default function Azienda() {
                 {t('azienda.cta.text')}
               </p>
               <Link
-                href="/contatti"
+                href={lp('/contatti')}
                 className="inline-block py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg"
                 style={{ fontSize: '1.125rem', paddingLeft: '2.25rem', paddingRight: '2.25rem' }}
               >

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import { notFound } from "next/navigation";
 import { ScrollToTop } from "@/components/Header";
 import MobileCtaBar from "@/components/MobileCtaBar";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import ScrollToTopOnRouteChange from "@/components/ScrollToTopOnRouteChange";
-import HtmlLang from "@/components/HtmlLang";
-import { DEFAULT_OG_IMAGE, SITE_TAGLINE, SITE_URL } from "@/lib/seo";
+import { PAGE_META, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { DEFAULT_LANG, LANGS, isLang } from "@/lib/i18n";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,63 +22,53 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${SITE_TAGLINE} | Articoli per imballaggio`,
-    template: `%s | ${SITE_TAGLINE}`,
-  },
-  description:
-    "Fratelli Pozzi — Caravaggio, dal 1947. Reggiatrici, tendireggia, sigilli e reggia per imballaggio industriale. Made in Italy.",
-  keywords:
-    "Fratelli Pozzi, Flli Pozzi, Caravaggio, reggiatrici, tendireggia, sigilli, reggia, imballaggio industriale, Made in Italy",
-  authors: [{ name: "Fratelli Pozzi S.r.l." }],
-  creator: "Fratelli Pozzi S.r.l.",
-  publisher: "Fratelli Pozzi S.r.l.",
-  icons: {
-    icon: [
-      { url: "/favicon.png", type: "image/png" },
-      { url: "/favicon.ico", type: "image/x-icon" },
-    ],
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
-  },
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: `${SITE_TAGLINE} | Articoli per imballaggio`,
-    description:
-      "Dal 1947 a Caravaggio: reggiatrici, sigilli e reggia Made in Italy per l'imballaggio industriale.",
-    url: "/",
-    siteName: SITE_TAGLINE,
-    images: [
-      {
-        url: DEFAULT_OG_IMAGE,
-        alt: "Logo Fratelli Pozzi — Caravaggio, dal 1947",
-      },
-    ],
-    type: "website",
-    locale: "it_IT",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${SITE_TAGLINE} | Articoli per imballaggio`,
-    description:
-      "Dal 1947 a Caravaggio: attrezzature e forniture per l'imballaggio industriale. Made in Italy.",
-    images: [DEFAULT_OG_IMAGE],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export function generateStaticParams() {
+  return LANGS.map((lang) => ({ lang }));
+}
 
-export default function RootLayout({
+// Solo it/en/fr: qualsiasi altro prefisso (es. /de) restituisce 404
+export const dynamicParams = false;
+
+type LayoutParams = { params: Promise<{ lang: string }> };
+
+export async function generateMetadata({ params }: LayoutParams): Promise<Metadata> {
+  const { lang: raw } = await params;
+  const lang = isLang(raw) ? raw : DEFAULT_LANG;
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: `${PAGE_META.home[lang].title} | ${SITE_NAME}`,
+      template: `%s | ${SITE_NAME}`,
+    },
+    description: PAGE_META.home[lang].description,
+    authors: [{ name: "Fratelli Pozzi S.r.l." }],
+    creator: "Fratelli Pozzi S.r.l.",
+    publisher: "Fratelli Pozzi S.r.l.",
+    icons: {
+      icon: [
+        { url: "/favicon.png", type: "image/png" },
+        { url: "/favicon.ico", type: "image/x-icon" },
+      ],
+      shortcut: "/favicon.png",
+      apple: "/favicon.png",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }>) {
+  const { lang } = await params;
+  if (!isLang(lang)) notFound();
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -117,7 +108,7 @@ export default function RootLayout({
 
   return (
     <html
-      lang="it"
+      lang={lang}
       suppressHydrationWarning
       className={`${inter.variable} ${montserrat.variable} overflow-x-hidden`}
     >
@@ -130,8 +121,7 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c'),
           }}
         />
-        <LanguageProvider>
-          <HtmlLang />
+        <LanguageProvider language={lang}>
           <div className="min-h-screen w-full overflow-x-hidden">
             <ScrollToTopOnRouteChange />
             {children}

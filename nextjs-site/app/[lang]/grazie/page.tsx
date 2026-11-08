@@ -17,7 +17,7 @@ function ThankYouText() {
 
 /** Pagina mostrata dopo l'invio dei moduli contatti (/grazie) e rivenditori (/grazie?tipo=b2b). */
 export default function Grazie() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
 
   return (
     <>
@@ -47,14 +47,14 @@ export default function Grazie() {
             </a>
             <div className="flex flex-col sm:flex-row gap-3 justify-center w-full sm:w-auto">
               <Link
-                href="/prodotti"
+                href={lp('/prodotti')}
                 className="inline-flex items-center justify-center bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
                 style={{ padding: '13px 27px' }}
               >
                 {t('grazie.products')}
               </Link>
               <Link
-                href="/"
+                href={lp('/')}
                 className="inline-flex items-center justify-center border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
                 style={{ padding: '11px 25px' }}
               >

@@ -70,7 +70,7 @@ const benefits = [
 ] as const;
 
 export default function DiventaRivenditore() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   const router = useRouter();
   const [submitError, setSubmitError] = useState('');
 
@@ -143,7 +143,7 @@ export default function DiventaRivenditore() {
       }
 
       // Pagina di ringraziamento al posto dell'alert
-      router.push('/grazie?tipo=b2b');
+      router.push(lp('/grazie?tipo=b2b'));
     } catch {
       setSubmitError(t('contatti.form.error.submit'));
     }
@@ -241,7 +241,7 @@ export default function DiventaRivenditore() {
                     {t('rivenditore.about.p2')}
                   </p>
                   <Link
-                    href="/azienda"
+                    href={lp('/azienda')}
                     className="text-primary font-semibold hover:underline"
                   >
                     {t('rivenditore.about.link')}
@@ -267,7 +267,7 @@ export default function DiventaRivenditore() {
                 {categories.map((cat, index) => (
                   <Link
                     key={cat.titleKey}
-                    href={cat.href}
+                    href={lp(cat.href)}
                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
                   >
                     <div className="aspect-square relative bg-gradient-to-br from-gray-100 to-gray-200">
@@ -290,7 +290,7 @@ export default function DiventaRivenditore() {
               </div>
               <div className="text-center" style={{ marginTop: '2rem' }}>
                 <Link
-                  href="/prodotti"
+                  href={lp('/prodotti')}
                   className="inline-block border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
                   style={{ padding: '0.75rem 1.5rem' }}
                 >
@@ -498,7 +498,7 @@ export default function DiventaRivenditore() {
 
                 <p className="text-sm text-text-light text-center">
                   {t('rivenditore.form.note')}{' '}
-                  <Link href="/contatti" className="text-primary hover:underline">
+                  <Link href={lp('/contatti')} className="text-primary hover:underline">
                     {t('nav.contacts')}
                   </Link>
                 </p>

@@ -12,12 +12,12 @@ const BAR_HEIGHT = 56;
  * Sulla pagina Contatti il preventivo porta direttamente al modulo.
  */
 export default function MobileCtaBar() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   const pathname = usePathname();
 
-  if (pathname === '/grazie') return null;
+  if (pathname === lp('/grazie')) return null;
 
-  const quoteHref = pathname === '/contatti' ? '#modulo' : '/contatti?topic=preventivo';
+  const quoteHref = pathname === lp('/contatti') ? '#modulo' : lp('/contatti?topic=preventivo');
 
   return (
     <>

@@ -236,7 +236,7 @@ function getProductDescriptionTranslation(name: string, description: string, t: 
 }
 
 export default function Prodotti() {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
   const productCategories = getProductCategories(t);
   const [isMounted, setIsMounted] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -950,21 +950,21 @@ export default function Prodotti() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full flex-wrap" style={{ marginBottom: '1.5rem' }}>
               <Link
-                href="/contatti?topic=accessori"
+                href={lp('/contatti?topic=accessori')}
                 className="inline-block text-center py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg w-full sm:w-auto"
                 style={{ fontSize: '1.0625rem', paddingLeft: '1.75rem', paddingRight: '1.75rem' }}
               >
                 {t('prodotti.accessori.cta.quote')}
               </Link>
               <Link
-                href="/contatti"
+                href={lp('/contatti')}
                 className="inline-block text-center py-4 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors w-full sm:w-auto"
                 style={{ fontSize: '1.0625rem', paddingLeft: '1.75rem', paddingRight: '1.75rem' }}
               >
                 {t('prodotti.accessori.cta.commercial')}
               </Link>
               <Link
-                href="/diventa-rivenditore"
+                href={lp('/diventa-rivenditore')}
                 className="inline-block text-center py-4 text-primary font-semibold hover:underline w-full sm:w-auto"
                 style={{ fontSize: '1rem' }}
               >
