@@ -1,160 +1,70 @@
 'use client';
 
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { PhoneIcon, WrenchScrewdriverIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { motion } from 'framer-motion';
-import { 
-  CheckBadgeIcon, 
-  SparklesIcon, 
-  WrenchScrewdriverIcon,
-  ClockIcon,
-  CogIcon,
-  DocumentTextIcon,
-  PhoneIcon
-} from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
+import Finder, { type FinderItem } from './Finder';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { HOME } from '@/lib/home-content';
+import type { Material } from '@/lib/catalog';
+import styles from './home.module.css';
 
-function getFeatures(t: (key: string) => string) {
-  return [
-  {
-    icon: CheckBadgeIcon,
-      title: t('home.features.madeInItaly'),
-      description: t('home.features.madeInItaly.desc'),
-  },
-  {
-    icon: SparklesIcon,
-      title: t('home.features.excellence'),
-      description: t('home.features.excellence.desc'),
-  },
-  {
-    icon: WrenchScrewdriverIcon,
-      title: t('home.features.assistance'),
-      description: t('home.features.assistance.desc'),
-    },
+export type HomeCategory = {
+  slug: string;
+  name: string;
+  spec: string;
+  image: string;
+  alt: string;
+  materials: Material[];
+  count: number;
+  href: string;
+};
+
+export type HomeProduct = { name: string; short: string; image: string; href: string };
+
+type Props = {
+  categories: HomeCategory[];
+  finderItems: FinderItem[];
+  madeProducts: HomeProduct[];
+};
+
+const SERVICE_ICONS = [WrenchScrewdriverIcon, CogIcon, DocumentTextIcon];
+
+export default function HomePage({ categories, finderItems, madeProducts }: Props) {
+  const { t, lp, language } = useLanguage();
+  const [material, setMaterial] = useState<Material | 'all'>('all');
+  const L = <T extends Record<string, string>>(v: T) => v[language];
+
+  const chips: { v: Material | 'all'; label: string }[] = [
+    { v: 'all', label: L(HOME.chipAll) },
+    { v: 'pp', label: 'PP' },
+    { v: 'pet', label: 'PET' },
+    { v: 'acc', label: L(HOME.chipSteel) },
   ];
-}
 
-// Componente Carosello Tendireggia Manuali
-function TendireggiaCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
-  const tendireggiaImages = [
-    { src: '/Immagini/tendireggia-manuale-cp2000.png', alt: 'CP2000' },
-    { src: '/Immagini/tendireggia-manuale-best.png', alt: 'BEST' },
-    { src: '/Immagini/tendireggia-manuale-plr-g.png', alt: 'PLR/G' },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isDragging) {
-        setCurrentIndex((prev) => (prev + 1) % tendireggiaImages.length);
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isDragging, tendireggiaImages.length]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX(e.pageX - (carouselRef.current?.offsetLeft || 0));
-    setScrollLeft(carouselRef.current?.scrollLeft || 0);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !carouselRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - (carouselRef.current.offsetLeft || 0);
-    const walk = (x - startX) * 2;
-    carouselRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-  };
-
-  return (
-    <div className="relative w-full h-full rounded-lg overflow-hidden bg-transparent">
-      <div
-        ref={carouselRef}
-        className="flex transition-transform duration-500 ease-in-out h-full"
-        style={{
-          transform: `translateX(-${currentIndex * 100}%)`,
-          cursor: isDragging ? 'grabbing' : 'grab',
-        }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-      >
-        {tendireggiaImages.map((image, index) => (
-          <div
-            key={index}
-            className="min-w-full h-full flex items-center justify-center p-6"
-          >
-            <div className="relative w-full h-full" style={{ maxWidth: '28rem' }}>
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      {/* Indicatori */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {tendireggiaImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              index === currentIndex ? 'bg-primary w-6' : 'bg-gray-400'
-            }`}
-            aria-label={`Vai all'immagine ${index + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default function HomePage() {
-  const { t, lp } = useLanguage();
-  const features = getFeatures(t);
-  
   return (
     <>
       <Header />
       <main className="pt-20">
-        {/* Hero Section */}
+        {/* Apertura */}
         <section className="relative min-h-screen flex items-end justify-center overflow-hidden">
-          {/* Background Image */}
           <motion.div
             initial={{ scale: 1.26 }}
             animate={{ scale: 1.045 }}
-            transition={{ duration: 3, ease: "easeOut" }}
+            transition={{ duration: 3, ease: 'easeOut' }}
             className="absolute inset-0 z-0"
           >
             <Image
               src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
-              alt="Flli Pozzi esterno"
+              alt="Stabilimento Fratelli Pozzi a Caravaggio (BG)"
               fill
               className="object-cover"
               priority
+              sizes="100vw"
               style={{ opacity: 0.8, objectPosition: 'left center' }}
             />
           </motion.div>
@@ -164,28 +74,15 @@ export default function HomePage() {
             <p className="text-sm md:text-base font-semibold uppercase tracking-[0.2em] text-white/85 text-balance" style={{ marginBottom: '16px' }}>
               {t('home.hero.eyebrow')}
             </p>
-            {/* H1 visibile da subito (niente opacity 0): è l'elemento principale per LCP e SEO */}
+            {/* Contenuti dell'apertura visibili da subito: niente opacity 0 (LCP e SEO) */}
             <h1
               className="text-[32px] leading-[1.08] md:text-5xl lg:text-[56px] font-black font-heading uppercase tracking-tight max-w-5xl text-balance"
               style={{ marginBottom: '20px', marginLeft: 'auto', marginRight: 'auto' }}
             >
               {t('home.hero.title')}
             </h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-base md:text-xl lg:text-2xl font-light uppercase tracking-wide"
-            >
-              {t('home.hero.subtitle')}
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-3 justify-center items-center"
-              style={{ marginTop: '32px' }}
-            >
+            <p className="text-base md:text-xl lg:text-2xl font-light uppercase tracking-wide">{t('home.hero.subtitle')}</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center" style={{ marginTop: '32px' }}>
               <Link
                 href={lp('/contatti?topic=preventivo')}
                 className="inline-flex items-center justify-center bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-lg w-full sm:w-auto"
@@ -201,285 +98,236 @@ export default function HomePage() {
                 <PhoneIcon className="h-5 w-5" aria-hidden="true" />
                 {t('cta.call')} +39 0363 350380
               </a>
-            </motion.div>
+            </div>
           </div>
         </section>
 
-        <div className="text-content-area">
-        {/* Features Section */}
-        <section className="bg-white" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="w-full flex justify-center px-8 lg:px-4">
-            <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-6xl w-full">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="text-center p-10 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow flex flex-col items-center flex-1 max-w-sm"
-                >
-                  <feature.icon className="mb-6 text-primary" style={{ width: '68px', height: '68px' }} />
-                  <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-text-light text-base">{feature.description}</p>
-                </motion.div>
+        {/* Prove concrete */}
+        <section className={styles.proof} aria-label="Fratelli Pozzi">
+          <ul className={`${styles.wrap} ${styles.proofList}`}>
+            {HOME.proof.map((p) => (
+              <li key={p.big.it}>
+                <b className="font-heading">{L(p.big)}</b>
+                <span>{L(p.label)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Categorie per tipo di reggia */}
+        <section className={styles.section}>
+          <div className={styles.wrap}>
+            <div className={styles.head}>
+              <div>
+                <h2 className={`${styles.h2} font-heading font-bold`}>{L(HOME.catTitle)}</h2>
+                <p className={styles.sub}>{L(HOME.catText)}</p>
+              </div>
+              <div className={styles.chips} role="group" aria-label={L(HOME.filterLabel)}>
+                {chips.map((c) => (
+                  <button
+                    key={c.v}
+                    type="button"
+                    aria-pressed={material === c.v}
+                    onClick={() => setMaterial(c.v)}
+                    className={styles.chip}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className={styles.cats}>
+              {categories.map((c) => {
+                const active = material === 'all' || c.materials.includes(material);
+                return (
+                  <Link key={c.slug} href={c.href} className={`${styles.cat} ${active ? '' : styles.dim}`} aria-hidden={!active || undefined} tabIndex={active ? undefined : -1}>
+                    <div className={styles.catImg}>
+                      <Image src={c.image} alt={c.alt} fill sizes="(max-width: 640px) 40vw, (max-width: 1024px) 45vw, 360px" style={{ objectFit: 'contain', padding: '12px' }} />
+                    </div>
+                    <div className={styles.catBody}>
+                      <h3 className="font-heading font-bold">{c.name}</h3>
+                      <p>{c.spec}</p>
+                      <span className={styles.go}>
+                        {c.count > 0
+                          ? `${c.count} ${['reggia', 'sigilli'].includes(c.slug) ? L(HOME.items) : L(HOME.models)} →`
+                          : L(HOME.view)}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+            <div className={styles.links}>
+              <Link href={lp('/prodotti')}>{L(HOME.catalogLink)}</Link>
+              <Link href={lp('/prodotti/accessori-imballaggio')}>{L(HOME.accessoriesLink)}</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Selettore guidato */}
+        <Finder items={finderItems} />
+
+        {/* Prodotti a Caravaggio */}
+        <section className={`${styles.section} ${styles.alt}`}>
+          <div className={styles.wrap}>
+            <div className={styles.head}>
+              <div>
+                <h2 className={`${styles.h2} font-heading font-bold`}>{L(HOME.madeTitle)}</h2>
+                <p className={styles.sub}>{L(HOME.madeText)}</p>
+              </div>
+              <span className={styles.badge}>
+                <span className={styles.flag} aria-hidden="true" />
+                {L(HOME.madeBadge)}
+              </span>
+            </div>
+            <div className={styles.made}>
+              {madeProducts.map((p) => (
+                <Link key={p.name} href={p.href} className={styles.prod}>
+                  <div className={styles.prodImg}>
+                    <Image src={p.image} alt={p.name} fill sizes="(max-width: 640px) 40vw, 360px" style={{ objectFit: 'contain', padding: '20px' }} />
+                  </div>
+                  <div className={styles.prodBody}>
+                    <h3 className="font-heading font-bold">{p.name}</h3>
+                    <p>{p.short}</p>
+                    <span className={styles.go}>{L(HOME.details)}</span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Reggiatrici Preview */}
-        <section className="bg-bg-light" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-8 lg:px-4">
-            <div className="flex justify-center">
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ maxWidth: '1200px', width: '100%', gap: '32px' }}>
-                <div className="flex justify-center md:justify-end">
-                  <div className="aspect-square rounded-lg overflow-hidden" style={{ width: '100%', maxWidth: '500px' }}>
-                    <TendireggiaCarousel />
-                  </div>
+        {/* Confronto con l'import */}
+        <section className={styles.section}>
+          <div className={styles.wrap}>
+            <div className={styles.head}>
+              <div>
+                <h2 className={`${styles.h2} font-heading font-bold`}>{L(HOME.compareTitle)}</h2>
+                <p className={styles.sub}>{L(HOME.compareText)}</p>
               </div>
-                <div className="flex justify-center md:justify-start">
-                  <div className="text-center md:text-left px-4 lg:px-0" style={{ maxWidth: '600px', width: '100%' }}>
-                    <h2 className="text-4xl md:text-5xl font-bold font-heading lg:whitespace-nowrap" style={{ marginBottom: '20px' }}>
-                      {t('home.reggiatrici.title')}
-                </h2>
-                    <p className="text-lg text-text-light leading-relaxed text-justify lg:text-left" style={{ marginBottom: '20px' }}>
-                      {t('home.reggiatrici.text')}
-                </p>
-                    <div className="flex justify-center md:justify-start" style={{ marginTop: '3px' }}>
-                <Link
-                  href={lp('/prodotti#reggiatrici')}
-                        className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
-                        style={{ paddingLeft: '27px', paddingRight: '27px', paddingTop: '13px', paddingBottom: '13px' }}
-                >
-                  {t('home.reggiatrici.button')}
+            </div>
+            <div className={styles.cmpWrap}>
+              <table className={styles.cmp}>
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <span className="sr-only">—</span>
+                    </th>
+                    <th scope="col">Fratelli Pozzi</th>
+                    <th scope="col">{L(HOME.compareThem)}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {HOME.compareRows.map((r) => (
+                    <tr key={r.k.it}>
+                      <th scope="row">{L(r.k)}</th>
+                      <td>{L(r.us)}</td>
+                      <td>{L(r.them)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* Assistenza */}
+        <section className={styles.service}>
+          <div className={`${styles.wrap} ${styles.serviceGrid}`}>
+            <div>
+              <h2 className={`${styles.h2} font-heading font-bold`}>{L(HOME.serviceTitle)}</h2>
+              <p>{L(HOME.serviceText)}</p>
+              <div className={styles.row}>
+                <Link href={lp('/assistenza-ricambi')} className={`${styles.btn} ${styles.btnWhite}`}>
+                  {L(HOME.serviceBtn)}
                 </Link>
+                <a href="tel:+390363350380" className={`${styles.btn} ${styles.btnLine}`}>
+                  {t('cta.call')} 0363 350380
+                </a>
+              </div>
+            </div>
+            <ul className={styles.serviceList}>
+              {HOME.serviceItems.map((s, i) => {
+                const Icon = SERVICE_ICONS[i];
+                return (
+                  <li key={s.t.it}>
+                    <Icon className={styles.serviceIcon} aria-hidden="true" />
+                    <div>
+                      <b className="font-heading">{L(s.t)}</b>
+                      <span>{L(s.d)}</span>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </section>
 
-        {/* Assistenza Section */}
-        <section className="bg-white" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-8 lg:px-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-center font-heading" style={{ marginBottom: '60px' }}>
-              {t('home.assistance.title')}
+        {/* Settori */}
+        <section className={styles.section}>
+          <div className={styles.wrap}>
+            <h2 className={`${styles.h2} font-heading font-bold`} style={{ marginBottom: 24 }}>
+              {L(HOME.sectorsTitle)}
             </h2>
-            <div className="flex justify-center">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8" style={{ maxWidth: '1200px', width: '100%', paddingLeft: '3px', paddingRight: '3px' }}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center px-6 lg:px-8"
-              >
-                <div className="mb-6 p-4 bg-primary/10 rounded-full">
-                  <ClockIcon className="text-primary" style={{ width: '48px', height: '48px' }} />
+            <div className={styles.sectors}>
+              {HOME.sectors.map((s) => (
+                <div key={s.t.it}>
+                  <b className="font-heading">{L(s.t)}</b>
+                  <span>{L(s.d)}</span>
                 </div>
-                <h3 className="text-xl font-semibold mb-4 font-heading">
-                  {t('home.assistance.rapid')}
-                </h3>
-                <p className="text-text-light leading-relaxed text-justify lg:text-left">
-                  {t('home.assistance.rapid.desc')}
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center px-6 lg:px-8"
-              >
-                <div className="mb-6 p-4 bg-primary/10 rounded-full">
-                  <CogIcon className="text-primary" style={{ width: '48px', height: '48px' }} />
-                </div>
-                <h3 className="text-xl font-semibold mb-4 font-heading">
-                  {t('home.assistance.spare')}
-                </h3>
-                <p className="text-text-light leading-relaxed text-justify lg:text-left">
-                  {t('home.assistance.spare.desc')}
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8 text-center flex flex-col items-center px-6 lg:px-8"
-              >
-                <div className="mb-6 p-4 bg-primary/10 rounded-full">
-                  <DocumentTextIcon className="text-primary" style={{ width: '48px', height: '48px' }} />
-                </div>
-                <h3 className="text-xl font-semibold mb-4 font-heading">
-                  {t('home.assistance.docs')}
-                </h3>
-                <p className="text-text-light leading-relaxed text-justify lg:text-left">
-                  {t('home.assistance.docs.desc')}
-                </p>
-              </motion.div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Soluzioni Section */}
-        <section className="bg-bg-light" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-8 lg:px-4 max-w-5xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-white rounded-xl shadow-lg px-6 lg:px-0 lg:pl-[calc(2.5rem+5px)] lg:pr-[calc(2.5rem+5px)]"
-              style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem' }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-center font-heading" style={{ marginBottom: '2rem' }}>
-                {t('home.solutions.title')}
-              </h2>
-              <p className="text-lg text-text-light leading-relaxed text-justify lg:text-center px-4 lg:px-0" style={{ marginBottom: '2rem' }}>
-                {t('home.solutions.text')}
+        {/* Storia */}
+        <section className={`${styles.section} ${styles.alt}`}>
+          <div className={`${styles.wrap} ${styles.heritage}`}>
+            <figure>
+              <Image
+                src="/Immagini/fratelli-pozzi-foto-storica-1949.jpg"
+                alt={L(HOME.heritageCaption)}
+                width={620}
+                height={800}
+                sizes="(max-width: 900px) 100vw, 420px"
+              />
+              <figcaption>{L(HOME.heritageCaption)}</figcaption>
+            </figure>
+            <div>
+              <p className={styles.eyebrow}>1947 → 2027</p>
+              <h2 className={`${styles.h2} font-heading font-bold`}>{L(HOME.heritageTitle)}</h2>
+              <p className={styles.sub}>{L(HOME.heritageText)}</p>
+              <p className={`${styles.years} font-heading`}>80</p>
+              <Link href={lp('/azienda')} className={styles.textLink}>
+                {L(HOME.heritageLink)}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Chiusura */}
+        <section className={styles.final}>
+          <div className={`${styles.wrap} ${styles.finalGrid}`}>
+            <div>
+              <h2 className={`${styles.h2} font-heading font-bold`}>{L(HOME.finalTitle)}</h2>
+              <p>{L(HOME.finalText)}</p>
+              <p className={`${styles.phone} font-heading`}>
+                <a href="tel:+390363350380">+39 0363 350380</a>
               </p>
-              <div className="text-center">
-                <Link
-                  href={lp('/prodotti#accessori')}
-                  className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors"
-                  style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 3px)', paddingBottom: 'calc(0.625rem + 3px)' }}
-                >
-                  {t('home.solutions.button')}
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Reggia e Sigilli Preview Section */}
-        <section className="bg-white" style={{ paddingTop: '30px', paddingBottom: '0px' }}>
-          <div className="container mx-auto px-8 lg:px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-              {/* Reggia Riquadro */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="flex flex-col justify-start items-center text-center border-r border-gray-200 lg:pl-8 lg:pr-8"
-                style={{ paddingTop: '30px', paddingBottom: '30px', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
-              >
-                <h3 className="text-3xl md:text-4xl font-bold font-heading" style={{ marginBottom: '10px' }}>
-                  {t('home.reggia.title')}
-                </h3>
-                <p className="text-lg text-text-light leading-relaxed max-w-md" style={{ marginBottom: '10px' }}>
-                  {t('home.reggia.desc')}
-                </p>
-                <div style={{ marginBottom: '10px', marginTop: '3px' }}>
-                  <Link
-                    href={lp('/prodotti#reggia')}
-                    className="inline-block border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
-                    style={{ paddingLeft: '27px', paddingRight: '27px', paddingTop: '13px', paddingBottom: '13px' }}
-                  >
-                    {t('home.reggia.button')}
-                  </Link>
-                </div>
-                <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3px', background: 'transparent' }}>
-                  <Image
-                    src="/Immagini/reggia-in-poliestere.png"
-                    alt="Reggia in poliestere per imballaggio industriale Flli Pozzi"
-                    width={1536}
-                    height={1024}
-                    sizes="(max-width: 768px) 70vw, 35vw"
-                    className="object-contain"
-                    style={{ maxHeight: 'none', height: 'auto', width: '68.85%', background: 'transparent' }}
-                  />
-                </div>
-              </motion.div>
-
-              {/* Sigilli Riquadro */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="flex flex-col justify-start items-center text-center lg:pl-8 lg:pr-8"
-                style={{ paddingTop: '30px', paddingBottom: '30px', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
-              >
-                <h3 className="text-3xl md:text-4xl font-bold font-heading" style={{ marginBottom: '10px' }}>
-                  {t('home.sigilli.title')}
-                </h3>
-                <p className="text-lg text-text-light leading-relaxed max-w-md" style={{ marginBottom: '10px' }}>
-                  {t('home.sigilli.desc')}
-                </p>
-                <div style={{ marginBottom: '10px', marginTop: '3px' }}>
-                  <Link
-                    href={lp('/prodotti#sigilli')}
-                    className="inline-block border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors"
-                    style={{ paddingLeft: '27px', paddingRight: '27px', paddingTop: '13px', paddingBottom: '13px' }}
-                  >
-                    {t('home.sigilli.button')}
-                  </Link>
-                </div>
-                <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '13px', background: 'transparent' }}>
-                  <Image
-                    src="/Immagini/sigilli-per-reggia.png"
-                    alt="Sigilli per reggia in polipropilene, poliestere e acciaio Flli Pozzi"
-                    width={1536}
-                    height={1024}
-                    sizes="(max-width: 768px) 70vw, 35vw"
-                    className="object-contain"
-                    style={{ maxHeight: 'none', height: 'auto', width: '68.85%', background: 'transparent' }}
-                  />
-                </div>
-              </motion.div>
+            </div>
+            <div className={styles.finalBtns}>
+              <Link href={lp('/contatti?topic=preventivo')} className={`${styles.btn} ${styles.btnRed}`}>
+                {L(HOME.finalQuote)}
+              </Link>
+              <Link href={lp('/ordine-rapido')} className={`${styles.btn} ${styles.btnDark}`}>
+                {L(HOME.finalReorder)}
+              </Link>
+              <Link href={lp('/diventa-rivenditore')} className={`${styles.btn} ${styles.btnDark}`}>
+                {t('nav.reseller')}
+              </Link>
             </div>
           </div>
         </section>
-
-        {/* CTA Section */}
-        <section className="bg-gradient-to-br from-primary/10 to-secondary/10" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-          <div className="container mx-auto px-8 lg:px-4">
-            <div className="flex justify-center">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center"
-                style={{ maxWidth: '1200px', width: '100%' }}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold font-heading" style={{ marginBottom: '2rem' }}>
-                  {t('home.cta.title')}
-                </h2>
-                <div className="flex justify-center">
-                  <p className="text-lg text-text-light leading-relaxed text-center" style={{ marginBottom: '2rem', maxWidth: '800px' }}>
-                    {t('home.cta.text')}
-                  </p>
-                </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link
-                  href={lp('/contatti')}
-                  className="inline-block bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-lg hover:shadow-xl transform hover:scale-105 transition-all w-full sm:w-auto text-center"
-                  style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 3px)', paddingBottom: 'calc(0.625rem + 3px)' }}
-                >
-                  {t('home.cta.button')}
-                </Link>
-                <Link
-                  href={lp('/diventa-rivenditore')}
-                  className="inline-block border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-colors w-full sm:w-auto text-center"
-                  style={{ paddingLeft: 'calc(1.5rem + 3px)', paddingRight: 'calc(1.5rem + 3px)', paddingTop: 'calc(0.625rem + 1px)', paddingBottom: 'calc(0.625rem + 1px)' }}
-                >
-                  {t('nav.reseller')}
-                </Link>
-              </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-        </div>
       </main>
       <Footer />
     </>

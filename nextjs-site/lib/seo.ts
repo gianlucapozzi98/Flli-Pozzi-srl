@@ -206,7 +206,8 @@ export function buildMetadata(
   const image = opts.image ?? DEFAULT_OG_IMAGE;
   const fullTitle = `${text.title} | ${SITE_NAME}`;
   return {
-    title: text.title,
+    // Titolo assoluto: un layout intermedio con titolo proprio interromperebbe il template del layout radice
+    title: { absolute: fullTitle },
     description: text.description,
     alternates: languageAlternates(path, lang),
     openGraph: {

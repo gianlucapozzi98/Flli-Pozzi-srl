@@ -51,8 +51,15 @@ export default function Contatti() {
       setValue('message', t('contatti.form.prefill.accessori'), { shouldValidate: false });
     } else if (topic === 'b2b') {
       setValue('message', t('rivenditore.form.prefill'), { shouldValidate: false });
+    } else if (topic === 'assistenza') {
+      setValue('message', t('contatti.form.prefill.assistenza'), { shouldValidate: false });
     } else if (topic === 'preventivo') {
-      setValue('message', t('contatti.form.prefill.preventivo'), { shouldValidate: false });
+      // ?prodotto=CP2000 dalle schede prodotto: compila già la riga "Prodotto:"
+      const product = new URLSearchParams(window.location.search).get('prodotto')?.slice(0, 120);
+      const label = t('contatti.form.prefill.productLabel');
+      let message = t('contatti.form.prefill.preventivo');
+      if (product) message = message.replace(`${label} `, `${label} ${product}`);
+      setValue('message', message, { shouldValidate: false });
     }
   }, [t, setValue]);
 

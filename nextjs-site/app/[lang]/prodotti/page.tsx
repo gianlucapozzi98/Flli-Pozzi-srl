@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { pathForProductName } from '@/lib/catalog';
 
 function getProductCategories(t: (key: string) => string) {
   return [
@@ -122,7 +123,8 @@ function getProductImage(productName: string): string | null {
 
 // Componente per la card prodotto con immagine (mobile: 2 per riga, descrizione troncata con tap per espandere)
 function ProductCard({ product, index }: { product: { name: string; description: string }; index: number }) {
-  const { t } = useLanguage();
+  const { t, lp } = useLanguage();
+  const detailPath = pathForProductName(product.name);
   const [expanded, setExpanded] = useState(false);
   const imagePath = getProductImage(product.name);
   const isSigillo = product.name.includes('Bulinati') || product.name.includes('Zincati') || product.name === 'Overlap';
@@ -164,7 +166,15 @@ function ProductCard({ product, index }: { product: { name: string; description:
         )}
       </div>
       <div className="p-3 lg:p-6" style={{ paddingTop: 0 }}>
-        <h3 className="text-base lg:text-xl font-semibold mb-2 lg:mb-6">{getProductNameTranslation(product.name, t)}</h3>
+        <h3 className="text-base lg:text-xl font-semibold mb-2 lg:mb-6">
+          {detailPath ? (
+            <Link href={lp(detailPath)} className="hover:text-primary transition-colors" onClick={(e) => e.stopPropagation()}>
+              {getProductNameTranslation(product.name, t)}
+            </Link>
+          ) : (
+            getProductNameTranslation(product.name, t)
+          )}
+        </h3>
         {description ? (
           <>
             <p
@@ -177,6 +187,16 @@ function ProductCard({ product, index }: { product: { name: string; description:
             </span>
           </>
         ) : null}
+        {detailPath && (
+          <Link
+            href={lp(detailPath)}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-block text-primary font-semibold text-sm lg:text-base hover:underline"
+            style={{ marginTop: '10px' }}
+          >
+            {t('prodotti.card.details')} →
+          </Link>
+        )}
       </div>
     </motion.div>
   );
@@ -358,7 +378,8 @@ export default function Prodotti() {
         <section id="reggiatrici" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.reggiatrici.manuali')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/tendireggia-manuali')} className="hover:text-primary transition-colors">{t('prodotti.sections.reggiatrici.manuali')}</Link>
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
@@ -369,7 +390,8 @@ export default function Prodotti() {
             </div>
 
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.reggiatrici.batteria')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/reggiatrici-a-batteria')} className="hover:text-primary transition-colors">{t('prodotti.sections.reggiatrici.batteria')}</Link>
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
@@ -380,7 +402,8 @@ export default function Prodotti() {
                   </div>
 
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.reggiatrici.pneumaticheVibrazione')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/reggiatrici-pneumatiche')} className="hover:text-primary transition-colors">{t('prodotti.sections.reggiatrici.pneumaticheVibrazione')}</Link>
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
@@ -391,7 +414,8 @@ export default function Prodotti() {
                   </div>
 
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.reggiatrici.pneumaticheAcciaioConSigillo')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/reggiatrici-pneumatiche')} className="hover:text-primary transition-colors">{t('prodotti.sections.reggiatrici.pneumaticheAcciaioConSigillo')}</Link>
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
@@ -402,7 +426,8 @@ export default function Prodotti() {
             </div>
 
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.reggiatrici.pneumaticheAcciaioSenzaSigillo')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/reggiatrici-pneumatiche')} className="hover:text-primary transition-colors">{t('prodotti.sections.reggiatrici.pneumaticheAcciaioSenzaSigillo')}</Link>
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
@@ -418,7 +443,8 @@ export default function Prodotti() {
         <section id="carrelli" className="bg-bg-light" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.carrelli')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/carrelli-porta-reggia')} className="hover:text-primary transition-colors">{t('prodotti.sections.carrelli')}</Link>
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
             
@@ -434,7 +460,8 @@ export default function Prodotti() {
         <section id="reggia" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.reggia.title')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/reggia')} className="hover:text-primary transition-colors">{t('prodotti.sections.reggia.title')}</Link>
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '3rem' }} />
 
@@ -582,7 +609,8 @@ export default function Prodotti() {
         <section id="sigilli" className="bg-bg-light" style={{ paddingTop: '2.8rem', paddingBottom: '2.8rem', scrollMarginTop: '200px' }}>
           <div className="flex flex-col items-center" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 1rem' }}>
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.sigilli.plastica')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/sigilli/sigilli-reggia-plastica')} className="hover:text-primary transition-colors">{t('prodotti.sections.sigilli.plastica')}</Link>
             </h2>
             <p className="text-center text-text-light mb-6" style={{ marginBottom: '2rem', fontSize: '18px' }}>
               {t('prodotti.description.plastica')}
@@ -679,7 +707,8 @@ export default function Prodotti() {
             </div>
 
             <h2 className="text-4xl font-bold text-center font-heading w-full" style={{ marginTop: '2.8rem', marginBottom: '2.8rem' }}>
-              {t('prodotti.sections.sigilli.acciaio')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/sigilli/sigilli-reggia-acciaio')} className="hover:text-primary transition-colors">{t('prodotti.sections.sigilli.acciaio')}</Link>
             </h2>
             <p className="text-center text-text-light mb-6" style={{ marginBottom: '2rem', fontSize: '18px' }}>
               {t('prodotti.description.plastica')}
@@ -877,7 +906,8 @@ export default function Prodotti() {
         <section id="accessori" className="py-20 bg-bg-light" style={{ scrollMarginTop: '200px' }}>
           <div className="flex flex-col items-center px-4 lg:px-8" style={{ maxWidth: '1320px', margin: '0 auto' }}>
             <h2 className="text-3xl md:text-4xl font-bold text-center font-heading w-full" style={{ marginBottom: '1.5rem' }}>
-              {t('prodotti.accessori.title')}
+              {/* Titolo collegato alla pagina categoria (link interni per la SEO) */}
+              <Link href={lp('/prodotti/accessori-imballaggio')} className="hover:text-primary transition-colors">{t('prodotti.accessori.title')}</Link>
             </h2>
             <div className="w-24 h-1 bg-primary" style={{ marginBottom: '1.5rem' }} />
             <p className="text-lg text-text-light text-center leading-relaxed max-w-3xl" style={{ marginBottom: '2.5rem' }}>

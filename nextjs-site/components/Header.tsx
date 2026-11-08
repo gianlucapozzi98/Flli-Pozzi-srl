@@ -10,9 +10,9 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const navLinks = [
-  { href: '/', labelKey: 'nav.home' },
   { href: '/azienda', labelKey: 'nav.company' },
   { href: '/prodotti', labelKey: 'nav.products' },
+  { href: '/assistenza-ricambi', labelKey: 'nav.service' },
   { href: '/eventi', labelKey: 'nav.events' },
   { href: '/contatti', labelKey: 'nav.contacts' },
 ];

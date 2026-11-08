@@ -1,12 +1,15 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/seo';
 import { LANGS, localizePath } from '@/lib/i18n';
+import { CATEGORIES, PRODUCTS, categoryPath, productPath } from '@/lib/catalog';
 
 type Entry = { path: string; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']; priority: number };
 
 const STATIC_PAGES: Entry[] = [
   { path: '/', changeFrequency: 'monthly', priority: 1 },
   { path: '/prodotti', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/assistenza-ricambi', changeFrequency: 'yearly', priority: 0.8 },
+  { path: '/ordine-rapido', changeFrequency: 'yearly', priority: 0.7 },
   { path: '/diventa-rivenditore', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/azienda', changeFrequency: 'yearly', priority: 0.7 },
   { path: '/contatti', changeFrequency: 'yearly', priority: 0.7 },
@@ -29,6 +32,11 @@ function withLanguages(entries: Entry[]): MetadataRoute.Sitemap {
   );
 }
 
+const CATALOG_PAGES: Entry[] = [
+  ...CATEGORIES.map((c) => ({ path: categoryPath(c.slug), changeFrequency: 'monthly' as const, priority: 0.9 })),
+  ...PRODUCTS.map((p) => ({ path: productPath(p), changeFrequency: 'monthly' as const, priority: 0.8 })),
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return withLanguages(STATIC_PAGES);
+  return withLanguages([...STATIC_PAGES, ...CATALOG_PAGES]);
 }

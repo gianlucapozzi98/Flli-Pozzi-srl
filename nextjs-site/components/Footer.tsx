@@ -52,6 +52,16 @@ export default function Footer() {
                   {t('nav.reseller')}
                 </Link>
               </li>
+              <li>
+                <Link href={lp('/assistenza-ricambi')} className="text-gray-400 hover:text-primary transition-colors">
+                  {t('nav.service')}
+                </Link>
+              </li>
+              <li>
+                <Link href={lp('/ordine-rapido')} className="text-gray-400 hover:text-primary transition-colors">
+                  {t('nav.quickOrder')}
+                </Link>
+              </li>
             </ul>
           </div>
           
