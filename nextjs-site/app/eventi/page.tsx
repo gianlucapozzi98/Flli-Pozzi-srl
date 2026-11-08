@@ -69,36 +69,36 @@ function getEventImage(eventTitle: string, imageKey: string, eventDate: string):
   // Per eventi con lo stesso titolo, usiamo la data per distinguerli
   const imageMap: { [key: string]: { [key: string]: string } } = {
     'IPACK-IMA': {
-      '19-23 MAGGIO 2015': '/Immagini/ipackima_2015.jpg',
-      '28 FEBBRAIO 2012': '/Immagini/ipackima 2012.jpg',
+      '19-23 MAGGIO 2015': '/Immagini/fiera-ipack-ima-2015.jpg',
+      '28 FEBBRAIO 2012': '/Immagini/fiera-ipack-ima-2012.jpg',
     },
     'FABEX SAUDI': {
-      'default': '/Immagini/fabex saudi.jpg',
+      'default': '/Immagini/fiera-fabex-saudi.jpg',
     },
     'BLECH CHINA': {
-      'default': '/Immagini/BLECH CHINA.jpg',
+      'default': '/Immagini/fiera-blech-china.jpg',
     },
     'MACFRUT': {
-      '8-10 MAGGIO 2024': '/Immagini/macfrut-2024.gif',
-      'default': '/Immagini/mac-frut 2012.jpg',
+      '8-10 MAGGIO 2024': '/Immagini/fiera-macfrut-2024.gif',
+      'default': '/Immagini/fiera-macfrut-2012.jpg',
     },
     'PROPACK CHINA': {
-      'default': '/Immagini/propack.jpg',
+      'default': '/Immagini/fiera-propack-china.jpg',
     },
     'GULF PRINT & PACK': {
-      'default': '/Immagini/GULF PRINT & PACK.jpg',
+      'default': '/Immagini/fiera-gulf-print-pack.jpg',
     },
     'SINOPACK': {
-      'default': '/Immagini/SINOPACK.jpg',
+      'default': '/Immagini/fiera-sinopack.jpg',
     },
     'METAL & STEEL': {
-      'default': '/Immagini/METAL e steel.jpg',
+      'default': '/Immagini/fiera-metal-steel.jpg',
     },
     'STEEL FAB': {
-      'default': '/Immagini/steelfab.jpg',
+      'default': '/Immagini/fiera-steelfab.jpg',
     },
     'IPACK-IMA 2025': {
-      'default': '/Immagini/IPACK-IMA 2025.jpeg',
+      'default': '/Immagini/ipack-ima-2025-stand-fratelli-pozzi.jpg',
     },
   };
   
@@ -146,6 +146,9 @@ export default function Eventi() {
         {/* IPACK-IMA 2025 Featured Event */}
         <section className="py-20" style={{ paddingTop: '120px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h1 className="text-3xl md:text-5xl font-bold font-heading text-center" style={{ marginBottom: '48px', lineHeight: 1.15 }}>
+              {t('eventi.h1')}
+            </h1>
             <div className="max-w-[calc(100%-32px)] lg:max-w-none mx-auto lg:mx-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <motion.div
@@ -156,7 +159,7 @@ export default function Eventi() {
                 className="aspect-[1189/714] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden relative mx-auto lg:mx-0"
               >
                 <Image
-                  src="/Immagini/IPACK-IMA 2025.jpeg"
+                  src="/Immagini/ipack-ima-2025-stand-fratelli-pozzi.jpg"
                   alt="Stand Flli Pozzi - IPACK-IMA 2025"
                   fill
                   className="object-cover"
@@ -190,14 +193,14 @@ export default function Eventi() {
                   </p>
                 </div>
                 <a
-                  href="/Immagini/Poster A3 - FESR 21-27.png"
+                  href="/Immagini/poster-fesr-21-27.png"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
                   style={{ marginTop: '62px' }}
                 >
                   <Image
-                    src="/Immagini/Coesione Italia Lombardia - Colore.jpg"
+                    src="/Immagini/coesione-italia-lombardia.jpg"
                     alt="Coesione Italia Lombardia"
                     width={1189}
                     height={400}
@@ -228,7 +231,7 @@ export default function Eventi() {
                   className="aspect-[1189/714] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden relative mx-auto lg:mx-0"
                 >
                   <Image
-                    src="/Immagini/IPACK-IMA 2022 - Stand Flli Pozzi.jpg"
+                    src="/Immagini/ipack-ima-2022-stand-fratelli-pozzi.jpg"
                     alt="Stand Flli Pozzi - IPACK-IMA 2022"
                     fill
                     className="object-cover"
@@ -262,7 +265,7 @@ export default function Eventi() {
                 </div>
                 <div className="w-full rounded-lg overflow-hidden" style={{ marginTop: '16px' }}>
                   <Image
-                    src="/Immagini/loghi bando ipackima 2022.jpg"
+                    src="/Immagini/loghi-bando-ipack-ima-2022.jpg"
                     alt="Loghi bando IPACK-IMA 2022"
                     width={1189}
                     height={400}

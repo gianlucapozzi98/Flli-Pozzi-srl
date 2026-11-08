@@ -3,8 +3,9 @@ import { DEFAULT_OG_IMAGE, SITE_TAGLINE } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Diventa rivenditore — Distributori e grossisti',
+  // Max ~155 caratteri, oltre Google tronca
   description:
-    `Per distributori, grossisti e rivenditori di imballaggio: catalogo B2B, condizioni commerciali e collaborazione con ${SITE_TAGLINE}. Richiedi listino e informazioni.`,
+    'Distributori e rivenditori di imballaggio: richiedi a Fratelli Pozzi catalogo B2B, listino riservato e condizioni commerciali dedicate.',
   keywords:
     'diventa rivenditore, distributori imballaggio, grossisti packaging, listino B2B, reggiatrici, tendireggia, Fratelli Pozzi Caravaggio',
   alternates: {

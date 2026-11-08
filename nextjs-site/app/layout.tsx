@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { ScrollToTop } from "@/components/Header";
+import MobileCtaBar from "@/components/MobileCtaBar";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import ScrollToTopOnRouteChange from "@/components/ScrollToTopOnRouteChange";
 import HtmlLang from "@/components/HtmlLang";
@@ -81,6 +81,7 @@ export default function RootLayout({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
     name: "Fratelli Pozzi S.r.l.",
     alternateName: [
       "Flli Pozzi",
@@ -90,7 +91,7 @@ export default function RootLayout({
     description:
       "Fratelli Pozzi — Caravaggio, dal 1947. Attrezzature e forniture per l'imballaggio industriale. Made in Italy.",
     url: SITE_URL,
-    logo: `${SITE_URL}/Immagini/Logo Flli Pozzi Italia.png`,
+    logo: `${SITE_URL}/Immagini/logo-fratelli-pozzi.png`,
     foundingDate: "1947",
     address: {
       "@type": "PostalAddress",
@@ -121,11 +122,12 @@ export default function RootLayout({
       className={`${inter.variable} ${montserrat.variable} overflow-x-hidden`}
     >
       <body className="antialiased overflow-x-hidden max-w-full" suppressHydrationWarning>
-        <Script
+        {/* JSON-LD renderizzato dal server: presente già nell'HTML iniziale (next/script lo inseriva solo dopo l'idratazione) */}
+        <script
           id="organization-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
+            __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c'),
           }}
         />
         <LanguageProvider>
@@ -134,6 +136,7 @@ export default function RootLayout({
             <ScrollToTopOnRouteChange />
             {children}
             <ScrollToTop />
+            <MobileCtaBar />
           </div>
         </LanguageProvider>
       </body>

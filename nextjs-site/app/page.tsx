@@ -9,7 +9,8 @@ import {
   WrenchScrewdriverIcon,
   ClockIcon,
   CogIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
+  PhoneIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -45,9 +46,9 @@ function TendireggiaCarousel() {
   const [scrollLeft, setScrollLeft] = useState(0);
 
   const tendireggiaImages = [
-    { src: '/Immagini/cp2000.png', alt: 'CP2000' },
-    { src: '/Immagini/best.png', alt: 'BEST' },
-    { src: '/Immagini/plrg.png', alt: 'PLR/G' },
+    { src: '/Immagini/tendireggia-manuale-cp2000.png', alt: 'CP2000' },
+    { src: '/Immagini/tendireggia-manuale-best.png', alt: 'BEST' },
+    { src: '/Immagini/tendireggia-manuale-plr-g.png', alt: 'PLR/G' },
   ];
 
   useEffect(() => {
@@ -149,7 +150,7 @@ export default function Home() {
             className="absolute inset-0 z-0"
           >
             <Image
-              src="/Immagini/flli pozzi esterno.png"
+              src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
               alt="Flli Pozzi esterno"
               fill
               className="object-cover"
@@ -158,23 +159,49 @@ export default function Home() {
             />
           </motion.div>
           <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="relative z-20 text-center text-white px-10 lg:px-4" style={{ paddingBottom: '120px', width: '100%' }}>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-[40px] md:text-7xl lg:text-[50px] font-black mb-4 font-heading uppercase tracking-tight"
+          <div className="relative z-20 text-center text-white px-6 lg:px-4" style={{ paddingBottom: '110px', width: '100%' }}>
+            {/* Margini inline: il reset globale `* { margin: 0 }` in globals.css non è in un layer e vince sulle utility Tailwind */}
+            <p className="text-sm md:text-base font-semibold uppercase tracking-[0.2em] text-white/85 text-balance" style={{ marginBottom: '16px' }}>
+              {t('home.hero.eyebrow')}
+            </p>
+            {/* H1 visibile da subito (niente opacity 0): è l'elemento principale per LCP e SEO */}
+            <h1
+              className="text-[32px] leading-[1.08] md:text-5xl lg:text-[56px] font-black font-heading uppercase tracking-tight max-w-5xl text-balance"
+              style={{ marginBottom: '20px', marginLeft: 'auto', marginRight: 'auto' }}
             >
               {t('home.hero.title')}
-            </motion.h1>
+            </h1>
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg md:text-2xl lg:text-3xl font-light uppercase tracking-wide"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-base md:text-xl lg:text-2xl font-light uppercase tracking-wide"
             >
               {t('home.hero.subtitle')}
             </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-3 justify-center items-center"
+              style={{ marginTop: '32px' }}
+            >
+              <Link
+                href="/contatti?topic=preventivo"
+                className="inline-flex items-center justify-center bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-lg w-full sm:w-auto"
+                style={{ paddingLeft: '28px', paddingRight: '28px', paddingTop: '14px', paddingBottom: '14px' }}
+              >
+                {t('home.hero.cta.quote')}
+              </Link>
+              <a
+                href="tel:+390363350380"
+                className="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-secondary transition-colors w-full sm:w-auto"
+                style={{ paddingLeft: '26px', paddingRight: '26px', paddingTop: '12px', paddingBottom: '12px' }}
+              >
+                <PhoneIcon className="h-5 w-5" aria-hidden="true" />
+                {t('cta.call')} +39 0363 350380
+              </a>
+            </motion.div>
           </div>
         </section>
 
@@ -361,14 +388,13 @@ export default function Home() {
                 </div>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3px', background: 'transparent' }}>
                   <Image
-                    src="/Immagini/reggia in poliestere.png?v=2"
+                    src="/Immagini/reggia-in-poliestere.png"
                     alt="Reggia in poliestere per imballaggio industriale Flli Pozzi"
-                    width={918}
-                    height={688}
-                    quality={100}
+                    width={1536}
+                    height={1024}
+                    sizes="(max-width: 768px) 70vw, 35vw"
                     className="object-contain"
                     style={{ maxHeight: 'none', height: 'auto', width: '68.85%', background: 'transparent' }}
-                    unoptimized
                   />
                 </div>
               </motion.div>
@@ -399,14 +425,13 @@ export default function Home() {
                 </div>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '13px', background: 'transparent' }}>
                   <Image
-                    src="/Immagini/sigilli per reggia.png?v=2"
+                    src="/Immagini/sigilli-per-reggia.png"
                     alt="Sigilli per reggia in polipropilene, poliestere e acciaio Flli Pozzi"
-                    width={918}
-                    height={688}
-                    quality={100}
+                    width={1536}
+                    height={1024}
+                    sizes="(max-width: 768px) 70vw, 35vw"
                     className="object-contain"
                     style={{ maxHeight: 'none', height: 'auto', width: '68.85%', background: 'transparent' }}
-                    unoptimized
                   />
                 </div>
               </motion.div>

@@ -17,6 +17,9 @@ export default function Azienda() {
         {/* Company Content */}
         <section className="py-20" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="px-8 lg:px-8" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h1 className="text-3xl md:text-5xl font-bold font-heading text-center text-balance" style={{ marginBottom: '56px', lineHeight: 1.15 }}>
+              {t('azienda.h1')}
+            </h1>
             <div className="flex flex-col lg:grid lg:grid-cols-2 gap-16 items-center lg:items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -26,7 +29,7 @@ export default function Azienda() {
                 className="aspect-[550/709] bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative shadow-xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full lg:w-full"
               >
                 <Image
-                  src="/Immagini/Foto Storica Flli Pozzi.jpg"
+                  src="/Immagini/fratelli-pozzi-foto-storica-1949.jpg"
                   alt="Foto Storica Flli Pozzi"
                   fill
                   className="object-cover"
@@ -54,7 +57,7 @@ export default function Azienda() {
                 <div className="flex flex-col items-center">
                   <div className="relative scale-[0.85] lg:scale-100" style={{ filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))' }}>
                     <Image
-                      src="/Immagini/Logo Flli Pozzi Italia.png"
+                      src="/Immagini/logo-fratelli-pozzi.png"
                       alt="Flli Pozzi Logo"
                       width={230}
                       height={92}
@@ -130,7 +133,7 @@ export default function Azienda() {
               className="rounded-xl overflow-hidden shadow-2xl mx-auto lg:mx-0 max-w-[calc(100%-32px)] lg:max-w-none w-full"
             >
               <Image
-                src="/Immagini/quadri flli pozzi.webp"
+                src="/Immagini/quadri-fratelli-pozzi.webp"
                 alt="Quadri Flli Pozzi"
                 width={1400}
                 height={800}

@@ -3,8 +3,9 @@ import { DEFAULT_OG_IMAGE, SITE_TAGLINE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contatti",
+  // Max ~155 caratteri, oltre Google tronca
   description:
-    `Contatta ${SITE_TAGLINE}. Telefono, email e modulo per informazioni su reggiatrici, sigilli e forniture per l'imballaggio. Via L. Da Vinci 37, Caravaggio (BG).`,
+    "Contatta Fratelli Pozzi a Caravaggio (BG): telefono, email e modulo per preventivi su tendireggia, reggiatrici, reggia e sigilli per imballaggio.",
   keywords:
     "contatti Fratelli Pozzi, Caravaggio BG, informazioni imballaggio, assistenza tecnica, preventivi",
   alternates: {
