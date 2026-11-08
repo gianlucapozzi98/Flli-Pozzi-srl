@@ -17,7 +17,7 @@ export default function Footer() {
       <div className={`${styles.wrap} ${styles.grid}`}>
         <div className={styles.brand}>
           <Link href={lp('/')} className={styles.logoTile}>
-            <Image src="/Immagini/logo-fratelli-pozzi.png" alt="Fratelli Pozzi S.r.l." width={2288} height={1910} sizes="80px" />
+            <Image src="/Immagini/logo-fratelli-pozzi.png" alt="Fratelli Pozzi S.r.l." width={2288} height={1910} sizes="120px" />
           </Link>
           <p className={styles.tagline}>{t('footer.tagline')}</p>
           <a href={ISO_PDF} target="_blank" rel="noopener noreferrer" className={styles.iso}>

@@ -25,12 +25,9 @@
 .logoTile {
   display: inline-flex;
   justify-self: start;
-  background: #fff;
-  border-radius: 3px;
-  padding: 10px 12px;
 }
 .logoTile img {
-  height: 64px;
+  height: 92px;
   width: auto;
 }
 .tagline {
