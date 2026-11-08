@@ -5,9 +5,9 @@ export const HOME = {
   heroFinder: { it: 'Trova la reggiatrice giusta', en: 'Find the right tool', fr: 'Trouver la bonne cercleuse' },
   heroPhone: { it: 'Preferisci parlarne? Chiama il', en: 'Prefer to talk? Call', fr: 'Vous préférez en parler ? Appelez le' },
   animAria: {
-    it: 'Animazione: una reggia viene tesa attorno a un collo e chiusa con un sigillo in acciaio',
-    en: 'Animation: a strap is tensioned around a package and closed with a steel seal',
-    fr: 'Animation : un feuillard est tendu autour d’un colis et fermé par une chape en acier',
+    it: 'Animazione: una reggia attraversa lo schermo, viene tesa e chiusa con un sigillo in acciaio zincato',
+    en: 'Animation: a strap runs across the screen, is tensioned and closed with a galvanised steel seal',
+    fr: 'Animation : un feuillard traverse l’écran, est mis en tension et fermé par une chape en acier galvanisé',
   },
   animTension: { it: 'Tensione', en: 'Tension', fr: 'Tension' },
   animStep1: { it: 'Tensionamento…', en: 'Tensioning…', fr: 'Mise en tension…' },

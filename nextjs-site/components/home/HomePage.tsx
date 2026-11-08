@@ -50,7 +50,7 @@ export default function HomePage({ categories, finderItems, madeProducts }: Prop
     <>
       <Header />
       <main>
-        {/* Apertura: testo a sinistra, animazione della reggia a destra */}
+        {/* Apertura: testo e, sotto, la reggia che attraversa tutto lo schermo */}
         <section className={styles.hero}>
           <Image
             src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
@@ -79,15 +79,16 @@ export default function HomePage({ categories, finderItems, madeProducts }: Prop
                 {L(HOME.heroPhone)} <a href="tel:+390363350380">+39 0363 350380</a>
               </p>
             </div>
-            <div className={styles.heroArt}>
-              <StrapAnimation
-                labels={{
-                  aria: L(HOME.animAria),
-                  tension: L(HOME.animTension),
-                  steps: [L(HOME.animStep1), L(HOME.animStep2), L(HOME.animStep3)],
-                }}
-              />
-            </div>
+          </div>
+          {/* Reggia da un bordo all'altro dello schermo */}
+          <div className={styles.heroStrap}>
+            <StrapAnimation
+              labels={{
+                aria: L(HOME.animAria),
+                tension: L(HOME.animTension),
+                steps: [L(HOME.animStep1), L(HOME.animStep2), L(HOME.animStep3)],
+              }}
+            />
           </div>
         </section>
 
