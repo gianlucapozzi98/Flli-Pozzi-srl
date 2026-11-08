@@ -2,6 +2,17 @@
 import type { L } from './catalog';
 
 export const HOME = {
+  heroFinder: { it: 'Trova la reggiatrice giusta', en: 'Find the right tool', fr: 'Trouver la bonne cercleuse' },
+  heroPhone: { it: 'Preferisci parlarne? Chiama il', en: 'Prefer to talk? Call', fr: 'Vous préférez en parler ? Appelez le' },
+  animAria: {
+    it: 'Animazione: una reggia viene tesa attorno a un collo e chiusa con un sigillo in acciaio',
+    en: 'Animation: a strap is tensioned around a package and closed with a steel seal',
+    fr: 'Animation : un feuillard est tendu autour d’un colis et fermé par une chape en acier',
+  },
+  animTension: { it: 'Tensione', en: 'Tension', fr: 'Tension' },
+  animStep1: { it: 'Tensionamento…', en: 'Tensioning…', fr: 'Mise en tension…' },
+  animStep2: { it: 'Sigillatura…', en: 'Sealing…', fr: 'Pose de la chape…' },
+  animStep3: { it: 'Reggiatura completata ✓', en: 'Strapping complete ✓', fr: 'Cerclage terminé ✓' },
   proof: [
     { big: { it: '1947', en: '1947', fr: '1947' }, label: { it: 'anno di fondazione', en: 'year founded', fr: 'année de fondation' } },
     {

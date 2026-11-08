@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { PhoneIcon, WrenchScrewdriverIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Finder, { type FinderItem } from './Finder';
+import StrapAnimation from './StrapAnimation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { HOME } from '@/lib/home-content';
 import type { Material } from '@/lib/catalog';
@@ -50,54 +50,43 @@ export default function HomePage({ categories, finderItems, madeProducts }: Prop
     <>
       <Header />
       <main className="pt-20">
-        {/* Apertura */}
-        <section className="relative min-h-screen flex items-end justify-center overflow-hidden">
-          <motion.div
-            initial={{ scale: 1.26 }}
-            animate={{ scale: 1.045 }}
-            transition={{ duration: 3, ease: 'easeOut' }}
-            className="absolute inset-0 z-0"
-          >
-            <Image
-              src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
-              alt="Stabilimento Fratelli Pozzi a Caravaggio (BG)"
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-              style={{ opacity: 0.8, objectPosition: 'left center' }}
-            />
-          </motion.div>
-          <div className="absolute inset-0 bg-black/40 z-10" />
-          <div className="relative z-20 text-center text-white px-6 lg:px-4" style={{ paddingBottom: '110px', width: '100%' }}>
-            {/* Margini inline: il reset globale `* { margin: 0 }` in globals.css non è in un layer e vince sulle utility Tailwind */}
-            <p className="text-sm md:text-base font-semibold uppercase tracking-[0.2em] text-white/85 text-balance" style={{ marginBottom: '16px' }}>
-              {t('home.hero.eyebrow')}
-            </p>
-            {/* Contenuti dell'apertura visibili da subito: niente opacity 0 (LCP e SEO) */}
-            <h1
-              className="text-[32px] leading-[1.08] md:text-5xl lg:text-[56px] font-black font-heading uppercase tracking-tight max-w-5xl text-balance"
-              style={{ marginBottom: '20px', marginLeft: 'auto', marginRight: 'auto' }}
-            >
-              {t('home.hero.title')}
-            </h1>
-            <p className="text-base md:text-xl lg:text-2xl font-light uppercase tracking-wide">{t('home.hero.subtitle')}</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center" style={{ marginTop: '32px' }}>
-              <Link
-                href={lp('/contatti?topic=preventivo')}
-                className="inline-flex items-center justify-center bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-lg w-full sm:w-auto"
-                style={{ paddingLeft: '28px', paddingRight: '28px', paddingTop: '14px', paddingBottom: '14px' }}
-              >
-                {t('home.hero.cta.quote')}
-              </Link>
-              <a
-                href="tel:+390363350380"
-                className="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-secondary transition-colors w-full sm:w-auto"
-                style={{ paddingLeft: '26px', paddingRight: '26px', paddingTop: '12px', paddingBottom: '12px' }}
-              >
+        {/* Apertura: testo a sinistra, animazione della reggia a destra */}
+        <section className={styles.hero}>
+          <Image
+            src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroPhoto}
+          />
+          <div className={styles.heroShade} aria-hidden="true" />
+          <div className={`${styles.wrap} ${styles.heroGrid}`}>
+            <div className={styles.heroCopy}>
+              <p className={styles.heroEyebrow}>{t('home.hero.eyebrow')}</p>
+              <h1 className="font-heading font-black uppercase text-balance">{t('home.hero.title')}</h1>
+              <p className={styles.heroSub}>{t('home.hero.subtitle')}</p>
+              <div className={styles.heroCtas}>
+                <Link href={lp('/contatti?topic=preventivo')} className={`${styles.btn} ${styles.btnRed}`}>
+                  {t('home.hero.cta.quote')}
+                </Link>
+                <a href="#selettore" className={`${styles.btn} ${styles.btnLine}`}>
+                  {L(HOME.heroFinder)}
+                </a>
+              </div>
+              <p className={styles.heroPhone}>
                 <PhoneIcon className="h-5 w-5" aria-hidden="true" />
-                {t('cta.call')} +39 0363 350380
-              </a>
+                {L(HOME.heroPhone)} <a href="tel:+390363350380">+39 0363 350380</a>
+              </p>
+            </div>
+            <div className={styles.heroArt}>
+              <StrapAnimation
+                labels={{
+                  aria: L(HOME.animAria),
+                  tension: L(HOME.animTension),
+                  steps: [L(HOME.animStep1), L(HOME.animStep2), L(HOME.animStep3)],
+                }}
+              />
             </div>
           </div>
         </section>
