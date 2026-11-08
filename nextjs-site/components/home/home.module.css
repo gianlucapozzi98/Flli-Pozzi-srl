@@ -348,43 +348,32 @@
   color: #9ca6b0;
 }
 .resMsg {
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.55;
   color: #d6dbe0;
 }
-.resItem {
+.resSum {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 14px;
-  align-items: center;
-  padding-top: 12px;
+  grid-template-columns: auto minmax(0, 1fr);
   border-top: 1px solid #434a53;
 }
-.resItem:hover b {
-  text-decoration: underline;
+.resSum dt,
+.resSum dd {
+  padding: 10px 0;
+  border-bottom: 1px solid #434a53;
 }
-.resThumb {
-  position: relative;
-  width: 72px;
-  height: 72px;
-  background: #fff;
-  border-radius: 3px;
-  overflow: hidden;
-}
-.resItem b {
-  display: block;
-  color: #fff;
-  font-family: var(--font-heading);
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 1.1;
-}
-.resItem small {
-  display: block;
-  color: #b8c0c8;
+.resSum dt {
+  padding-right: 18px;
   font-size: 14px;
-  margin-top: 2px;
+  color: #9ca6b0;
 }
-
+.resSum dd {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+}
 /* Bottoni */
 .row {
   display: flex;

@@ -8,7 +8,7 @@ type Labels = {
 };
 
 /*
- * Apertura della home: una reggia in polipropilene attraversa tutto lo schermo,
+ * Apertura della home: una reggia verde in poliestere (PET) attraversa tutto lo schermo,
  * entra allentata dai due lati, viene tesa e chiusa con un sigillo in acciaio zincato
  * (bordi ripiegati, bollini a rilievo, tacche di chiusura come nelle foto dei sigilli).
  *
@@ -40,13 +40,13 @@ type Layer = { dy: number; w: number; stroke: string; op: number };
 
 /* Strati della reggia: colore, zigrinatura, bordi e riflessi (tratti paralleli) */
 const LAYERS: Layer[] = [
-  { dy: 0, w: 44, stroke: '#C40E17', op: 1 },
+  { dy: 0, w: 44, stroke: '#17805A', op: 1 },
   { dy: 0, w: 44, stroke: 'EMBOSS', op: 1 },
-  { dy: -15.5, w: 7, stroke: '#FF6B71', op: 0.42 },
-  { dy: -8, w: 8, stroke: '#FFFFFF', op: 0.07 },
-  { dy: 13, w: 14, stroke: '#3D0105', op: 0.3 },
-  { dy: -21, w: 2.2, stroke: '#5E040A', op: 0.75 },
-  { dy: 21, w: 2.2, stroke: '#3D0105', op: 0.85 },
+  { dy: -15.5, w: 7, stroke: '#7DDAC4', op: 0.5 },
+  { dy: -8, w: 8, stroke: '#FFFFFF', op: 0.12 },
+  { dy: 13, w: 14, stroke: '#022A1B', op: 0.32 },
+  { dy: -21, w: 2.2, stroke: '#0A4A33', op: 0.8 },
+  { dy: 21, w: 2.2, stroke: '#03301F', op: 0.85 },
 ];
 
 /* Ombre a terra: tracciate piene dentro un gruppo semitrasparente, così dove i due capi
@@ -187,14 +187,14 @@ export default function StrapAnimation({ labels }: { labels: Labels }) {
 
       <svg className={styles.svg} viewBox="0 0 2400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
         <defs>
-          {/* Zigrinatura a rombi della reggia in PP */}
+          {/* Goffratura leggera della reggia in PET */}
           <pattern id="sa-emboss-l" width="9" height="9" patternUnits="userSpaceOnUse">
-            <path d="M0 9 L9 0" stroke="#fff" strokeOpacity="0.16" strokeWidth="1.3" />
-            <path d="M0 0 L9 9" stroke="#000" strokeOpacity="0.16" strokeWidth="1.3" />
+            <path d="M0 9 L9 0" stroke="#fff" strokeOpacity="0.11" strokeWidth="1.1" />
+            <path d="M0 0 L9 9" stroke="#000" strokeOpacity="0.11" strokeWidth="1.1" />
           </pattern>
           <pattern id="sa-emboss-r" width="9" height="9" patternUnits="userSpaceOnUse">
-            <path d="M0 9 L9 0" stroke="#fff" strokeOpacity="0.16" strokeWidth="1.3" />
-            <path d="M0 0 L9 9" stroke="#000" strokeOpacity="0.16" strokeWidth="1.3" />
+            <path d="M0 9 L9 0" stroke="#fff" strokeOpacity="0.11" strokeWidth="1.1" />
+            <path d="M0 0 L9 9" stroke="#000" strokeOpacity="0.11" strokeWidth="1.1" />
             {/* La reggia scorre durante il tensionamento */}
             <animateTransform
               attributeName="patternTransform"
@@ -208,8 +208,8 @@ export default function StrapAnimation({ labels }: { labels: Labels }) {
             />
           </pattern>
           <pattern id="sa-emboss-still" width="9" height="9" patternUnits="userSpaceOnUse">
-            <path d="M0 9 L9 0" stroke="#fff" strokeOpacity="0.16" strokeWidth="1.3" />
-            <path d="M0 0 L9 9" stroke="#000" strokeOpacity="0.16" strokeWidth="1.3" />
+            <path d="M0 9 L9 0" stroke="#fff" strokeOpacity="0.11" strokeWidth="1.1" />
+            <path d="M0 0 L9 9" stroke="#000" strokeOpacity="0.11" strokeWidth="1.1" />
           </pattern>
 
           {/* Acciaio zincato: bordi arrotondati scuri, faccia piana chiara */}

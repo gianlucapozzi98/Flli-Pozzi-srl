@@ -42,9 +42,9 @@ export const HOME = {
 
   finderTitle: { it: 'Trova la reggiatrice giusta', en: 'Find the right strapping tool', fr: 'Trouvez la bonne cercleuse' },
   finderText: {
-    it: 'Tre domande, poi ti proponiamo i modelli adatti dal nostro catalogo.',
-    en: 'Three questions, then we suggest the right models from our catalogue.',
-    fr: 'Trois questions, puis nous vous proposons les modèles adaptés de notre catalogue.',
+    it: 'Tre domande per capire cosa ti serve. Ti consigliamo noi la macchina più adatta, anche tra modelli che non trovi sul sito.',
+    en: 'Three questions to understand what you need. We recommend the most suitable machine, including models not shown on this site.',
+    fr: 'Trois questions pour comprendre votre besoin. Nous vous conseillons la machine la plus adaptée, y compris des modèles absents du site.',
   },
   q1: { it: '1 · Materiale della reggia', en: '1 · Strap material', fr: '1 · Matériau du feuillard' },
   q2: { it: '2 · Larghezza della reggia', en: '2 · Strap width', fr: '2 · Largeur du feuillard' },
@@ -58,26 +58,26 @@ export const HOME = {
   pwManLower: { it: 'manuale', en: 'manual', fr: 'manuelle' },
   pwBatLower: { it: 'a batteria', en: 'battery', fr: 'à batterie' },
   pwPnLower: { it: 'pneumatica', en: 'pneumatic', fr: 'pneumatique' },
-  matchOne: { it: 'modello adatto', en: 'matching model', fr: 'modèle adapté' },
-  matchMany: { it: 'modelli adatti', en: 'matching models', fr: 'modèles adaptés' },
-  alternatives: { it: 'Alternative consigliate', en: 'Suggested alternatives', fr: 'Alternatives conseillées' },
-  noPower: {
-    it: 'Per reggia in {mat} di questa larghezza non abbiamo una versione {pw}. Ecco le alternative:',
-    en: 'For {mat} strap of this width we have no {pw} version. Here are the alternatives:',
-    fr: 'Pour un feuillard {mat} de cette largeur, nous n’avons pas de version {pw}. Voici les alternatives :',
+  finderQuote: { it: 'Richiedi preventivo', en: 'Request a quote', fr: 'Demander un devis' },
+  finderResLabel: { it: 'La tua richiesta', en: 'Your request', fr: 'Votre demande' },
+  sumMat: { it: 'Reggia', en: 'Strap', fr: 'Feuillard' },
+  sumWidth: { it: 'Larghezza', en: 'Width', fr: 'Largeur' },
+  sumPower: { it: 'Utilizzo', en: 'Operation', fr: 'Utilisation' },
+  finderAdvice: {
+    it: 'Oltre ai modelli presenti sul sito proponiamo altre macchine: in base alle tue risposte e al tipo di azienda ti consigliamo quella più adatta.',
+    en: 'Besides the models on this site we offer other machines: based on your answers and your type of business we recommend the most suitable one.',
+    fr: 'En plus des modèles du site, nous proposons d’autres machines : selon vos réponses et votre activité, nous vous conseillons la plus adaptée.',
   },
-  noWidth: {
-    it: 'Nessun modello copre esattamente questa larghezza: ecco i più vicini. Il nostro ufficio tecnico ti consiglia la soluzione giusta.',
-    en: 'No model covers exactly this width: here are the closest. Our technical team will recommend the right solution.',
-    fr: 'Aucun modèle ne couvre exactement cette largeur : voici les plus proches. Notre service technique vous conseillera.',
+  finderPrefill: {
+    it: 'Reggiatrice per reggia in {mat}, {w}, {pw}',
+    en: 'Strapping tool for {mat} strap, {w}, {pw}',
+    fr: 'Cercleuse pour feuillard {mat}, {w}, {pw}',
   },
   matLower: {
     pp: { it: 'polipropilene', en: 'polypropylene', fr: 'polypropylène' },
     pet: { it: 'poliestere', en: 'polyester', fr: 'polyester' },
     acc: { it: 'acciaio', en: 'steel', fr: 'acier' },
   },
-  quoteThese: { it: 'Richiedi preventivo per questi modelli', en: 'Request a quote for these models', fr: 'Demander un devis pour ces modèles' },
-  quoteFor: { it: 'Richiedi preventivo per', en: 'Request a quote for', fr: 'Demander un devis pour' },
 
   madeTitle: { it: 'Progettati e assemblati a Caravaggio', en: 'Designed and assembled in Caravaggio', fr: 'Conçus et assemblés à Caravaggio' },
   madeText: {

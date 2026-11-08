@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { PhoneIcon, WrenchScrewdriverIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Finder, { type FinderItem } from './Finder';
+import Finder from './Finder';
 import StrapAnimation from './StrapAnimation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { HOME } from '@/lib/home-content';
@@ -28,13 +28,12 @@ export type HomeProduct = { name: string; short: string; image: string; href: st
 
 type Props = {
   categories: HomeCategory[];
-  finderItems: FinderItem[];
   madeProducts: HomeProduct[];
 };
 
 const SERVICE_ICONS = [WrenchScrewdriverIcon, CogIcon, DocumentTextIcon];
 
-export default function HomePage({ categories, finderItems, madeProducts }: Props) {
+export default function HomePage({ categories, madeProducts }: Props) {
   const { t, lp, language } = useLanguage();
   const [material, setMaterial] = useState<Material | 'all'>('all');
   const L = <T extends Record<string, string>>(v: T) => v[language];
@@ -155,7 +154,7 @@ export default function HomePage({ categories, finderItems, madeProducts }: Prop
         </section>
 
         {/* Selettore guidato */}
-        <Finder items={finderItems} />
+        <Finder />
 
         {/* Prodotti a Caravaggio */}
         <section className={`${styles.section} ${styles.alt}`}>
