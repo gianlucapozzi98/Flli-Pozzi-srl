@@ -57,7 +57,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: clamp(620px, calc(100vh - var(--header-h)), 860px);
+  /* L'header trasparente è sopra l'apertura: l'apertura occupa tutto lo schermo */
+  min-height: clamp(700px, 100vh, 980px);
   background: #22262b;
   color: #fff;
 }
@@ -81,7 +82,7 @@
   grid-template-columns: minmax(0, 1fr);
   align-content: center;
   width: 100%;
-  padding-top: 56px;
+  padding-top: calc(var(--header-h) + 56px);
   padding-bottom: 12px;
 }
 .heroCopy {
@@ -729,7 +730,7 @@
     min-height: 0;
   }
   .heroGrid {
-    padding-top: 40px;
+    padding-top: calc(var(--header-h) + 40px);
     padding-bottom: 6px;
   }
   .heroStrap {

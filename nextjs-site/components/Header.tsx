@@ -26,7 +26,7 @@ export default function Header() {
   const { t, lp } = useLanguage();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -51,10 +51,17 @@ export default function Header() {
   };
   const quoteHref = lp('/contatti?topic=preventivo');
 
+  // In home l'header si appoggia sull'apertura scura: trasparente finché non si scorre
+  // (o si apre il menu), poi torna pieno. Nelle altre pagine resta sempre pieno.
+  const overlay = pathname === lp('/');
+  const transparent = overlay && !scrolled && !open;
+
   return (
     <>
-      <div className={styles.spacer} aria-hidden="true" />
-      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+      {!overlay && <div className={styles.spacer} aria-hidden="true" />}
+      <header
+        className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${transparent ? styles.transparent : ''}`}
+      >
         <div className={styles.util}>
           <div className={styles.wrap}>
             <a href="tel:+390363350380" className={styles.utilPhone}>
@@ -84,7 +91,21 @@ export default function Header() {
                 height={384}
                 sizes="140px"
                 loading="eager"
+                className={styles.logoDark}
               />
+              {/* Versione chiara (alloro e scritte in bianco) per l'header trasparente sull'apertura scura */}
+              {overlay && (
+                <Image
+                  src="/Immagini/flli-pozzi-80-anni-logo-chiaro.png"
+                  alt=""
+                  aria-hidden="true"
+                  width={949}
+                  height={384}
+                  sizes="140px"
+                  loading="eager"
+                  className={styles.logoLight}
+                />
+              )}
             </Link>
 
             <nav className={styles.nav} aria-label="Menu principale">
