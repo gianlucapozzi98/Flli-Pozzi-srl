@@ -1,6 +1,7 @@
 /*
  * Reggia a tutta larghezza nell'apertura della home.
- * Il ciclo dell'indicatore (7 s) è allineato a quello SMIL dell'SVG.
+ * Il ciclo dell'indicatore (8 s) è allineato a quello SMIL dell'SVG (StrapAnimation.tsx):
+ * scatti di tensione a 1,2–1,35 · 1,55–1,7 · 1,9–2,05 · 2,25–2,4 s.
  */
 .band {
   position: relative;
@@ -28,7 +29,7 @@
   background: rgba(20, 23, 27, 0.72);
   backdrop-filter: blur(4px);
   color: #fff;
-  animation: hudIn 7s linear infinite;
+  animation: hudIn 8s linear infinite;
 }
 .hudTop {
   display: flex;
@@ -42,13 +43,24 @@
   letter-spacing: 0.12em;
   color: #9ca6b0;
 }
+/* Valore che conta da 0 a 2000 N: proprietà intera animata + contatore CSS */
+@property --tension {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
 .hudValue {
   font-family: var(--font-heading);
   font-size: 19px;
   font-weight: 700;
   line-height: 1;
-  opacity: 0;
-  animation: hudValue 7s linear infinite;
+  font-variant-numeric: tabular-nums;
+  --tension: 0;
+  counter-reset: tension var(--tension);
+  animation: hudValue 8s linear infinite;
+}
+.hudValue::after {
+  content: counter(tension) ' N';
 }
 .hudTrack {
   position: relative;
@@ -63,7 +75,7 @@
   inset: 0 auto 0 0;
   width: 0;
   background: #e30613;
-  animation: hudBar 7s infinite;
+  animation: hudBar 8s linear infinite;
 }
 .hudSteps {
   display: grid;
@@ -78,85 +90,109 @@
   opacity: 0;
 }
 .step1 {
-  animation: step1 7s linear infinite;
+  animation: step1 8s linear infinite;
 }
 .step2 {
-  animation: step2 7s linear infinite;
+  animation: step2 8s linear infinite;
 }
 .step3 {
   color: #7ee2a8;
-  animation: step3 7s linear infinite;
+  animation: step3 8s linear infinite;
 }
 
 @keyframes hudIn {
   0%,
-  6% {
+  5% {
     opacity: 0;
   }
-  11%,
-  88.5% {
+  10%,
+  87.5% {
     opacity: 1;
   }
-  94%,
+  92.5%,
   100% {
     opacity: 0;
   }
 }
+/* Barra e valore a scatti, come la leva del tendireggia */
 @keyframes hudBar {
   0%,
-  15.7% {
+  15% {
     width: 0;
-    animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1);
   }
-  35.7%,
+  16.875%,
+  19.375% {
+    width: 25%;
+  }
+  21.25%,
+  23.75% {
+    width: 50%;
+  }
+  25.625%,
+  28.125% {
+    width: 75%;
+  }
+  30%,
   100% {
     width: 100%;
   }
 }
 @keyframes hudValue {
   0%,
-  33% {
-    opacity: 0;
+  15% {
+    --tension: 0;
   }
-  36%,
+  16.875%,
+  19.375% {
+    --tension: 500;
+  }
+  21.25%,
+  23.75% {
+    --tension: 1000;
+  }
+  25.625%,
+  28.125% {
+    --tension: 1500;
+  }
+  30%,
   100% {
-    opacity: 1;
+    --tension: 2000;
   }
 }
 @keyframes step1 {
   0%,
-  12% {
+  13% {
     opacity: 0;
   }
   15%,
-  35.5% {
+  34.5% {
     opacity: 1;
   }
-  37%,
+  35.5%,
   100% {
     opacity: 0;
   }
 }
 @keyframes step2 {
   0%,
-  37% {
+  35.5% {
     opacity: 0;
   }
-  38.5%,
-  45.5% {
+  36.5%,
+  44% {
     opacity: 1;
   }
-  47%,
+  45%,
   100% {
     opacity: 0;
   }
 }
 @keyframes step3 {
   0%,
-  46.5% {
+  44.5% {
     opacity: 0;
   }
-  48.5%,
+  45.5%,
   100% {
     opacity: 1;
   }
@@ -206,9 +242,11 @@
     animation: none;
   }
   .hud,
-  .hudValue,
   .step3 {
     opacity: 1;
+  }
+  .hudValue {
+    --tension: 2000;
   }
   .hudBar {
     width: 100%;

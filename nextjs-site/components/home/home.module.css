@@ -145,6 +145,46 @@
   text-decoration: underline;
 }
 
+/* Entrata in sequenza dei testi all'apertura (una sola volta) */
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.heroEyebrow,
+.heroCopy h1,
+.heroSub,
+.heroCtas,
+.heroPhone {
+  animation: heroIn 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.heroCopy h1 {
+  animation-delay: 0.08s;
+}
+.heroSub {
+  animation-delay: 0.22s;
+}
+.heroCtas {
+  animation-delay: 0.34s;
+}
+.heroPhone {
+  animation-delay: 0.44s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .heroEyebrow,
+  .heroCopy h1,
+  .heroSub,
+  .heroCtas,
+  .heroPhone {
+    animation: none;
+  }
+}
+
 /* Prove concrete */
 .proof {
   background: #fff;
