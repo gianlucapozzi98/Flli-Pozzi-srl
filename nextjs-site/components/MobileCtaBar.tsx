@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { PhoneIcon } from '@heroicons/react/24/outline';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage, usePublicPathname } from '@/contexts/LanguageContext';
 
 const BAR_HEIGHT = 56;
 /** Scorrimento oltre il quale la barra compare, nelle pagine senza apertura animata */
@@ -18,7 +17,7 @@ const REVEAL_AFTER = 160;
  */
 export default function MobileCtaBar() {
   const { t, lp } = useLanguage();
-  const pathname = usePathname();
+  const pathname = usePublicPathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

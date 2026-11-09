@@ -3,9 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { Bars3Icon, XMarkIcon, ArrowUpIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage, usePublicPathname } from '@/contexts/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import styles from './header.module.css';
 
@@ -22,7 +21,7 @@ const ISO_PDF = '/FRATELLI POZZI 9001 2015_Certificato di registrazione.pdf';
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname() || '/';
+  const pathname = usePublicPathname();
   const { t, lp } = useLanguage();
 
   useEffect(() => {

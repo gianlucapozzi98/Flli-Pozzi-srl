@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage, usePublicPathname } from '@/contexts/LanguageContext';
 import { localizePath, splitLangFromPath, type Lang } from '@/lib/i18n';
 
 const languages: { code: Lang; label: string; name: string }[] = [
@@ -18,7 +17,7 @@ const languages: { code: Lang; label: string; name: string }[] = [
  */
 export default function LanguageSwitcher({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
   const { language } = useLanguage();
-  const pathname = usePathname() || '/';
+  const pathname = usePublicPathname();
   const { path } = splitLangFromPath(pathname);
   const dark = tone === 'dark';
 

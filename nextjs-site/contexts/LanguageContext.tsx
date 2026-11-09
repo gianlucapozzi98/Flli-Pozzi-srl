@@ -17,12 +17,23 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 /**
+ * Percorso pubblico della pagina, uguale sul server e nel browser.
+ * Sul server usePathname() restituisce l'indirizzo riscritto da proxy.ts (/it/azienda),
+ * nel browser quello visibile (/azienda): togliamo il prefisso /it, altrimenti l'HTML del server
+ * conterrebbe link sbagliati (es. /en/it/azienda) e stati diversi da quelli del browser.
+ */
+export function usePublicPathname(): string {
+  const p = usePathname() || '/';
+  return p.replace(/^\/it(?=\/|$)/, '') || '/';
+}
+
+/**
  * La lingua arriva dall'URL (segmento [lang] del layout), non più da localStorage:
  * così ogni lingua ha il suo indirizzo e Google può indicizzarla.
  */
 export function LanguageProvider({ children, language }: { children: ReactNode; language: Lang }) {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePublicPathname();
 
   const setLanguage = useCallback(
     (lang: Lang) => {
