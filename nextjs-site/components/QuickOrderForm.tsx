@@ -72,7 +72,16 @@ export default function QuickOrderForm() {
       const label = ITEMS.find((i) => i.v === r.item)?.label.it ?? r.item;
       return `- ${label}${r.size.trim() ? ` · ${r.size.trim()}` : ''} · ${r.qty.trim()}`;
     });
-    const message = [`${TXT.subject.it} (${language.toUpperCase()})`, '', ...lines, '', fields.notes.trim() ? `Note: ${fields.notes.trim()}` : '']
+    // L'email all'ufficio riporta i dati aziendali solo per le richieste B2B: l'azienda va nel testo
+    const message = [
+      `${TXT.subject.it} (${language.toUpperCase()})`,
+      `${TXT.company.it}: ${fields.company.trim()}`,
+      '',
+      `${TXT.rows.it}:`,
+      ...lines,
+      '',
+      fields.notes.trim() ? `Note: ${fields.notes.trim()}` : '',
+    ]
       .join('\n')
       .trim();
     setSending(true);
