@@ -118,7 +118,8 @@ export default async function CategoryPage({ params }: Params) {
                 src={category.image}
                 alt={category.imageAlt[lang]}
                 fill
-                priority
+                preload
+                fetchPriority="high"
                 sizes="(max-width: 900px) 100vw, 480px"
                 style={{ objectFit: 'contain', padding: '20px' }}
               />

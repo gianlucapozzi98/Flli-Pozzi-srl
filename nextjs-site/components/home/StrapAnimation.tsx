@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import styles from './strap-animation.module.css';
+import StrapSync from './StrapSync';
 
 type Labels = {
   aria: string;
@@ -215,7 +216,8 @@ function Notches() {
 
 export default function StrapAnimation({ labels }: { labels: Labels }) {
   return (
-    <div className={styles.band} role="img" aria-label={labels.aria}>
+    <div className={styles.band} role="img" aria-label={labels.aria} data-strap-band>
+      <StrapSync duration={DUR_S} />
       {/* Indicatore di tensione: il valore conta in CSS (strap-animation.module.css) */}
       <div className={styles.hud} aria-hidden="true">
         <div className={styles.hudTop}>

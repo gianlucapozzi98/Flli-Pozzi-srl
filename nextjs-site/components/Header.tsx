@@ -83,7 +83,7 @@ export default function Header() {
                 width={949}
                 height={384}
                 sizes="140px"
-                priority
+                loading="eager"
               />
             </Link>
 

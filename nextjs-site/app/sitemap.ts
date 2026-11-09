@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { SITE_URL } from '@/lib/seo';
+import { CONTENT_UPDATED, SITE_URL } from '@/lib/seo';
 import { LANGS, localizePath } from '@/lib/i18n';
 import { CATEGORIES, PRODUCTS, categoryPath, productPath } from '@/lib/catalog';
 
@@ -23,6 +23,7 @@ function withLanguages(entries: Entry[]): MetadataRoute.Sitemap {
   return entries.flatMap((entry) =>
     LANGS.map((lang) => ({
       url: `${SITE_URL}${localizePath(entry.path, lang)}`,
+      lastModified: CONTENT_UPDATED,
       changeFrequency: entry.changeFrequency,
       priority: lang === 'it' ? entry.priority : Math.round(entry.priority * 0.9 * 10) / 10,
       alternates: {

@@ -5,6 +5,12 @@ import { LANGS, OG_LOCALE, languageAlternates, localizePath, type Lang } from '.
 export const SITE_URL = 'https://www.fllipozzi.it';
 
 export const SITE_NAME = 'Fratelli Pozzi';
+
+/**
+ * Data dell'ultimo aggiornamento significativo dei contenuti (lastmod nel sitemap).
+ * Aggiornarla quando si cambiano testi, prodotti o pagine: Google la usa solo se è affidabile.
+ */
+export const CONTENT_UPDATED = '2026-11-09';
 export const SITE_TAGLINE = 'Fratelli Pozzi — Caravaggio, dal 1947';
 
 /** Immagine di condivisione 1200×630 (foto dello stabilimento) */

@@ -173,7 +173,8 @@ export default async function AssistenzaPage({ params }: Params) {
                 src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
                 alt="Stabilimento Fratelli Pozzi, Caravaggio (BG)"
                 fill
-                priority
+                preload
+                fetchPriority="high"
                 sizes="(max-width: 900px) 100vw, 480px"
                 style={{ objectFit: 'cover' }}
               />

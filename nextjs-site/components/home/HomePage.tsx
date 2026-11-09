@@ -52,12 +52,14 @@ export default function HomePage({ categories, madeProducts }: Props) {
         {/* Apertura: testo e, sotto, la reggia che attraversa tutto lo schermo */}
         {/* data-hide-mobile-cta: la barra Chiama/Preventivo su mobile compare solo dopo questa sezione */}
         <section className={styles.hero} data-hide-mobile-cta>
+          {/* Sfondo scurito al 28%: basta una risoluzione più bassa, così l'apertura carica prima */}
           <Image
             src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
             alt=""
             fill
-            priority
-            sizes="100vw"
+            preload
+            fetchPriority="high"
+            sizes="(max-width: 900px) 60vw, 70vw"
             className={styles.heroPhoto}
           />
           <div className={styles.heroShade} aria-hidden="true" />

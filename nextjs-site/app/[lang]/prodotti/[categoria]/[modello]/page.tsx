@@ -152,7 +152,8 @@ export default async function ProductPage({ params }: Params) {
               src={product.image}
               alt={name}
               fill
-              priority
+              preload
+              fetchPriority="high"
               sizes="(max-width: 900px) 100vw, 560px"
               style={{ objectFit: 'contain', padding: '28px' }}
             />
