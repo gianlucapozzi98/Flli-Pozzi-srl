@@ -13,7 +13,7 @@ export default function StrapSync({ duration }: { duration: number }) {
       const band = document.querySelector<HTMLElement>('[data-strap-band]');
       const svg = band?.querySelector('svg');
       if (!band || !svg || typeof svg.getCurrentTime !== 'function') return;
-      const t = (svg.getCurrentTime() % duration) * 1000;
+      const t = Math.min(svg.getCurrentTime(), duration) * 1000;
       band.getAnimations({ subtree: true }).forEach((a) => {
         a.currentTime = t;
       });

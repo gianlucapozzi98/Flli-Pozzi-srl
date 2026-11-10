@@ -79,7 +79,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     // Home
     'home.hero.title': 'Tendireggia e reggiatrici per l\'imballaggio industriale',
     'home.hero.subtitle': 'Made in Italy · Ricambi originali · Assistenza tecnica in sede',
-    'home.hero.eyebrow': 'Fratelli Pozzi · Caravaggio, dal 1947',
+    'home.hero.eyebrow': '1947 → 2027 · 80 anni di reggiatura',
     'home.hero.cta.quote': 'Richiedi un preventivo',
     'cta.quote': 'Richiedi preventivo',
     'cta.call': 'Chiama',
@@ -476,7 +476,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     // Home
     'home.hero.title': 'Strapping tensioners and tools for industrial packaging',
     'home.hero.subtitle': 'Made in Italy · Original spare parts · In-house technical service',
-    'home.hero.eyebrow': 'Fratelli Pozzi · Caravaggio, since 1947',
+    'home.hero.eyebrow': '1947 → 2027 · 80 years of strapping',
     'home.hero.cta.quote': 'Request a quote',
     'cta.quote': 'Request a quote',
     'cta.call': 'Call',
@@ -873,7 +873,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     // Home
     'home.hero.title': 'Tendeurs et cercleuses pour l\'emballage industriel',
     'home.hero.subtitle': 'Made in Italy · Pièces détachées d\'origine · Assistance technique sur site',
-    'home.hero.eyebrow': 'Fratelli Pozzi · Caravaggio, depuis 1947',
+    'home.hero.eyebrow': '1947 → 2027 · 80 ans de cerclage',
     'home.hero.cta.quote': 'Demander un devis',
     'cta.quote': 'Demander un devis',
     'cta.call': 'Appeler',

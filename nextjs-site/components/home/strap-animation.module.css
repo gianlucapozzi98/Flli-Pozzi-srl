@@ -20,7 +20,7 @@
 .hud {
   position: absolute;
   z-index: 2;
-  left: calc(50% + 100px);
+  left: calc(50% + 160px);
   bottom: calc(50% + 44px);
   width: 230px;
   padding: 12px 14px 11px;
@@ -29,7 +29,7 @@
   background: rgba(20, 23, 27, 0.72);
   backdrop-filter: blur(4px);
   color: #fff;
-  animation: hudIn 8s linear infinite;
+  animation: hudIn 8s linear 1 both;
 }
 .hudTop {
   display: flex;
@@ -47,7 +47,7 @@
 @property --tension {
   syntax: '<integer>';
   inherits: false;
-  initial-value: 0;
+  initial-value: 1947;
 }
 .hudValue {
   font-family: var(--font-heading);
@@ -55,12 +55,12 @@
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  --tension: 0;
+  --tension: 1947;
   counter-reset: tension var(--tension);
-  animation: hudValue 8s linear infinite;
+  animation: hudValue 8s linear 1 both;
 }
 .hudValue::after {
-  content: counter(tension) ' N';
+  content: counter(tension);
 }
 .hudTrack {
   position: relative;
@@ -75,7 +75,7 @@
   inset: 0 auto 0 0;
   width: 0;
   background: #e30613;
-  animation: hudBar 8s linear infinite;
+  animation: hudBar 8s linear 1 both;
 }
 .hudSteps {
   display: grid;
@@ -90,14 +90,14 @@
   opacity: 0;
 }
 .step1 {
-  animation: step1 8s linear infinite;
+  animation: step1 8s linear 1 both;
 }
 .step2 {
-  animation: step2 8s linear infinite;
+  animation: step2 8s linear 1 both;
 }
 .step3 {
   color: #7ee2a8;
-  animation: step3 8s linear infinite;
+  animation: step3 8s linear 1 both;
 }
 
 @keyframes hudIn {
@@ -106,12 +106,8 @@
     opacity: 0;
   }
   10%,
-  87.5% {
-    opacity: 1;
-  }
-  92.5%,
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 /* Barra e valore a scatti, come la leva del tendireggia */
@@ -140,23 +136,23 @@
 @keyframes hudValue {
   0%,
   15% {
-    --tension: 0;
+    --tension: 1947;
   }
   16.875%,
   19.375% {
-    --tension: 500;
+    --tension: 1967;
   }
   21.25%,
   23.75% {
-    --tension: 1000;
+    --tension: 1987;
   }
   25.625%,
   28.125% {
-    --tension: 1500;
+    --tension: 2007;
   }
   30%,
   100% {
-    --tension: 2000;
+    --tension: 2027;
   }
 }
 @keyframes step1 {
@@ -246,7 +242,7 @@
     opacity: 1;
   }
   .hudValue {
-    --tension: 2000;
+    --tension: 2027;
   }
   .hudBar {
     width: 100%;
