@@ -28,6 +28,12 @@ const TXT = {
     fr: 'Assistance et pièces pour cercleuses et tendeurs',
   },
   lead: {
+    it: 'Ripariamo le vostre reggiatrici manuali, a batteria e pneumatiche di ogni marca nel nostro stabilimento di Caravaggio. Nel minor tempo possibile.',
+    en: 'We repair your manual, battery and pneumatic strapping tools of any brand at our Caravaggio facility. As quickly as possible.',
+    fr: 'Nous réparons vos cercleuses manuelles, à batterie et pneumatiques de toutes marques dans notre site de Caravaggio. Dans les plus brefs délais.',
+  },
+  /** Descrizione completa del servizio per i dati strutturati (non visibile) */
+  serviceDesc: {
     it: 'Ripariamo e manuteniamo reggiatrici manuali, a batteria e pneumatiche di ogni marca nel nostro stabilimento di Caravaggio. Forniamo ricambi originali, documentazione tecnica e formazione per il vostro personale.',
     en: 'We repair and maintain manual, battery and pneumatic strapping tools of any brand at our Caravaggio facility. We supply original spare parts, technical documentation and training for your staff.',
     fr: 'Nous réparons et entretenons des cercleuses manuelles, à batterie et pneumatiques de toutes marques dans notre site de Caravaggio. Nous fournissons pièces d’origine, documentation technique et formation de votre personnel.',
@@ -136,7 +142,7 @@ export default async function AssistenzaPage({ params }: Params) {
     '@type': 'Service',
     name: TXT.h1[lang],
     serviceType: TXT.crumb[lang],
-    description: TXT.lead[lang],
+    description: TXT.serviceDesc[lang],
     provider: { '@id': `${SITE_URL}/#organization` },
     areaServed: [{ '@type': 'Country', name: 'Italy' }],
     url: `${SITE_URL}${localizePath('/assistenza-ricambi', lang)}`,
