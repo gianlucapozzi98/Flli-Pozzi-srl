@@ -28,9 +28,9 @@ const TXT = {
     fr: 'Assistance et pièces pour cercleuses et tendeurs',
   },
   lead: {
-    it: 'Ripariamo le vostre reggiatrici manuali, a batteria e pneumatiche di ogni marca nel nostro stabilimento di Caravaggio. Nel minor tempo possibile.',
-    en: 'We repair your manual, battery and pneumatic strapping tools of any brand at our Caravaggio facility. As quickly as possible.',
-    fr: 'Nous réparons vos cercleuses manuelles, à batterie et pneumatiques de toutes marques dans notre site de Caravaggio. Dans les plus brefs délais.',
+    it: 'Ripariamo le vostre reggiatrici manuali, a batteria e pneumatiche nel nostro stabilimento di Caravaggio. Nel minor tempo possibile.',
+    en: 'We repair your manual, battery and pneumatic strapping tools at our Caravaggio facility. As quickly as possible.',
+    fr: 'Nous réparons vos cercleuses manuelles, à batterie et pneumatiques dans notre site de Caravaggio. Dans les plus brefs délais.',
   },
   /** Descrizione completa del servizio per i dati strutturati (non visibile) */
   serviceDesc: {
