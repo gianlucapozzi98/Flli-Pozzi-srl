@@ -503,10 +503,12 @@ export const ACCESSORIES = [
 
 /* ---------- Prodotti ---------- */
 
-const manualSpecs = (tension: L, seal: L = V.sealA): SpecRow[] => [
+const manualSeal: L = { it: 'Bulinato lucido | Zincato', en: 'Embossed polished | Galvanised', fr: 'Crantée brillante | Zinguée' };
+
+const manualSpecs = (tension: L): SpecRow[] => [
   { label: 'strap', value: V.pp },
   { label: 'width', value: '9 – 19 mm' },
-  { label: 'seal', value: seal },
+  { label: 'seal', value: manualSeal },
   { label: 'drive', value: V.manual },
   { label: 'tensioning', value: tension },
   { label: 'origin', value: V.caravaggio },
@@ -522,10 +524,7 @@ export const PRODUCTS: Product[] = [
     descKey: 'CP2000',
     short: { it: 'reggia PP 9–19 mm', en: 'PP strap 9–19 mm', fr: 'feuillard PP 9–19 mm' },
     image: '/Immagini/tendireggia-manuale-cp2000.png',
-    specs: manualSpecs(
-      { it: 'Dal basso verso l’alto', en: 'Bottom to top', fr: 'Du bas vers le haut' },
-      { it: 'Bulinato lucido | Zincato', en: 'Embossed polished | Galvanised', fr: 'Crantée brillante | Zinguée' },
-    ),
+    specs: manualSpecs({ it: 'Dal basso verso l’alto', en: 'Bottom to top', fr: 'Du bas vers le haut' }),
     madeInItaly: true,
     related: ['sigilli/sigilli-reggia-plastica', 'reggia/reggia-polipropilene', 'carrelli-porta-reggia/gm-15'],
     finder: { materials: ['pp'], power: 'man', widths: [9, 12, 13, 15, 16, 19] },
@@ -537,7 +536,7 @@ export const PRODUCTS: Product[] = [
     descKey: 'BEST',
     short: { it: 'reggia PP 9–19 mm, tensionamento speciale', en: 'PP strap 9–19 mm, special tensioning', fr: 'feuillard PP 9–19 mm, tension spéciale' },
     image: '/Immagini/tendireggia-manuale-best.png',
-    specs: manualSpecs(V.special),
+    specs: manualSpecs({ it: 'Dall’alto verso il basso', en: 'Top to bottom', fr: 'Du haut vers le bas' }),
     madeInItaly: true,
     related: ['sigilli/sigilli-reggia-plastica', 'reggia/reggia-polipropilene', 'carrelli-porta-reggia/fp-15'],
     finder: { materials: ['pp'], power: 'man', widths: [9, 12, 13, 15, 16, 19] },
@@ -549,7 +548,11 @@ export const PRODUCTS: Product[] = [
     descKey: 'PLRG',
     short: { it: 'reggia PP 9–19 mm, tensionamento veloce', en: 'PP strap 9–19 mm, fast tensioning', fr: 'feuillard PP 9–19 mm, tension rapide' },
     image: '/Immagini/tendireggia-manuale-plr-g.png',
-    specs: manualSpecs(V.fast),
+    specs: manualSpecs({
+      it: 'Dall’alto verso il basso con moltiplicatore di tensione',
+      en: 'Top to bottom with tension multiplier',
+      fr: 'Du haut vers le bas avec multiplicateur de tension',
+    }),
     madeInItaly: true,
     related: ['sigilli/sigilli-reggia-plastica', 'reggia/reggia-polipropilene', 'carrelli-porta-reggia/fp-15s'],
     finder: { materials: ['pp'], power: 'man', widths: [9, 12, 13, 15, 16, 19] },
