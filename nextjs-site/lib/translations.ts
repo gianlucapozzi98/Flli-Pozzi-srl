@@ -263,9 +263,9 @@ export const translations: Record<Lang, Record<string, string>> = {
     'prodotti.steel.highResistance': 'Alta resistenza',
     'prodotti.steel.upTo': 'fino a',
     // Descrizioni prodotti - Reggiatrici manuali
-    'prodotti.descriptions.CP2000': 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con tensionamento dal basso verso l\'alto, per sigillo serie A.',
-    'prodotti.descriptions.BEST': 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con tensionamento dall\'alto verso il basso, per sigillo serie A.',
-    'prodotti.descriptions.PLRG': 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con tensionamento dall\'alto verso il basso e moltiplicatore di tensione, per sigillo serie A.',
+    'prodotti.descriptions.CP2000': 'Tendireggia manuale per reggia in polipropilene da mm 13 a 16 con tensionamento dal basso verso l\'alto, per sigillo serie A.',
+    'prodotti.descriptions.BEST': 'Tendireggia manuale per reggia in polipropilene da mm 13 a 16 con tensionamento dall\'alto verso il basso, per sigillo serie A.',
+    'prodotti.descriptions.PLRG': 'Tendireggia manuale per reggia in polipropilene da mm 13 a 16 con tensionamento dall\'alto verso il basso e moltiplicatore di tensione, per sigillo serie A.',
     // Descrizioni prodotti - Reggiatrici a batteria
     'prodotti.descriptions.GTSMART': 'Reggiatrice a batteria per reggia tipo PP/PET mm 13/16 saldatura a vibrazione colli piani e tondi . Tensione regolabile fino a 3000 N. Per spessori della reggia fino a mm 1,0. La batteria 14V / 3.0 AH LI-ION si ricarica in soli 15 minuti.',
     'prodotti.descriptions.GTONE': 'Reggiatrice a batteria per reggia in PP/PET mm 13/16/19 saldatura a vibrazione colli piani e tondi. Tensione regolabile fino a 3000 N. Per spessori della reggia da 0,8 a 1,2. La batteria 14V / 3.0 AH LI-ION si ricarica in soli 15 minuti.',
@@ -660,9 +660,9 @@ export const translations: Record<Lang, Record<string, string>> = {
     'prodotti.steel.highResistance': 'High resistance',
     'prodotti.steel.upTo': 'up to',
     // Descrizioni prodotti - Reggiatrici manuali
-    'prodotti.descriptions.CP2000': 'Manual strapping machine for polypropylene strapping from 9 to 19 mm with bottom-to-top tensioning, for A series seal.',
-    'prodotti.descriptions.BEST': 'Manual strapping machine for polypropylene strapping from 9 to 19 mm with top-to-bottom tensioning, for A series seal.',
-    'prodotti.descriptions.PLRG': 'Manual strapping machine for polypropylene strapping from 9 to 19 mm with top-to-bottom tensioning and tension multiplier, for A series seal.',
+    'prodotti.descriptions.CP2000': 'Manual strapping machine for polypropylene strapping from 13 to 16 mm with bottom-to-top tensioning, for A series seal.',
+    'prodotti.descriptions.BEST': 'Manual strapping machine for polypropylene strapping from 13 to 16 mm with top-to-bottom tensioning, for A series seal.',
+    'prodotti.descriptions.PLRG': 'Manual strapping machine for polypropylene strapping from 13 to 16 mm with top-to-bottom tensioning and tension multiplier, for A series seal.',
     // Descrizioni prodotti - Reggiatrici a batteria
     'prodotti.descriptions.GTSMART': 'Battery strapping machine for PP/PET strapping 13/16 mm vibration welding for flat and round packages. Adjustable tension up to 3000 N. For strapping thicknesses up to 1.0 mm. The 14V / 3.0 AH LI-ION battery recharges in just 15 minutes.',
     'prodotti.descriptions.GTONE': 'Battery strapping machine for PP/PET strapping 13/16/19 mm vibration welding for flat and round packages. Adjustable tension up to 3000 N. For strapping thicknesses from 0.8 to 1.2. The 14V / 3.0 AH LI-ION battery recharges in just 15 minutes.',
@@ -1055,9 +1055,9 @@ export const translations: Record<Lang, Record<string, string>> = {
     'prodotti.sections.sigilli.zincati': 'Galvanisés',
     'prodotti.sections.sigilli.overlap': 'Overlap',
     // Descrizioni prodotti - Reggiatrici manuali
-    'prodotti.descriptions.CP2000': 'Tendeur manuel pour cerceaux en polypropylène de 9 à 19 mm avec tension du bas vers le haut, pour sceau série A.',
-    'prodotti.descriptions.BEST': 'Tendeur manuel pour cerceaux en polypropylène de 9 à 19 mm avec tension du haut vers le bas, pour sceau série A.',
-    'prodotti.descriptions.PLRG': 'Tendeur manuel pour cerceaux en polypropylène de 9 à 19 mm avec tension du haut vers le bas et multiplicateur de tension, pour sceau série A.',
+    'prodotti.descriptions.CP2000': 'Tendeur manuel pour cerceaux en polypropylène de 13 à 16 mm avec tension du bas vers le haut, pour sceau série A.',
+    'prodotti.descriptions.BEST': 'Tendeur manuel pour cerceaux en polypropylène de 13 à 16 mm avec tension du haut vers le bas, pour sceau série A.',
+    'prodotti.descriptions.PLRG': 'Tendeur manuel pour cerceaux en polypropylène de 13 à 16 mm avec tension du haut vers le bas et multiplicateur de tension, pour sceau série A.',
     // Descrizioni prodotti - Reggiatrici a batteria
     'prodotti.descriptions.GTSMART': 'Cerceleuse à batterie pour cerceaux type PP/PET 13/16 mm soudure à vibration colis plats et ronds. Tension réglable jusqu\'à 3000 N. Pour épaisseurs de cerceaux jusqu\'à 1,0 mm. La batterie 14V / 3.0 AH LI-ION se recharge en seulement 15 minutes.',
     'prodotti.descriptions.GTONE': 'Cerceleuse à batterie pour cerceaux PP/PET 13/16/19 mm soudure à vibration colis plats et ronds. Tension réglable jusqu\'à 3000 N. Pour épaisseurs de cerceaux de 0,8 à 1,2. La batterie 14V / 3.0 AH LI-ION se recharge en seulement 15 minutes.',

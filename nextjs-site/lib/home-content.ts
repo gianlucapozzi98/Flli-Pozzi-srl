@@ -190,7 +190,7 @@ export const HOME = {
 
 /** Specifica breve mostrata sulle card categoria in home */
 export const CATEGORY_CARD_SPEC: Record<string, L> = {
-  'tendireggia-manuali': { it: 'PP · 9–19 mm · sigillo serie A', en: 'PP · 9–19 mm · A-series seal', fr: 'PP · 9–19 mm · chape série A' },
+  'tendireggia-manuali': { it: 'PP · 13–16 mm · sigillo serie A', en: 'PP · 13–16 mm · A-series seal', fr: 'PP · 13–16 mm · chape série A' },
   'reggiatrici-a-batteria': { it: 'PP / PET · 9–25 mm · fino a 5000 N', en: 'PP / PET · 9–25 mm · up to 5000 N', fr: 'PP / PET · 9–25 mm · jusqu’à 5000 N' },
   'reggiatrici-pneumatiche': { it: 'PP / PET / acciaio · 13–32 mm', en: 'PP / PET / steel · 13–32 mm', fr: 'PP / PET / acier · 13–32 mm' },
   reggia: { it: 'PP · PET · acciaio · colore e marchio su richiesta', en: 'PP · PET · steel · custom colour and logo', fr: 'PP · PET · acier · couleur et logo sur demande' },
