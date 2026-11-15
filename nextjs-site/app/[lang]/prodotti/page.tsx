@@ -42,9 +42,9 @@ function getProductCategories(t: (key: string) => string) {
 
 const reggiatrici = {
   manuali: [
-    { name: 'CP2000', description: 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con sigillo serie A.' },
-    { name: 'BEST', description: 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con tensionamento speciale, per sigillo serie A.' },
-    { name: 'PLR/G', description: 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con tensionamento veloce, per sigillo serie A.' },
+    { name: 'CP2000', description: 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con tensionamento dal basso verso l\'alto, per sigillo serie A.' },
+    { name: 'BEST', description: 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con tensionamento dall\'alto verso il basso, per sigillo serie A.' },
+    { name: 'PLR/G', description: 'Tendireggia manuale per reggia in polipropilene da mm 9 a 19 con tensionamento dall\'alto verso il basso e moltiplicatore di tensione, per sigillo serie A.' },
   ],
   batteria: [
     { name: 'GT SMART+', description: 'Reggiatrice a batteria per reggia tipo PP/PET mm 13/16 saldatura a vibrazione colli piani e tondi . Tensione regolabile fino a 3000 N. Per spessori della reggia fino a mm 1,0. La batteria 14V / 3.0 AH LI-ION si ricarica in soli 15 minuti.' },

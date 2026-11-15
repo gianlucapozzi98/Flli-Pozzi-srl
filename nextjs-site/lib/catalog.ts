@@ -150,9 +150,9 @@ export const CATEGORIES: Category[] = [
       fr: "Tendeurs manuels made in Italy pour feuillard polypropylène 9–19 mm avec chapes série A : CP2000, BEST et PLR/G. Pièces d'origine et assistance.",
     },
     intro: {
-      it: 'Progettati e assemblati nel nostro stabilimento di Caravaggio, i tendireggia manuali Fratelli Pozzi lavorano con reggia in polipropilene da 9 a 19 mm e sigilli serie A. Tre modelli, con tensionamento standard, speciale o veloce.',
-      en: 'Designed and assembled at our Caravaggio facility, Fratelli Pozzi manual tensioners work with 9 to 19 mm polypropylene strap and A-series seals. Three models, with standard, special or fast tensioning.',
-      fr: 'Conçus et assemblés dans notre site de Caravaggio, les tendeurs manuels Fratelli Pozzi fonctionnent avec du feuillard polypropylène de 9 à 19 mm et des chapes série A. Trois modèles, avec mise en tension standard, spéciale ou rapide.',
+      it: 'Progettati e assemblati nel nostro stabilimento di Caravaggio, i tendireggia manuali Fratelli Pozzi lavorano con reggia in polipropilene da 9 a 19 mm e sigilli serie A. Tre modelli: tensionamento dal basso verso l’alto sulla CP2000, dall’alto verso il basso sulla BEST e sulla PLR/G, che ha in più il moltiplicatore di tensione.',
+      en: 'Designed and assembled at our Caravaggio facility, Fratelli Pozzi manual tensioners work with 9 to 19 mm polypropylene strap and A-series seals. Three models: bottom-to-top tensioning on the CP2000, top-to-bottom on the BEST and the PLR/G, which also has a tension multiplier.',
+      fr: 'Conçus et assemblés dans notre site de Caravaggio, les tendeurs manuels Fratelli Pozzi fonctionnent avec du feuillard polypropylène de 9 à 19 mm et des chapes série A. Trois modèles : mise en tension du bas vers le haut sur le CP2000, du haut vers le bas sur le BEST et le PLR/G, qui dispose en plus d’un multiplicateur de tension.',
     },
     body: {
       it: 'Un tendireggia manuale non ha bisogno di batterie né di aria compressa: è il modo più semplice per reggiare colli e bancali in magazzino, in produzione o al banco spedizioni. Poiché li produciamo noi, ricambi e revisioni sono gestiti direttamente a Caravaggio, senza intermediari.',
@@ -174,9 +174,9 @@ export const CATEGORIES: Category[] = [
       {
         q: { it: 'Che differenza c’è tra CP2000, BEST e PLR/G?', en: 'What is the difference between CP2000, BEST and PLR/G?', fr: 'Quelle différence entre CP2000, BEST et PLR/G ?' },
         a: {
-          it: 'Tutti e tre lavorano con reggia in polipropilene da 9 a 19 mm e sigillo serie A. Cambia il tensionamento: standard sulla CP2000, speciale sulla BEST, veloce sulla PLR/G.',
-          en: 'All three work with 9–19 mm polypropylene strap and A-series seals. The tensioning differs: standard on the CP2000, special on the BEST, fast on the PLR/G.',
-          fr: 'Les trois fonctionnent avec du feuillard polypropylène de 9 à 19 mm et des chapes série A. Seule la mise en tension change : standard sur le CP2000, spéciale sur le BEST, rapide sur le PLR/G.',
+          it: 'Tutti e tre lavorano con reggia in polipropilene da 9 a 19 mm e sigillo serie A. Cambia il tensionamento: dal basso verso l’alto sulla CP2000, dall’alto verso il basso sulla BEST e sulla PLR/G, che ha in più il moltiplicatore di tensione.',
+          en: 'All three work with 9–19 mm polypropylene strap and A-series seals. The tensioning differs: bottom to top on the CP2000, top to bottom on the BEST and the PLR/G, which also has a tension multiplier.',
+          fr: 'Les trois fonctionnent avec du feuillard polypropylène de 9 à 19 mm et des chapes série A. Seule la mise en tension change : du bas vers le haut sur le CP2000, du haut vers le bas sur le BEST et le PLR/G, qui dispose en plus d’un multiplicateur de tension.',
         },
       },
       {
@@ -522,7 +522,7 @@ export const PRODUCTS: Product[] = [
     category: 'tendireggia-manuali',
     name: 'CP2000',
     descKey: 'CP2000',
-    short: { it: 'reggia PP 9–19 mm', en: 'PP strap 9–19 mm', fr: 'feuillard PP 9–19 mm' },
+    short: { it: 'reggia PP 9–19 mm, tensionamento dal basso verso l’alto', en: 'PP strap 9–19 mm, bottom-to-top tensioning', fr: 'feuillard PP 9–19 mm, tension du bas vers le haut' },
     image: '/Immagini/tendireggia-manuale-cp2000.png',
     specs: manualSpecs({ it: 'Dal basso verso l’alto', en: 'Bottom to top', fr: 'Du bas vers le haut' }),
     madeInItaly: true,
@@ -534,7 +534,7 @@ export const PRODUCTS: Product[] = [
     category: 'tendireggia-manuali',
     name: 'BEST',
     descKey: 'BEST',
-    short: { it: 'reggia PP 9–19 mm, tensionamento speciale', en: 'PP strap 9–19 mm, special tensioning', fr: 'feuillard PP 9–19 mm, tension spéciale' },
+    short: { it: 'reggia PP 9–19 mm, tensionamento dall’alto verso il basso', en: 'PP strap 9–19 mm, top-to-bottom tensioning', fr: 'feuillard PP 9–19 mm, tension du haut vers le bas' },
     image: '/Immagini/tendireggia-manuale-best.png',
     specs: manualSpecs({ it: 'Dall’alto verso il basso', en: 'Top to bottom', fr: 'Du haut vers le bas' }),
     madeInItaly: true,
@@ -546,7 +546,7 @@ export const PRODUCTS: Product[] = [
     category: 'tendireggia-manuali',
     name: 'PLR/G',
     descKey: 'PLRG',
-    short: { it: 'reggia PP 9–19 mm, tensionamento veloce', en: 'PP strap 9–19 mm, fast tensioning', fr: 'feuillard PP 9–19 mm, tension rapide' },
+    short: { it: 'reggia PP 9–19 mm, con moltiplicatore di tensione', en: 'PP strap 9–19 mm, with tension multiplier', fr: 'feuillard PP 9–19 mm, avec multiplicateur de tension' },
     image: '/Immagini/tendireggia-manuale-plr-g.png',
     specs: manualSpecs({
       it: 'Dall’alto verso il basso con moltiplicatore di tensione',
