@@ -143,7 +143,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'azienda.values.excellence.desc': 'Prodotti di alta qualità progettati per durare nel tempo e soddisfare le esigenze più esigenti del mercato.',
     'azienda.values.assistance': 'Assistenza',
     'azienda.values.assistance.desc': 'Supporto tecnico qualificato, formazione del personale e fornitura di pezzi di ricambio originali.',
-    'azienda.cta.text': 'Contattaci per scoprire come possiamo ottimizzare il tuo processo di imballaggio e migliorare la vostra efficienza operativa.',
+    'azienda.cta.text': 'Contattaci per scoprire come possiamo ottimizzare il vostro processo di imballaggio e migliorare la vostra efficienza operativa.',
     'azienda.cta.button': 'Contattaci',
     
     // Contatti
