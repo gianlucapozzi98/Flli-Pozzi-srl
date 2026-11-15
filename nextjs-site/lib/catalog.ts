@@ -150,9 +150,9 @@ export const CATEGORIES: Category[] = [
       fr: "Tendeurs manuels made in Italy pour feuillard polypropylène 9–19 mm avec chapes série A : CP2000, BEST et PLR/G. Pièces d'origine et assistance.",
     },
     intro: {
-      it: 'Progettati e assemblati nel nostro stabilimento di Caravaggio, i tendireggia manuali Fratelli Pozzi lavorano con reggia in polipropilene da 9 a 19 mm e sigilli serie A. Tre modelli: tensionamento dal basso verso l’alto sulla CP2000, dall’alto verso il basso sulla BEST e sulla PLR/G, che ha in più il moltiplicatore di tensione.',
-      en: 'Designed and assembled at our Caravaggio facility, Fratelli Pozzi manual tensioners work with 9 to 19 mm polypropylene strap and A-series seals. Three models: bottom-to-top tensioning on the CP2000, top-to-bottom on the BEST and the PLR/G, which also has a tension multiplier.',
-      fr: 'Conçus et assemblés dans notre site de Caravaggio, les tendeurs manuels Fratelli Pozzi fonctionnent avec du feuillard polypropylène de 9 à 19 mm et des chapes série A. Trois modèles : mise en tension du bas vers le haut sur le CP2000, du haut vers le bas sur le BEST et le PLR/G, qui dispose en plus d’un multiplicateur de tension.',
+      it: 'Progettati e assemblati nel nostro stabilimento di Caravaggio, i tendireggia manuali Fratelli Pozzi lavorano con reggia in PP da 13 a 16 mm e con il sigillo.',
+      en: 'Designed and assembled at our Caravaggio facility, Fratelli Pozzi manual tensioners work with 13 to 16 mm PP strap and with a seal.',
+      fr: 'Conçus et assemblés dans notre site de Caravaggio, les tendeurs manuels Fratelli Pozzi fonctionnent avec du feuillard PP de 13 à 16 mm et avec chape.',
     },
     body: {
       it: 'Un tendireggia manuale non ha bisogno di batterie né di aria compressa: è il modo più semplice per reggiare colli e bancali in magazzino, in produzione o al banco spedizioni. Poiché li produciamo noi, ricambi e revisioni sono gestiti direttamente a Caravaggio, senza intermediari.',
