@@ -143,7 +143,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'azienda.values.excellence.desc': 'Prodotti di alta qualità progettati per durare nel tempo e soddisfare le esigenze più esigenti del mercato.',
     'azienda.values.assistance': 'Assistenza',
     'azienda.values.assistance.desc': 'Supporto tecnico qualificato, formazione del personale e fornitura di pezzi di ricambio originali.',
-    'azienda.cta.text': 'Contattateci oggi per scoprire come possiamo contribuire a ottimizzare il vostro processo di imballaggio e migliorare la vostra efficienza operativa.',
+    'azienda.cta.text': 'Contattaci per scoprire come possiamo ottimizzare il tuo processo di imballaggio e migliorare la vostra efficienza operativa.',
     'azienda.cta.button': 'Contattaci',
     
     // Contatti
@@ -540,7 +540,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'azienda.values.excellence.desc': 'High quality products designed to last over time and meet the most demanding market needs.',
     'azienda.values.assistance': 'Assistance',
     'azienda.values.assistance.desc': 'Qualified technical support, staff training and supply of original spare parts.',
-    'azienda.cta.text': 'Contact us today to discover how we can help optimize your packaging process and improve your operational efficiency.',
+    'azienda.cta.text': 'Contact us to discover how we can optimize your packaging process and improve your operational efficiency.',
     'azienda.cta.button': 'Contact us',
     
     // Contatti
@@ -936,7 +936,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'azienda.values.innovation.desc': 'Recherche constante de nouvelles solutions et technologies',
     'azienda.values.service': 'Service',
     'azienda.values.service.desc': 'Assistance technique et support client de qualité',
-    'azienda.cta.text': 'Découvrez comment nous pouvons vous aider à optimiser vos processus d\'emballage. Contactez-nous pour plus d\'informations.',
+    'azienda.cta.text': 'Contactez-nous pour découvrir comment nous pouvons optimiser votre processus d\'emballage et améliorer votre efficacité opérationnelle.',
     'azienda.cta.button': 'Contactez-nous',
     
     // Contatti
