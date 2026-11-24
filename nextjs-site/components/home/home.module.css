@@ -57,8 +57,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* L'header trasparente è sopra l'apertura: l'apertura occupa tutto lo schermo */
-  min-height: clamp(700px, 100vh, 980px);
+  /* L'header trasparente è sopra l'apertura: l'apertura occupa sempre tutto lo schermo, senza limite in altezza */
+  min-height: max(620px, 100vh);
+  min-height: max(620px, 100svh);
   /* Spazio profondo: il globo e le stelle sono disegnati sopra da GlobeHero */
   background: radial-gradient(120% 95% at 16% 58%, #0c1829 0%, #060b14 46%, #020407 100%);
   color: #fff;
