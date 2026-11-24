@@ -59,21 +59,9 @@
   flex-direction: column;
   /* L'header trasparente è sopra l'apertura: l'apertura occupa tutto lo schermo */
   min-height: clamp(700px, 100vh, 980px);
-  background: #22262b;
+  /* Spazio profondo: il globo e le stelle sono disegnati sopra da GlobeHero */
+  background: radial-gradient(120% 95% at 16% 58%, #0c1829 0%, #060b14 46%, #020407 100%);
   color: #fff;
-}
-.heroPhoto {
-  object-fit: cover;
-  object-position: left center;
-  opacity: 0.28;
-  filter: grayscale(0.35);
-}
-.heroShade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(34, 38, 43, 0.97) 0%, rgba(34, 38, 43, 0.9) 42%, rgba(34, 38, 43, 0.62) 100%),
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.025) 0 2px, transparent 2px 14px);
 }
 .heroGrid {
   position: relative;
@@ -83,17 +71,33 @@
   align-content: center;
   width: 100%;
   padding-top: calc(var(--header-h) + 56px);
-  padding-bottom: 12px;
+  padding-bottom: 56px;
 }
+/* Testi nello spazio a destra del globo */
 .heroCopy {
-  max-width: 760px;
-}
-.heroStrap {
   position: relative;
-  padding-bottom: 28px;
+  max-width: 560px;
+  margin-left: auto;
+}
+/* Schermi stretti o verticali: globo in alto (GlobeHero.tsx, STACKED_QUERY) e testi sotto */
+@media (max-width: 899.98px), (max-aspect-ratio: 23/20) {
+  /* A tutto schermo: sotto non deve spuntare la sezione successiva; testi al centro dello spazio sotto il globo */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  .heroGrid {
+    align-content: center;
+    padding-top: calc(var(--header-h) + 1.72 * min(52vw, 30svh));
+    padding-bottom: 40px;
+  }
+  .heroCopy {
+    max-width: 640px;
+    margin-left: 0;
+  }
 }
 .heroCopy h1 {
-  font-size: clamp(40px, 5.2vw, 72px);
+  font-size: clamp(36px, 4vw, 60px);
   font-weight: 700;
   line-height: 0.98;
   letter-spacing: 0.003em;
@@ -203,7 +207,7 @@
 .proofList {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   padding-top: 26px;
   padding-bottom: 26px;
 }
@@ -726,16 +730,6 @@
   }
 }
 @media (max-width: 900px) {
-  .hero {
-    min-height: 0;
-  }
-  .heroGrid {
-    padding-top: calc(var(--header-h) + 40px);
-    padding-bottom: 6px;
-  }
-  .heroStrap {
-    padding-bottom: 20px;
-  }
   .finderGrid,
   .serviceGrid,
   .heritage,
@@ -748,6 +742,7 @@
     gap: 16px 0;
   }
   .proofList li:nth-child(3) {
+    grid-column: 1 / -1;
     border-left: 0;
     padding-left: 0;
   }

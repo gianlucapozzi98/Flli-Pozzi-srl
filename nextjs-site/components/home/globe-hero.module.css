@@ -1,0 +1,21 @@
+/* Scena 3D dell'apertura (GlobeHero.tsx): occupa tutta l'apertura, dietro ai testi */
+.stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.ready canvas {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage canvas {
+    transition: none;
+  }
+}

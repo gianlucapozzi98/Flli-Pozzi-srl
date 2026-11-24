@@ -77,7 +77,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'rivenditore.form.error.products': 'Indica i prodotti di interesse',
     
     // Home
-    'home.hero.title': 'Tendireggia e reggiatrici per l\'imballaggio industriale',
+    'home.hero.title': 'Tendireggia e reggiatrici per l\'imballaggio',
     'home.hero.subtitle': 'Made in Italy · Ricambi originali · Assistenza tecnica in sede',
     'home.hero.eyebrow': '1947 → 2027 · 80 anni di reggiatura',
     'home.hero.cta.quote': 'Richiedi un preventivo',
@@ -474,7 +474,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'rivenditore.form.error.products': 'Please indicate the products of interest',
     
     // Home
-    'home.hero.title': 'Strapping tensioners and tools for industrial packaging',
+    'home.hero.title': 'Strapping tensioners and tools for packaging',
     'home.hero.subtitle': 'Made in Italy · Original spare parts · In-house technical service',
     'home.hero.eyebrow': '1947 → 2027 · 80 years of strapping',
     'home.hero.cta.quote': 'Request a quote',
@@ -871,7 +871,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'rivenditore.form.error.products': 'Veuillez indiquer les produits d\'intérêt',
     
     // Home
-    'home.hero.title': 'Tendeurs et cercleuses pour l\'emballage industriel',
+    'home.hero.title': 'Tendeurs et cercleuses pour l\'emballage',
     'home.hero.subtitle': 'Made in Italy · Pièces détachées d\'origine · Assistance technique sur site',
     'home.hero.eyebrow': '1947 → 2027 · 80 ans de cerclage',
     'home.hero.cta.quote': 'Demander un devis',

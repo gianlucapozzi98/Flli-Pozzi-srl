@@ -17,6 +17,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.69.0",
+    "three": "^0.181.2",
     "typescript": "^5",
     "zod": "^4.2.1"
   },
@@ -26,6 +27,7 @@
     "@types/nodemailer": "^6.4.21",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.181.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4"

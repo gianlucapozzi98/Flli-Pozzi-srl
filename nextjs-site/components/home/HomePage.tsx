@@ -7,7 +7,7 @@ import { PhoneIcon, WrenchScrewdriverIcon, CogIcon, DocumentTextIcon } from '@he
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Finder from './Finder';
-import StrapAnimation from './StrapAnimation';
+import GlobeHero from './GlobeHero';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { HOME } from '@/lib/home-content';
 import type { Material } from '@/lib/catalog';
@@ -49,20 +49,10 @@ export default function HomePage({ categories, madeProducts }: Props) {
     <>
       <Header />
       <main>
-        {/* Apertura: testo e, sotto, la reggia che attraversa tutto lo schermo */}
+        {/* Apertura: globo con la reggia che gli gira attorno a sinistra, testi a destra */}
         {/* data-hide-mobile-cta: la barra Chiama/Preventivo su mobile compare solo dopo questa sezione */}
         <section className={styles.hero} data-hide-mobile-cta>
-          {/* Sfondo scurito al 28%: basta una risoluzione più bassa, così l'apertura carica prima */}
-          <Image
-            src="/Immagini/stabilimento-fratelli-pozzi-caravaggio.png"
-            alt=""
-            fill
-            preload
-            fetchPriority="high"
-            sizes="(max-width: 900px) 60vw, 70vw"
-            className={styles.heroPhoto}
-          />
-          <div className={styles.heroShade} aria-hidden="true" />
+          <GlobeHero />
           <div className={`${styles.wrap} ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <p className={styles.heroEyebrow}>{t('home.hero.eyebrow')}</p>
@@ -81,16 +71,6 @@ export default function HomePage({ categories, madeProducts }: Props) {
                 {L(HOME.heroPhone)} <a href="tel:+390363350380">+39 0363 350380</a>
               </p>
             </div>
-          </div>
-          {/* Reggia da un bordo all'altro dello schermo */}
-          <div className={styles.heroStrap}>
-            <StrapAnimation
-              labels={{
-                aria: L(HOME.animAria),
-                tension: L(HOME.animTension),
-                steps: [L(HOME.animStep1), L(HOME.animStep2), L(HOME.animStep3)],
-              }}
-            />
           </div>
         </section>
 

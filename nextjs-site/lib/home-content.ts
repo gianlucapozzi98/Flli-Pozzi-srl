@@ -4,21 +4,8 @@ import type { L } from './catalog';
 export const HOME = {
   heroFinder: { it: 'Trova la reggiatrice giusta', en: 'Find the right tool', fr: 'Trouver la bonne cercleuse' },
   heroPhone: { it: 'Preferisci parlarne? Chiama il', en: 'Prefer to talk? Call', fr: 'Vous préférez en parler ? Appelez le' },
-  animAria: {
-    it: 'Animazione per gli 80 anni: una reggia attraversa lo schermo e viene tesa mentre gli anni contano dal 1947 al 2027; il sigillo in acciaio zincato si chiude con impresso 80, circondato da una corona d’alloro',
-    en: 'Animation for our 80th anniversary: a strap runs across the screen and is tensioned while the years count from 1947 to 2027; the galvanised steel seal closes stamped with 80, inside a laurel wreath',
-    fr: 'Animation pour nos 80 ans : un feuillard traverse l’écran et se tend pendant que les années défilent de 1947 à 2027 ; la chape en acier galvanisé se ferme marquée 80, dans une couronne de laurier',
-  },
-  animTension: { it: 'Anni', en: 'Years', fr: 'Années' },
-  animStep1: { it: 'Tensionamento…', en: 'Tensioning…', fr: 'Mise en tension…' },
-  animStep2: { it: 'Sigillatura…', en: 'Sealing…', fr: 'Pose de la chape…' },
-  animStep3: { it: '80 anni ✓', en: '80 years ✓', fr: '80 ans ✓' },
   proof: [
     { big: { it: '1947', en: '1947', fr: '1947' }, label: { it: 'anno di fondazione', en: 'year founded', fr: 'année de fondation' } },
-    {
-      big: { it: '2.200 m²', en: '2,200 m²', fr: '2 200 m²' },
-      label: { it: 'produzione, magazzino e assistenza', en: 'production, warehouse and service', fr: 'production, stock et assistance' },
-    },
     { big: { it: 'ISO 9001', en: 'ISO 9001', fr: 'ISO 9001' }, label: { it: 'sistema qualità certificato', en: 'certified quality system', fr: 'système qualité certifié' } },
     {
       big: { it: 'Made in Italy', en: 'Made in Italy', fr: 'Made in Italy' },
