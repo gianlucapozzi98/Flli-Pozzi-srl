@@ -85,7 +85,19 @@ export default function HomePage({ categories, madeProducts }: Props) {
           </div>
         </section>
 
-        {/* Storia: subito dopo l'apertura, prima dei prodotti */}
+        {/* Prove concrete */}
+        <section className={styles.proof} aria-label="Fratelli Pozzi">
+          <ul className={`${styles.wrap} ${styles.proofList}`}>
+            {HOME.proof.map((p) => (
+              <li key={p.big.it}>
+                <b className="font-heading">{L(p.big)}</b>
+                <span>{L(p.label)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Storia: dopo le prove concrete, prima dei prodotti */}
         <section className={styles.story} aria-labelledby="storia-title">
           <div className={styles.wrap}>
             <div className={styles.storyTop}>
@@ -130,18 +142,6 @@ export default function HomePage({ categories, madeProducts }: Props) {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Prove concrete */}
-        <section className={styles.proof} aria-label="Fratelli Pozzi">
-          <ul className={`${styles.wrap} ${styles.proofList}`}>
-            {HOME.proof.map((p) => (
-              <li key={p.big.it}>
-                <b className="font-heading">{L(p.big)}</b>
-                <span>{L(p.label)}</span>
-              </li>
-            ))}
-          </ul>
         </section>
 
         {/* Categorie per tipo di reggia */}
