@@ -10,7 +10,9 @@ import styles from './globe-hero.module.css';
  * Mappa della Terra: NASA Blue Marble (agosto 2004, topografia e batimetria), pubblico dominio.
  * All'apertura il sigillo è davanti a sinistra, vicino al bordo, e la reggia inizia subito a girare piano.
  * Quando il sigillo sparisce dall'altra parte, dopo 2 secondi rientra da sinistra.
- * Sul sigillo c'è l'"80" degli 80 anni (1947-2027), marcato come al laser.
+ * Una seconda reggia, quasi perpendicolare e appena sotto la principale, gira con il suo sigillo;
+ * la sua velocità si adatta di poco perché i due sigilli non si trovino mai insieme all'incrocio.
+ * Sul sigillo c'è l'"80" con la corona d'alloro del logo degli 80 anni, marcato come al laser.
  * Quando la scena è pronta avvisa la pagina (onReady), così i testi entrano insieme al globo.
  * Con "riduci movimento" la scena resta ferma, con il sigillo davanti.
  */
@@ -26,11 +28,19 @@ const SEAL_L = STRAP_W * 2.3; // lunghezza del sigillo
 const SEAL_H = STRAP_W * 1.14; // altezza del sigillo (avvolge i bordi della reggia)
 const RING_SPEED = (Math.PI * 2) / 45; // un giro della reggia ogni 45 s
 const RAMP_S = 0.8; // la reggia parte subito, con un avvio morbido
+const RING2_R = RING_R - STRAP_T * 2.9; // seconda reggia: passa sotto la principale, sigilli compresi
+const RING2_AXIS = [-0.75, -0.2, 0.63] as const; // asse della seconda reggia: circa 79° dalla principale, incrocio in obliquo
+const RING2_SPEED = (Math.PI * 2) / 52; // un giro ogni 52 s
+const RING2_START = 0.5; // all'apertura il secondo sigillo è sul globo, appena sopra l'incrocio
+const SEAL_GAP = 0.7; // distanza minima (radianti lungo la reggia) tra un sigillo e l'incrocio quando l'altro ci passa
 const HIDDEN_WAIT_S = 2; // sparito dietro al globo, il sigillo rientra da sinistra dopo 2 s
 const GLOBE_SPEED = (Math.PI * 2) / 300; // un giro del globo ogni 5 minuti
 const EARTH_SMALL = '/Immagini/terra-nasa-2048.jpg';
 const EARTH_LARGE = '/Immagini/terra-nasa-3072.jpg';
 const FACE_LON = 8; // longitudine rivolta verso chi guarda all'apertura (Europa e Africa)
+
+/* Angolo riportato tra -π e π */
+const wrapAngle = (a: number) => a - Math.round(a / (Math.PI * 2)) * Math.PI * 2;
 
 type Layout = { r: number; cx: number; cy: number };
 
@@ -127,7 +137,11 @@ function sealStrip(): Strip {
     ...arc(dri + cr, h - cr, Math.PI / 2, Math.PI),
     [dri, h - lip],
   ];
-  return { profile: p, v: p.map(([, y]) => (y + h) / SEAL_H) };
+  // Le alette sotto la reggia prendono solo il bordo liscio della texture: la marcatura si vede solo sopra
+  const v = p.map(([, y]) => (y + h) / SEAL_H);
+  v[0] = 0.035;
+  v[v.length - 1] = 0.965;
+  return { profile: p, v };
 }
 
 /* Estremità smussate: la lamiera scende un poco verso la reggia ai due capi del sigillo */
@@ -206,41 +220,80 @@ function strapNormalMap(T: Three) {
   return tex;
 }
 
-type Fonts = { head: string; mono: string };
-
 /*
- * Marcatura laser al centro del sigillo: "80" grande e, accanto, 1947 / 2027.
- * Restituisce l'ingombro (per lasciare libera la zona dai bollini) e la funzione che la disegna.
+ * Marcatura laser al centro del sigillo, come il logo degli 80 anni: "80" a tratto pieno e arrotondato
+ * dentro una corona d'alloro aperta in alto. Restituisce l'ingombro (la zona resta libera dai bollini)
+ * e la funzione che la disegna con il colore impostato sul contesto.
  */
-function laserMark(ctx: CanvasRenderingContext2D, W: number, H: number, fonts: Fonts) {
-  const big = `700 ${Math.round(H * 0.74)}px ${fonts.head}`;
-  const small = `500 ${Math.round(H * 0.125)}px ${fonts.mono}`;
-  ctx.save();
-  ctx.font = big;
-  const bigW = ctx.measureText('80').width;
-  ctx.font = small;
-  const smallW = Math.max(ctx.measureText('1947').width, ctx.measureText('2027').width);
-  ctx.restore();
-  const gap = W * 0.022;
-  const total = bigW + gap + smallW;
-  const x0 = (W - total) / 2;
-  const base = H * 0.5 + H * 0.74 * 0.355; // cifre centrate in altezza (altezza delle cifre ≈ 0,71 em)
-  const draw = (c: CanvasRenderingContext2D) => {
-    c.textBaseline = 'alphabetic';
-    c.textAlign = 'left';
-    c.font = big;
-    c.fillText('80', x0, base);
-    c.font = small;
-    const sx = x0 + bigW + gap;
-    c.fillText('1947', sx, H * 0.5 - H * 0.045);
-    c.fillRect(sx, H * 0.5 - H * 0.008, smallW, Math.max(2, H * 0.016));
-    c.fillText('2027', sx, H * 0.5 + H * 0.135);
+function laserMark(W: number, H: number) {
+  const cx = W / 2;
+  const cy = H / 2;
+  const U = H * 0.385;
+  const Hd = U * 1.12; // altezza delle cifre
+  const s = Hd * 0.155; // spessore del tratto
+  const Rw = U * 0.86; // raggio dei rami della corona
+  const ring = (c: CanvasRenderingContext2D, x: number, y: number, rx: number, ry: number) => {
+    c.beginPath();
+    c.ellipse(x, y, rx - s / 2, ry - s / 2, 0, 0, Math.PI * 2);
+    c.stroke();
   };
-  return { x0, x1: x0 + total, draw };
+  const leaf = (c: CanvasRenderingContext2D, x: number, y: number, ang: number, L: number) => {
+    c.save();
+    c.translate(x, y);
+    c.rotate(ang);
+    c.beginPath();
+    c.moveTo(0, 0);
+    c.quadraticCurveTo(L * 0.5, -L * 0.36, L, 0);
+    c.quadraticCurveTo(L * 0.5, L * 0.36, 0, 0);
+    c.fill();
+    c.restore();
+  };
+  // Ramo sinistro: dal basso (θ = 0) sale fino quasi in cima; il destro è il suo riflesso
+  const branch = (c: CanvasRenderingContext2D) => {
+    c.lineWidth = U * 0.04;
+    c.lineCap = 'round';
+    c.beginPath();
+    c.arc(cx, cy, Rw, Math.PI / 2 - 0.14, Math.PI / 2 + 2.62);
+    c.stroke();
+    const n = 9;
+    for (let i = 0; i < n; i++) {
+      const th = 0.36 + (i * 2.3) / (n - 1);
+      const L = U * 0.24 * (1 - (i / (n - 1)) * 0.3);
+      const tang = Math.atan2(-Math.sin(th), -Math.cos(th)); // verso di crescita del ramo
+      const at = (t: number) => [cx - Rw * Math.sin(t), cy + Rw * Math.cos(t)] as const;
+      const [ox, oy] = at(th);
+      leaf(c, ox, oy, tang - 0.62, L); // foglia esterna
+      const [ix, iy] = at(th + 0.09);
+      leaf(c, ix, iy, tang + 0.62, L * 0.86); // foglia interna, sfalsata
+    }
+    // punta del ramo
+    const [tx, ty] = [cx - Rw * Math.sin(2.74), cy + Rw * Math.cos(2.74)];
+    leaf(c, tx, ty, Math.atan2(-Math.sin(2.74), -Math.cos(2.74)), U * 0.17);
+  };
+  const draw = (c: CanvasRenderingContext2D) => {
+    c.save();
+    c.strokeStyle = c.fillStyle;
+    branch(c);
+    c.translate(2 * cx, 0);
+    c.scale(-1, 1);
+    branch(c);
+    c.restore();
+    c.save();
+    c.strokeStyle = c.fillStyle;
+    c.lineWidth = s;
+    const x8 = cx - U * 0.31;
+    const lowH = Hd * 0.56;
+    const upH = Hd * 0.47;
+    ring(c, x8, cy + Hd / 2 - lowH / 2, U * 0.27, lowH / 2);
+    ring(c, x8, cy - Hd / 2 + upH / 2, U * 0.23, upH / 2);
+    ring(c, cx + U * 0.31, cy, U * 0.29, Hd / 2);
+    c.restore();
+  };
+  return { x0: cx - U * 1.06, x1: cx + U * 1.06, draw };
 }
 
 /* Sigillo zincato bulinato: fiori di zincatura, grana, bollini punzonati e marcatura laser dell'80 */
-function sealTextures(T: Three, aniso: number, fonts: Fonts) {
+function sealTextures(T: Three, aniso: number) {
   const W = 1024;
   const Hh = Math.round((W * SEAL_H) / SEAL_L);
   const rand = rng(7);
@@ -293,7 +346,7 @@ function sealTextures(T: Three, aniso: number, fonts: Fonts) {
   const dimpleR = W * 0.0125;
   const rows = [0.19, 0.35, 0.5, 0.65, 0.81];
   const cols = 12;
-  const mark = laserMark(cctx, W, Hh, fonts);
+  const mark = laserMark(W, Hh);
   const clear = W * 0.035; // margine libero attorno alla marcatura
   rows.forEach((v, ri) => {
     const off = ri % 2 ? 0.5 : 0;
@@ -446,24 +499,6 @@ const RIM_FRAG = /* glsl */ `
   }
 `;
 
-/* Font del sito per la marcatura del sigillo (aspetta al massimo 1,5 s che siano caricati) */
-async function siteFonts(): Promise<Fonts> {
-  const css = getComputedStyle(document.documentElement);
-  const fonts = {
-    head: css.getPropertyValue('--font-heading').trim() || 'Arial Narrow, Arial, sans-serif',
-    mono: css.getPropertyValue('--font-mono').trim() || 'monospace',
-  };
-  try {
-    await Promise.race([
-      Promise.all([document.fonts.load(`700 100px ${fonts.head}`, '80'), document.fonts.load(`500 40px ${fonts.mono}`, '19472')]),
-      new Promise((r) => setTimeout(r, 1500)),
-    ]);
-  } catch {
-    // font di riserva
-  }
-  return fonts;
-}
-
 export default function GlobeHero({ onReady }: { onReady?: () => void }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const readyRef = useRef(onReady);
@@ -554,9 +589,8 @@ export default function GlobeHero({ onReady }: { onReady?: () => void }) {
       // Globo
       const isSmall = window.innerWidth < 1100;
       let earthMap: import('three').Texture;
-      let fonts: Fonts;
       try {
-        [earthMap, fonts] = await Promise.all([new T.TextureLoader().loadAsync(isSmall ? EARTH_SMALL : EARTH_LARGE), siteFonts()]);
+        earthMap = await new T.TextureLoader().loadAsync(isSmall ? EARTH_SMALL : EARTH_LARGE);
       } catch {
         renderer.dispose();
         renderer.domElement.remove();
@@ -608,17 +642,8 @@ export default function GlobeHero({ onReady }: { onReady?: () => void }) {
         envMapIntensity: 0.4,
         side: T.DoubleSide,
       });
-      const uStrap = (th: number) => (th * RING_R) / STRAP_W;
-      const half = SEAL_L / 2 / RING_R;
-      const bandGeo = sweep(T, RING_R, 0, Math.PI * 2, 900, strapStrips(STRAP_T, STRAP_W), uStrap);
-      // Capo superiore sovrapposto: entra nel sigillo e sporge un poco da un lato
-      const tailGeo = sweep(T, RING_R + STRAP_T * 1.02, -half * 0.9, half + (STRAP_W * 0.55) / RING_R, 60, strapStrips(STRAP_T, STRAP_W), uStrap);
-      const band = new T.Mesh(bandGeo, strapMat);
-      const tail = new T.Mesh(tailGeo, strapMat);
-      band.castShadow = tail.castShadow = true;
-
       // Sigillo
-      const sealTex = sealTextures(T, aniso, fonts);
+      const sealTex = sealTextures(T, aniso);
       const sealMat = new T.MeshStandardMaterial({
         map: sealTex.map,
         normalMap: sealTex.normal,
@@ -631,19 +656,61 @@ export default function GlobeHero({ onReady }: { onReady?: () => void }) {
         envMapIntensity: 0.9,
         side: T.DoubleSide,
       });
-      const sealGeo = sweep(T, RING_R, -half, half, 80, [sealStrip()], (th) => (th + half) / (2 * half), sealEnds);
-      const seal = new T.Mesh(sealGeo, sealMat);
-      seal.castShadow = true;
 
+      /*
+       * Una reggia chiusa dal suo sigillo, di raggio R: anello, capo sovrapposto e sigillo girano insieme.
+       * flip gira di 180° la marcatura, perché sulla seconda reggia l'80 si legga dritto.
+       */
+      const makeRing = (R: number, flip = false) => {
+        const half = SEAL_L / 2 / R;
+        const uStrap = (th: number) => (th * R) / STRAP_W;
+        const band = new T.Mesh(sweep(T, R, 0, Math.PI * 2, 900, strapStrips(STRAP_T, STRAP_W), uStrap), strapMat);
+        // Capo superiore sovrapposto: entra nel sigillo e sporge un poco da un lato
+        const tail = new T.Mesh(
+          sweep(T, R + STRAP_T * 1.02, -half * 0.9, half + (STRAP_W * 0.55) / R, 60, strapStrips(STRAP_T, STRAP_W), uStrap),
+          strapMat,
+        );
+        const strip = sealStrip();
+        if (flip) strip.v = strip.v.map((v) => 1 - v);
+        const uSeal = (th: number) => (flip ? (half - th) / (2 * half) : (th + half) / (2 * half));
+        const seal = new T.Mesh(sweep(T, R, -half, half, 80, [strip], uSeal, sealEnds), sealMat);
+        band.castShadow = tail.castShadow = seal.castShadow = true;
+        const spin = new T.Group();
+        spin.add(band, tail, seal);
+        return { spin, seal, half };
+      };
+
+      // Reggia principale
+      const main = makeRing(RING_R);
+      const { seal, half } = main;
+      const ringSpin = main.spin;
       const ringTilt = new T.Group();
       ringTilt.rotation.order = 'ZXY';
       ringTilt.rotation.set(0.2, 0, 0.34);
-      const ringSpin = new T.Group();
       ringSpin.rotation.y = -Math.PI / 2;
       let moved = false; // la reggia ha già iniziato a girare
-      ringSpin.add(band, tail, seal);
       ringTilt.add(ringSpin);
       earth.add(ringTilt);
+
+      // Seconda reggia: quasi perpendicolare alla principale (non a croce) e appena sotto, dove si incrociano
+      const second = makeRing(RING2_R, true);
+      const ring2Tilt = new T.Group();
+      ring2Tilt.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), new T.Vector3(...RING2_AXIS).normalize());
+      ring2Tilt.add(second.spin);
+      earth.add(ring2Tilt);
+      // Incrocio davanti delle due regge e sua posizione lungo ciascuna (angolo del sigillo quando ci passa sopra)
+      const crossDir = new T.Vector3()
+        .crossVectors(new T.Vector3(0, 1, 0).applyQuaternion(ringTilt.quaternion), new T.Vector3(0, 1, 0).applyQuaternion(ring2Tilt.quaternion))
+        .normalize();
+      if (crossDir.z < 0) crossDir.negate();
+      const angleOn = (tilt: import('three').Group) => {
+        const l = crossDir.clone().applyQuaternion(tilt.quaternion.clone().invert());
+        return Math.atan2(-l.z, l.x);
+      };
+      const crossMain = angleOn(ringTilt);
+      const crossSecond = angleOn(ring2Tilt);
+      // all'apertura il secondo sigillo è già oltre l'incrocio, lontano dal principale
+      second.spin.rotation.y = crossSecond + RING2_START;
 
       // Impaginazione: globo a sinistra (o in alto su schermi stretti), in parte fuori pagina
       const place = () => {
@@ -712,6 +779,7 @@ export default function GlobeHero({ onReady }: { onReady?: () => void }) {
         ringSpin.rotation.y = moved ? keep : start;
       };
       // passo della goffratura lungo la reggia: i salti avvengono di un numero intero di rombi, così non si notano
+      let ring2Speed = RING2_SPEED;
       const embossStep = (0.25 / 1.6) * (STRAP_W / RING_R);
       let seen = true;
       let hiddenAt = -1;
@@ -745,6 +813,22 @@ export default function GlobeHero({ onReady }: { onReady?: () => void }) {
           ringSpin.rotation.y = a + Math.round(delta / embossStep) * embossStep;
           hiddenAt = -1;
         }
+        // Seconda reggia: gira per conto suo, ma rallenta o accelera un poco perché il suo sigillo non sia
+        // all'incrocio quando ci passa sopra il sigillo principale
+        let want = RING2_SPEED;
+        const dMain = wrapAngle(ringSpin.rotation.y - crossMain);
+        if (dMain < -0.05) {
+          const tau = -dMain / RING_SPEED; // secondi prima che il sigillo principale arrivi all'incrocio
+          const e = wrapAngle(second.spin.rotation.y - crossSecond + RING2_SPEED * tau);
+          if (Math.abs(e) < SEAL_GAP) {
+            const late = -SEAL_GAP - e;
+            const early = SEAL_GAP - e;
+            const fix = Math.abs(late) < Math.abs(early) ? late : early;
+            want = Math.min(Math.max(RING2_SPEED + fix / tau, RING2_SPEED * 0.4), RING2_SPEED * 1.9);
+          }
+        }
+        ring2Speed += (want - ring2Speed) * Math.min(1, dt * 2);
+        second.spin.rotation.y += ring2Speed * k * k * (3 - 2 * k) * dt;
         render();
         raf = requestAnimationFrame(frame);
       };
