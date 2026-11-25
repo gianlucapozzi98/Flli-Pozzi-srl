@@ -154,10 +154,48 @@ export const HOME = {
 
   heritageTitle: { it: 'Ottant’anni di reggiatura', en: 'Eighty years of strapping', fr: 'Quatre-vingts ans de cerclage' },
   heritageText: {
-    it: 'Dalla prima officina meccanica nella Bergamasca allo stabilimento di 2.200 m² di Caravaggio: produzione, magazzino e assistenza sotto lo stesso tetto. Nel 2027 compiamo 80 anni.',
-    en: 'From the first machine shop near Bergamo to the 2,200 m² facility in Caravaggio: production, warehouse and service under one roof. In 2027 we turn 80.',
-    fr: 'Du premier atelier mécanique de la région de Bergame au site de 2 200 m² de Caravaggio : production, stock et assistance sous le même toit. En 2027, nous fêtons nos 80 ans.',
+    it: 'Fratelli Pozzi nasce nel 1947 come piccola officina meccanica nella Bergamasca e cresce insieme alla reggiatura. Oggi a Caravaggio produciamo tendireggia, forniamo reggia e sigilli e assistiamo reggiatrici di ogni tipo, per clienti in Italia e all’estero.',
+    en: 'Fratelli Pozzi was founded in 1947 as a small machine shop near Bergamo and grew together with strapping. Today in Caravaggio we make tensioners, supply strap and seals and service every type of strapping machine, for customers in Italy and abroad.',
+    fr: 'Fratelli Pozzi naît en 1947 comme petit atelier mécanique dans la région de Bergame et grandit avec le cerclage. Aujourd’hui, à Caravaggio, nous fabriquons des tendeurs, fournissons feuillard et chapes et assurons l’assistance de tout type de cercleuse, en Italie et à l’étranger.',
   },
+  heritageSteps: [
+    {
+      year: { it: '1947', en: '1947', fr: '1947' },
+      t: { it: 'Nasce l’officina', en: 'The workshop opens', fr: 'Naissance de l’atelier' },
+      d: {
+        it: 'Fratelli Pozzi apre come officina meccanica artigiana nella Bergamasca.',
+        en: 'Fratelli Pozzi starts as a small machine shop in the Bergamo area.',
+        fr: 'Fratelli Pozzi démarre comme atelier mécanique artisanal près de Bergame.',
+      },
+    },
+    {
+      year: { it: '1949', en: '1949', fr: '1949' },
+      t: { it: 'In fiera a Parma', en: 'At the Parma fair', fr: 'Au salon de Parme' },
+      d: {
+        it: 'Da Treviglio alla 4ª Mostra Internazionale delle Conserve, con gli articoli per l’imballaggio.',
+        en: 'From Treviglio to the 4th International Canned Food Exhibition, with packaging equipment.',
+        fr: 'De Treviglio à la 4e Exposition internationale des conserves, avec les articles d’emballage.',
+      },
+    },
+    {
+      year: { it: 'Oggi', en: 'Today', fr: 'Aujourd’hui' },
+      t: { it: 'A Caravaggio', en: 'In Caravaggio', fr: 'À Caravaggio' },
+      d: {
+        it: 'Produzione, magazzino e assistenza sotto lo stesso tetto, con una rete commerciale in gran parte del mondo.',
+        en: 'Production, warehouse and service under one roof, with a sales network across much of the world.',
+        fr: 'Production, stock et assistance sous le même toit, avec un réseau commercial dans une grande partie du monde.',
+      },
+    },
+    {
+      year: { it: '2027', en: '2027', fr: '2027' },
+      t: { it: '80 anni', en: '80 years', fr: '80 ans' },
+      d: {
+        it: 'Ottant’anni di reggiatura, sempre con i tendireggia prodotti in Italia.',
+        en: 'Eighty years of strapping, still with tensioners made in Italy.',
+        fr: 'Quatre-vingts ans de cerclage, toujours avec des tendeurs fabriqués en Italie.',
+      },
+    },
+  ],
   heritageCaption: {
     it: 'Lo stand Fratelli Pozzi alla 4ª Mostra Internazionale delle Conserve, Parma, settembre 1949.',
     en: 'The Fratelli Pozzi stand at the 4th International Canned Food Exhibition, Parma, September 1949.',

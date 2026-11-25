@@ -694,30 +694,147 @@
 }
 
 /* Storia */
-.heritage {
+/* Storia: subito dopo l'apertura. Carta calda d'archivio, foto del 1949 come una stampa, tappe principali */
+.story {
+  background: #f3efe7;
+  border-bottom: 1px solid #e0d8c9;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+.storyTop {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 72px;
   align-items: center;
 }
-.heritage figure img {
+.storyPhoto {
+  margin: 0;
+}
+.storyPrint {
+  background: #fff;
+  padding: 14px;
+  transform: rotate(-1.6deg);
+  box-shadow:
+    0 22px 44px rgba(52, 40, 24, 0.18),
+    0 2px 6px rgba(52, 40, 24, 0.12);
+}
+.storyPrint img {
+  display: block;
   width: 100%;
   height: auto;
-  border-radius: 3px;
-  display: block;
+  filter: sepia(0.22) contrast(1.03);
 }
-.heritage figcaption {
-  margin-top: 10px;
+.storyPhoto figcaption {
+  margin-top: 22px;
+  max-width: 44ch;
   font-size: 13px;
-  color: #596169;
+  line-height: 1.5;
+  color: #6b6459;
 }
-.years {
-  font-size: clamp(64px, 9vw, 112px);
+.storyCopy {
+  position: relative;
+}
+.storyBadge {
+  position: absolute;
+  top: -18px;
+  right: 0;
+  width: 138px;
+  height: auto;
+}
+.storyTitle {
+  max-width: calc(100% - 160px);
+  font-size: clamp(40px, 4.8vw, 66px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: #15191d;
+}
+.storyText {
+  max-width: 58ch;
+  margin-top: 22px;
+  margin-bottom: 40px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #3e444a;
+}
+.timeline {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 40px;
+  margin: 0 0 36px;
+  padding: 0;
+}
+.timeline li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 16px;
+  border-top: 2px solid #d9cfbd;
+}
+.timeline li::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 36px;
+  height: 2px;
+  background: var(--color-primary, #e30613);
+}
+.tlYear {
+  font-size: 42px;
   font-weight: 700;
   line-height: 1;
   color: var(--color-primary, #e30613);
-  margin-top: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
+}
+.timeline b {
+  font-size: 16px;
+  color: #15191d;
+}
+.timeline li > span:last-child {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #596169;
+}
+.storyLink {
+  display: inline-block;
+  padding-bottom: 2px;
+  border-bottom: 2px solid currentColor;
+  font-weight: 600;
+  color: var(--color-primary-dark, #b8050f);
+}
+.storyLink:hover {
+  color: #15191d;
+}
+@media (max-width: 900px) {
+  .story {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  .storyTop {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+  .storyPhoto {
+    max-width: 440px;
+  }
+  .storyBadge {
+    top: -8px;
+    width: 96px;
+  }
+  .storyTitle {
+    max-width: calc(100% - 108px);
+  }
+}
+@media (max-width: 640px) {
+  .timeline {
+    gap: 24px 20px;
+  }
+  .tlYear {
+    font-size: 34px;
+  }
 }
 
 /* Chiusura */
@@ -764,7 +881,6 @@
 @media (max-width: 900px) {
   .finderGrid,
   .serviceGrid,
-  .heritage,
   .finalGrid {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;

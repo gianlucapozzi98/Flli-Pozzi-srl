@@ -85,6 +85,53 @@ export default function HomePage({ categories, madeProducts }: Props) {
           </div>
         </section>
 
+        {/* Storia: subito dopo l'apertura, prima dei prodotti */}
+        <section className={styles.story} aria-labelledby="storia-title">
+          <div className={styles.wrap}>
+            <div className={styles.storyTop}>
+              <figure className={styles.storyPhoto}>
+                <div className={styles.storyPrint}>
+                  <Image
+                    src="/Immagini/fratelli-pozzi-foto-storica-1949.jpg"
+                    alt={L(HOME.heritageCaption)}
+                    width={620}
+                    height={800}
+                    sizes="(max-width: 900px) 90vw, 440px"
+                  />
+                </div>
+                <figcaption>{L(HOME.heritageCaption)}</figcaption>
+              </figure>
+              <div className={styles.storyCopy}>
+                <Image
+                  src="/Immagini/flli-pozzi-80-corona.png"
+                  alt=""
+                  width={420}
+                  height={384}
+                  sizes="150px"
+                  className={styles.storyBadge}
+                />
+                <p className={styles.eyebrow}>1947 → 2027</p>
+                <h2 id="storia-title" className={`${styles.storyTitle} font-heading font-bold`}>
+                  {L(HOME.heritageTitle)}
+                </h2>
+                <p className={styles.storyText}>{L(HOME.heritageText)}</p>
+                <ol className={styles.timeline}>
+                  {HOME.heritageSteps.map((s) => (
+                    <li key={s.year.it}>
+                      <span className={`${styles.tlYear} font-heading`}>{L(s.year)}</span>
+                      <b>{L(s.t)}</b>
+                      <span>{L(s.d)}</span>
+                    </li>
+                  ))}
+                </ol>
+                <Link href={lp('/azienda')} className={styles.storyLink}>
+                  {L(HOME.heritageLink)}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Prove concrete */}
         <section className={styles.proof} aria-label="Fratelli Pozzi">
           <ul className={`${styles.wrap} ${styles.proofList}`}>
@@ -259,31 +306,6 @@ export default function HomePage({ categories, madeProducts }: Props) {
                   <span>{L(s.d)}</span>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Storia */}
-        <section className={`${styles.section} ${styles.alt}`}>
-          <div className={`${styles.wrap} ${styles.heritage}`}>
-            <figure>
-              <Image
-                src="/Immagini/fratelli-pozzi-foto-storica-1949.jpg"
-                alt={L(HOME.heritageCaption)}
-                width={620}
-                height={800}
-                sizes="(max-width: 900px) 100vw, 420px"
-              />
-              <figcaption>{L(HOME.heritageCaption)}</figcaption>
-            </figure>
-            <div>
-              <p className={styles.eyebrow}>1947 → 2027</p>
-              <h2 className={`${styles.h2} font-heading font-bold`}>{L(HOME.heritageTitle)}</h2>
-              <p className={styles.sub}>{L(HOME.heritageText)}</p>
-              <p className={`${styles.years} font-heading`}>80</p>
-              <Link href={lp('/azienda')} className={styles.textLink}>
-                {L(HOME.heritageLink)}
-              </Link>
             </div>
           </div>
         </section>
