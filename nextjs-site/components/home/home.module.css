@@ -151,11 +151,40 @@
   text-decoration: underline;
 }
 
-/* Entrata in sequenza dei testi all'apertura (una sola volta) */
+/* Desktop (globo a sinistra, testi a destra): testi più grandi del 15% */
+@media (min-width: 900px) and (min-aspect-ratio: 23/20) {
+  .heroCopy h1 {
+    font-size: clamp(41px, 4.6vw, 69px);
+    margin-bottom: 23px;
+  }
+  .heroEyebrow {
+    font-size: 14.4px;
+    margin-bottom: 21px;
+  }
+  .heroSub {
+    font-size: clamp(18.4px, 1.725vw, 21.85px);
+  }
+  .heroCtas {
+    margin-top: 34px;
+  }
+  .heroCtas .btn {
+    font-size: 17.8px;
+    padding: 15px 25px;
+  }
+  .heroPhone {
+    font-size: 17.25px;
+    margin-top: 21px;
+  }
+}
+
+/*
+ * Entrata dei testi insieme al globo: restano nascosti finché la scena 3D è pronta
+ * (data-intro="go", impostato da HomePage) e poi entrano in sequenza mentre il globo compare.
+ */
 @keyframes heroIn {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -167,28 +196,30 @@
 .heroSub,
 .heroCtas,
 .heroPhone {
-  animation: heroIn 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: heroIn 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-play-state: paused;
 }
-/* Il titolo è l'elemento principale della pagina (LCP): visibile subito, entra solo con un movimento */
-@keyframes heroRise {
-  from {
-    transform: translateY(14px);
-  }
-  to {
-    transform: none;
-  }
+.hero[data-intro='go'] .heroEyebrow,
+.hero[data-intro='go'] .heroCopy h1,
+.hero[data-intro='go'] .heroSub,
+.hero[data-intro='go'] .heroCtas,
+.hero[data-intro='go'] .heroPhone {
+  animation-play-state: running;
+}
+.heroEyebrow {
+  animation-delay: 0.25s;
 }
 .heroCopy h1 {
-  animation-name: heroRise;
+  animation-delay: 0.35s;
 }
 .heroSub {
-  animation-delay: 0.22s;
+  animation-delay: 0.5s;
 }
 .heroCtas {
-  animation-delay: 0.34s;
+  animation-delay: 0.62s;
 }
 .heroPhone {
-  animation-delay: 0.44s;
+  animation-delay: 0.72s;
 }
 @media (prefers-reduced-motion: reduce) {
   .heroEyebrow,

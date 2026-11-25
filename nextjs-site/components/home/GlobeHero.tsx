@@ -10,6 +10,8 @@ import styles from './globe-hero.module.css';
  * Mappa della Terra: NASA Blue Marble (agosto 2004, topografia e batimetria), pubblico dominio.
  * All'apertura il sigillo è davanti a sinistra, vicino al bordo, e la reggia inizia subito a girare piano.
  * Quando il sigillo sparisce dall'altra parte, dopo 2 secondi rientra da sinistra.
+ * Sul sigillo c'è l'"80" degli 80 anni (1947-2027), marcato come al laser.
+ * Quando la scena è pronta avvisa la pagina (onReady), così i testi entrano insieme al globo.
  * Con "riduci movimento" la scena resta ferma, con il sigillo davanti.
  */
 
@@ -18,14 +20,16 @@ export const STACKED_QUERY = '(max-width: 899.98px), (max-aspect-ratio: 23/20)';
 
 const FOV = 20;
 const RING_R = 1.13; // raggio della reggia (globo = 1)
-const STRAP_W = 0.098; // larghezza della reggia
-const STRAP_T = 0.0075; // spessore della reggia
+const STRAP_W = 0.1127; // larghezza della reggia (+15% rispetto alla prima versione)
+const STRAP_T = 0.0086; // spessore della reggia
 const SEAL_L = STRAP_W * 2.3; // lunghezza del sigillo
 const SEAL_H = STRAP_W * 1.14; // altezza del sigillo (avvolge i bordi della reggia)
 const RING_SPEED = (Math.PI * 2) / 45; // un giro della reggia ogni 45 s
 const RAMP_S = 0.8; // la reggia parte subito, con un avvio morbido
 const HIDDEN_WAIT_S = 2; // sparito dietro al globo, il sigillo rientra da sinistra dopo 2 s
 const GLOBE_SPEED = (Math.PI * 2) / 300; // un giro del globo ogni 5 minuti
+const EARTH_SMALL = '/Immagini/terra-nasa-2048.jpg';
+const EARTH_LARGE = '/Immagini/terra-nasa-3072.jpg';
 const FACE_LON = 8; // longitudine rivolta verso chi guarda all'apertura (Europa e Africa)
 
 type Layout = { r: number; cx: number; cy: number };
@@ -202,8 +206,41 @@ function strapNormalMap(T: Three) {
   return tex;
 }
 
-/* Sigillo zincato bulinato: fiori di zincatura, grana e bollini punzonati fitti */
-function sealTextures(T: Three, aniso: number) {
+type Fonts = { head: string; mono: string };
+
+/*
+ * Marcatura laser al centro del sigillo: "80" grande e, accanto, 1947 / 2027.
+ * Restituisce l'ingombro (per lasciare libera la zona dai bollini) e la funzione che la disegna.
+ */
+function laserMark(ctx: CanvasRenderingContext2D, W: number, H: number, fonts: Fonts) {
+  const big = `700 ${Math.round(H * 0.74)}px ${fonts.head}`;
+  const small = `500 ${Math.round(H * 0.125)}px ${fonts.mono}`;
+  ctx.save();
+  ctx.font = big;
+  const bigW = ctx.measureText('80').width;
+  ctx.font = small;
+  const smallW = Math.max(ctx.measureText('1947').width, ctx.measureText('2027').width);
+  ctx.restore();
+  const gap = W * 0.022;
+  const total = bigW + gap + smallW;
+  const x0 = (W - total) / 2;
+  const base = H * 0.5 + H * 0.74 * 0.355; // cifre centrate in altezza (altezza delle cifre ≈ 0,71 em)
+  const draw = (c: CanvasRenderingContext2D) => {
+    c.textBaseline = 'alphabetic';
+    c.textAlign = 'left';
+    c.font = big;
+    c.fillText('80', x0, base);
+    c.font = small;
+    const sx = x0 + bigW + gap;
+    c.fillText('1947', sx, H * 0.5 - H * 0.045);
+    c.fillRect(sx, H * 0.5 - H * 0.008, smallW, Math.max(2, H * 0.016));
+    c.fillText('2027', sx, H * 0.5 + H * 0.135);
+  };
+  return { x0, x1: x0 + total, draw };
+}
+
+/* Sigillo zincato bulinato: fiori di zincatura, grana, bollini punzonati e marcatura laser dell'80 */
+function sealTextures(T: Three, aniso: number, fonts: Fonts) {
   const W = 1024;
   const Hh = Math.round((W * SEAL_H) / SEAL_L);
   const rand = rng(7);
@@ -256,10 +293,13 @@ function sealTextures(T: Three, aniso: number) {
   const dimpleR = W * 0.0125;
   const rows = [0.19, 0.35, 0.5, 0.65, 0.81];
   const cols = 12;
+  const mark = laserMark(cctx, W, Hh, fonts);
+  const clear = W * 0.035; // margine libero attorno alla marcatura
   rows.forEach((v, ri) => {
     const off = ri % 2 ? 0.5 : 0;
     for (let k = 0; k < cols - (off ? 1 : 0); k++) {
       const x = (0.07 + ((k + off) * 0.86) / (cols - 1)) * W + (rand() - 0.5) * 3;
+      if (x > mark.x0 - clear && x < mark.x1 + clear) continue; // al centro c'è la marcatura laser
       const y = (1 - v) * Hh + (rand() - 0.5) * 3;
       const r = dimpleR * (0.92 + rand() * 0.16);
       const grad = hctx.createRadialGradient(x, y, 0, x, y, r * 1.3);
@@ -281,6 +321,38 @@ function sealTextures(T: Three, aniso: number) {
       cctx.fill();
     }
   });
+  // Marcatura laser: alone di calore appena brunito, segno grigio scuro opaco a righe fitte, leggermente inciso
+  cctx.save();
+  cctx.shadowColor = 'rgba(96,74,48,0.55)';
+  cctx.shadowBlur = 16;
+  cctx.fillStyle = 'rgba(96,74,48,0.18)';
+  mark.draw(cctx);
+  cctx.restore();
+  const [ec, ectx] = canvas(W, Hh);
+  ectx.fillStyle = '#fff';
+  mark.draw(ectx);
+  ectx.globalCompositeOperation = 'source-in';
+  ectx.fillStyle = 'rgb(46,49,54)';
+  ectx.fillRect(0, 0, W, Hh);
+  ectx.globalCompositeOperation = 'source-atop';
+  for (let y = 0; y < Hh; y += 3) {
+    ectx.fillStyle = `rgba(150,156,164,${0.05 + rand() * 0.05})`;
+    ectx.fillRect(0, y, W, 1);
+  }
+  cctx.drawImage(ec, 0, 0);
+  hctx.save();
+  hctx.shadowColor = 'rgb(112,112,112)';
+  hctx.shadowBlur = 2;
+  hctx.fillStyle = 'rgb(112,112,112)';
+  mark.draw(hctx);
+  hctx.restore();
+  // Rugosità (verde) e metallicità (blu): zinco lucido, marcatura opaca e poco metallica
+  const [rc, rctx] = canvas(W, Hh);
+  rctx.fillStyle = 'rgb(0,82,235)';
+  rctx.fillRect(0, 0, W, Hh);
+  rctx.fillStyle = 'rgb(0,158,105)';
+  mark.draw(rctx);
+
   // Fianchi: un po' più scuri della faccia
   const edge = cctx.createLinearGradient(0, 0, 0, Hh);
   edge.addColorStop(0, 'rgba(30,36,42,0.3)');
@@ -296,7 +368,10 @@ function sealTextures(T: Three, aniso: number) {
   const normal = new T.CanvasTexture(normalFromHeight(hctx.getImageData(0, 0, W, Hh), 6, false));
   normal.colorSpace = T.NoColorSpace;
   normal.anisotropy = aniso;
-  return { map, normal };
+  const rm = new T.CanvasTexture(rc);
+  rm.colorSpace = T.NoColorSpace;
+  rm.anisotropy = aniso;
+  return { map, normal, rm };
 }
 
 /* Rugosità del globo: oceani lucidi (riflesso del sole), terre opache */
@@ -371,14 +446,38 @@ const RIM_FRAG = /* glsl */ `
   }
 `;
 
-export default function GlobeHero() {
+/* Font del sito per la marcatura del sigillo (aspetta al massimo 1,5 s che siano caricati) */
+async function siteFonts(): Promise<Fonts> {
+  const css = getComputedStyle(document.documentElement);
+  const fonts = {
+    head: css.getPropertyValue('--font-heading').trim() || 'Arial Narrow, Arial, sans-serif',
+    mono: css.getPropertyValue('--font-mono').trim() || 'monospace',
+  };
+  try {
+    await Promise.race([
+      Promise.all([document.fonts.load(`700 100px ${fonts.head}`, '80'), document.fonts.load(`500 40px ${fonts.mono}`, '19472')]),
+      new Promise((r) => setTimeout(r, 1500)),
+    ]);
+  } catch {
+    // font di riserva
+  }
+  return fonts;
+}
+
+export default function GlobeHero({ onReady }: { onReady?: () => void }) {
   const hostRef = useRef<HTMLDivElement>(null);
+  const readyRef = useRef(onReady);
+  useEffect(() => {
+    readyRef.current = onReady;
+  }, [onReady]);
 
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
     let disposed = false;
     let cleanup = () => {};
+
+    const ready = () => readyRef.current?.();
 
     (async () => {
       const T = await import('three');
@@ -389,6 +488,7 @@ export default function GlobeHero() {
       try {
         renderer = new T.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
       } catch {
+        ready();
         return; // niente WebGL: resta lo sfondo stellato in CSS
       }
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -453,7 +553,16 @@ export default function GlobeHero() {
 
       // Globo
       const isSmall = window.innerWidth < 1100;
-      const earthMap = await new T.TextureLoader().loadAsync(isSmall ? '/Immagini/terra-nasa-2048.jpg' : '/Immagini/terra-nasa-3072.jpg');
+      let earthMap: import('three').Texture;
+      let fonts: Fonts;
+      try {
+        [earthMap, fonts] = await Promise.all([new T.TextureLoader().loadAsync(isSmall ? EARTH_SMALL : EARTH_LARGE), siteFonts()]);
+      } catch {
+        renderer.dispose();
+        renderer.domElement.remove();
+        ready();
+        return;
+      }
       if (disposed) {
         renderer.dispose();
         renderer.domElement.remove();
@@ -509,13 +618,15 @@ export default function GlobeHero() {
       band.castShadow = tail.castShadow = true;
 
       // Sigillo
-      const sealTex = sealTextures(T, aniso);
+      const sealTex = sealTextures(T, aniso, fonts);
       const sealMat = new T.MeshStandardMaterial({
         map: sealTex.map,
         normalMap: sealTex.normal,
         normalScale: new T.Vector2(0.9, 0.9),
-        metalness: 0.92,
-        roughness: 0.32,
+        roughnessMap: sealTex.rm,
+        metalnessMap: sealTex.rm,
+        metalness: 1,
+        roughness: 1,
         envMap: env,
         envMapIntensity: 0.9,
         side: T.DoubleSide,
@@ -651,6 +762,7 @@ export default function GlobeHero() {
       render();
       host.dataset.ready = '';
       host.classList.add(styles.ready);
+      ready();
 
       const ro = new ResizeObserver(() => {
         place();
@@ -670,7 +782,7 @@ export default function GlobeHero() {
           const mats = Array.isArray(m.material) ? m.material : m.material ? [m.material] : [];
           mats.forEach((mat) => mat.dispose());
         });
-        [earthMap, rough, strapNormal, sealTex.map, sealTex.normal, sprite, env].forEach((x) => x.dispose());
+        [earthMap, rough, strapNormal, sealTex.map, sealTex.normal, sealTex.rm, sprite, env].forEach((x) => x.dispose());
         renderer.dispose();
         renderer.domElement.remove();
       };
@@ -682,5 +794,12 @@ export default function GlobeHero() {
     };
   }, []);
 
-  return <div ref={hostRef} className={styles.stage} aria-hidden="true" />;
+  return (
+    <>
+      {/* La mappa della Terra si scarica subito, insieme al codice della scena */}
+      <link rel="preload" as="image" href={EARTH_SMALL} media="(max-width: 1099.98px)" crossOrigin="anonymous" />
+      <link rel="preload" as="image" href={EARTH_LARGE} media="(min-width: 1100px)" crossOrigin="anonymous" />
+      <div ref={hostRef} className={styles.stage} aria-hidden="true" />
+    </>
+  );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PhoneIcon, WrenchScrewdriverIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
@@ -36,6 +36,13 @@ const SERVICE_ICONS = [WrenchScrewdriverIcon, CogIcon, DocumentTextIcon];
 export default function HomePage({ categories, madeProducts }: Props) {
   const { t, lp, language } = useLanguage();
   const [material, setMaterial] = useState<Material | 'all'>('all');
+  // I testi dell'apertura entrano insieme al globo; se la scena 3D tarda, entrano comunque dopo 2,5 s
+  const [introGo, setIntroGo] = useState(false);
+  const startIntro = useCallback(() => setIntroGo(true), []);
+  useEffect(() => {
+    const id = window.setTimeout(startIntro, 2500);
+    return () => window.clearTimeout(id);
+  }, [startIntro]);
   const L = <T extends Record<string, string>>(v: T) => v[language];
 
   const chips: { v: Material | 'all'; label: string }[] = [
@@ -51,8 +58,12 @@ export default function HomePage({ categories, madeProducts }: Props) {
       <main>
         {/* Apertura: globo con la reggia che gli gira attorno a sinistra, testi a destra */}
         {/* data-hide-mobile-cta: la barra Chiama/Preventivo su mobile compare solo dopo questa sezione */}
-        <section className={styles.hero} data-hide-mobile-cta>
-          <GlobeHero />
+        <section className={styles.hero} data-hide-mobile-cta data-intro={introGo ? 'go' : 'wait'}>
+          {/* Senza JavaScript i testi si vedono subito */}
+          <noscript>
+            <style>{'[data-intro] *{animation-play-state:running!important}'}</style>
+          </noscript>
+          <GlobeHero onReady={startIntro} />
           <div className={`${styles.wrap} ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <p className={styles.heroEyebrow}>{t('home.hero.eyebrow')}</p>
