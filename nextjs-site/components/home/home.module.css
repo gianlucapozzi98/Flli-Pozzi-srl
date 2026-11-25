@@ -245,13 +245,14 @@
 }
 .proofList li {
   display: grid;
+  justify-items: center;
   gap: 4px;
   padding: 4px 22px;
   border-left: 1px solid #d2d7dc;
+  text-align: center;
 }
 .proofList li:first-child {
   border-left: 0;
-  padding-left: 0;
 }
 .proofList b {
   font-size: clamp(26px, 2.8vw, 34px);
@@ -892,7 +893,6 @@
   .proofList li:nth-child(3) {
     grid-column: 1 / -1;
     border-left: 0;
-    padding-left: 0;
   }
   .finalBtns {
     min-width: 0;
